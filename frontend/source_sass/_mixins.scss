@@ -1,0 +1,19 @@
+// Insert your mixins
+@mixin marginLeft($d) {
+  -webkit-margin-left: $d;
+     -moz-margin-left: $d;
+      -ms-margin-left: $d;
+          margin-left: $d;
+}
+@mixin marginRight($d) {
+  -webkit-margin-right: $d;
+     -moz-margin-right: $d;
+      -ms-margin-right: $d;
+          margin-right: $d;
+}
+
+@mixin length($length) {
+  	width: $length !important;
+  	padding-left: 5px !important;
+  	padding-right: 5px !important;
+}

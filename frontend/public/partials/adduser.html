@@ -1,0 +1,39 @@
+<div class="list" ng-controller='AddUserController'>    
+	<form name="f"><div class="small-offset-1 small-8 medium-6">
+	    <div class="row"><span class="title">Settings </span><span class="desc">set your backend URL</span>
+	    </div>
+
+		<div class="row">
+			<span>Name<sup class="red">*</sup></span>
+	    </div>
+	    <div class="row">
+			<input name="name" ng-model="name" type="text" required>
+		</div>
+		<div class="row" ng-show="f.name.$touched && f.name.$invalid">
+			<span>Please enter your name</span>
+		</div>
+	      
+
+		<div class="row">
+		  	<span>Email<sup class="red">*</sup></span>
+	    </div>
+	    <div class="row">
+			<input name="email" ng-model="email" type="text" required>
+		</div>
+		<div class="row" ng-show="f.email.$touched && f.email.$invalid">
+			<span>Please enter your email</span>
+		</div>
+
+	    <div class="row">
+	      <button ng-click="submit()" class="button tiny info centered">Submit</button>
+	    </div>
+		<div class="row" ng-show="succMsg">
+			<span>{{succMsg}}</span>
+		</div>
+		<div class="row" ng-show="errMsg">
+			<span>{{errMsg}}</span>
+		</div>		
+
+
+  	</div></form>
+</div>

@@ -1,0 +1,60 @@
+// Add any custom Sass & CSS here
+
+.content{
+	padding-top: 56px;
+}
+
+.navbar{
+	height: 55px;
+	position: relative;
+	width: 100%;
+	padding-left: 20px;
+	padding-right: 20px;
+	-webkit-box-shadow: 0 4px 8px 0 #aaa;
+	box-shadow: 0 4px 8px 0 #aaa;
+}
+
+.round{
+	border-radius:25px !important;
+	top: 50% !important;
+	transform: translateY(20%);
+	position: relative;
+}
+
+.fixed{
+	position: absolute;
+}
+
+.btshort{
+	@include length(15px);
+}
+
+.btshort{
+	@include length(25px);
+}
+
+.red{
+	color:red;
+}
+
+.marginleftS{
+	@include marginLeft(5px);
+}
+
+.marginleftL{
+	@include marginLeft(25px);
+}
+
+.marginrightS{
+	@include marginRight(5px);
+}
+
+.marginrightL{
+	@include marginRight(25px);
+}
+.item{
+	border-bottom:1px solid #aaa;
+	margin-bottom:15px;
+
+}
+
