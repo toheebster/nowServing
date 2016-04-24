@@ -1,6 +1,6 @@
 var express = require('express'),
 	app = express(),
-	port = process.env.PORT || 3000,
+	port = process.env.PORT || 8080,
 	mongoose = require('mongoose'),
 	passport = require('passport'),
 	morgan = require('morgan'),
@@ -17,7 +17,7 @@ app.use(cookieParser());
 app.use(bodyParser());
 
 app.use(session({ secret: 'passport demo' }));
-app.use(express.static(__dirname + '/frontend'));
+app.use(express.static(__dirname + '/frontend/public'));
 
 
 app.use(passport.initialize());

@@ -20,8 +20,8 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider, $loca
     templateUrl: './partials/queue.html',
     controller: 'QueueCtrl'
   }).    
-  when('/task/:id', {
-    templateUrl: './partials/taskDetail.html',
+  when('/request/:id', {
+    templateUrl: './partials/requestDetail.html',
     controller: 'DetailCtrl'
   }).
 
