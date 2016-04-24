@@ -24,6 +24,5 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./app/routes.js')(app, passport);
-
 app.listen(port);
 console.log('Server running on port ' + port);
