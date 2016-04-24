@@ -68,7 +68,7 @@ mp4Controllers
             </div>
             <div class="float-right small-6 large-4 columns">
                 <div class="float-right row">
-                    <div class="columns small-6 float-right" ng-click="showSignup()"><a href="#" class="button round float-right">Signup</a></div>
+                    <div class="columns small-6 float-right" ng-click="showSignup()"><a  class="button round float-right">Signup</a></div>
                     <div class="columns small-4 end float-right" ng-click="showLogin()"><a class="button round float-right">Login</a></div>
                 </div>
 
