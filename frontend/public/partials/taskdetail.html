@@ -1,0 +1,23 @@
+<div class="list" ng-controller='TaskDetailController'>		
+    <div class="columns marginleftL">
+        <div class="row">
+            <div class="columns small-9 marginleftL">
+                <span class="title">Task </span><span class="desc">gotta get this done</span>
+            </div>
+            <div class="columns small-2">
+                <a href="#/edittask/{{id}}" class="button tiny info small-12">Edit Task</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <span class="columns small-6">{{name}}</span>
+            <span class="columns small-6">Deadline: {{deadline | date:"MM/dd/yyyy"}}</span>
+            <span class="columns small-6">Assigned to: {{owner}}</span>
+            <span class="columns small-6">Completed: {{completed}}</span>
+            <span class="columns small-8 float-left">Description: {{desc}}</span>
+        </div>
+
+    	
+    </div>  
+  {{url}}
+</div>
