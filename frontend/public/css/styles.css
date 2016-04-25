@@ -424,7 +424,7 @@ html {
 body {
   padding: 0;
   margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-weight: normal;
   line-height: 1.5;
   color: #0a0a0a;
@@ -1641,7 +1641,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-weight: normal;
   font-style: normal;
   color: inherit;
@@ -4160,10 +4160,9 @@ table.hover tr:nth-of-type(even):hover {
 .top-bar-right {
   float: right; }
 
-/* line 3, ../../source_sass/_base.scss */
-.content {
-  padding-top: 56px; }
-
+/*.content{
+	padding-top: 56px;
+}*/
 /* line 7, ../../source_sass/_base.scss */
 .navbar {
   height: 55px;
@@ -4233,6 +4232,71 @@ table.hover tr:nth-of-type(even):hover {
 .item {
   border-bottom: 1px solid #aaa;
   margin-bottom: 15px; }
+
+@media (max-width: 768px) {
+  /* line 65, ../../source_sass/_base.scss */
+  h1 {
+    font-size: 50px; }
+
+  /*
+      #home .header-content {
+          position: absolute;
+          top: 50%;
+          padding: 0 50px;
+          -webkit-transform: translateY(-50%);
+          -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+      }
+  
+      home .header-content .header-content-inner {
+          margin-right: auto;
+          margin-left: auto;
+          max-width: 1000px;
+      }
+  
+  	home #intro h1 {
+      	font-size: 100px;
+  		}
+  
+      home #intro p {
+          margin-right: auto;
+          margin-left: auto;
+          max-width: 80%;
+          font-size: 18px;
+      }*/ }
+/* line 98, ../../source_sass/_base.scss */
+#home {
+  top: -20px;
+  position: relative;
+  background-image: url("../images/icecream2.jpg");
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 800px;
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  font-family: 'Open Sans'; }
+
+/* line 115, ../../source_sass/_base.scss */
+h1 {
+  font-family: 'Open Sans'; }
+
+/* line 119, ../../source_sass/_base.scss */
+#intro {
+  width: 800px;
+  height: 350px; }
+
+/* line 124, ../../source_sass/_base.scss */
+#now-serving {
+  font-size: 100px; }
+
+/* line 128, ../../source_sass/_base.scss */
+#quote {
+  font-size: 20px; }
 
 /*
   NOTE: Do not touch this file. Write the bulk of your custom styles
