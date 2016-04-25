@@ -4269,6 +4269,7 @@ table.hover tr:nth-of-type(even):hover {
   top: -20px;
   position: relative;
   background-image: url("../images/icecream2.jpg");
+  background-color: black;
   background-repeat: no-repeat;
   width: 100%;
   height: 800px;
@@ -4281,20 +4282,20 @@ table.hover tr:nth-of-type(even):hover {
   text-align: center;
   font-family: 'Open Sans'; }
 
-/* line 115, ../../source_sass/_base.scss */
+/* line 116, ../../source_sass/_base.scss */
 h1 {
   font-family: 'Open Sans'; }
 
-/* line 119, ../../source_sass/_base.scss */
+/* line 120, ../../source_sass/_base.scss */
 #intro {
   width: 800px;
   height: 350px; }
 
-/* line 124, ../../source_sass/_base.scss */
+/* line 125, ../../source_sass/_base.scss */
 #now-serving {
-  font-size: 100px; }
+  font-size: 90px; }
 
-/* line 128, ../../source_sass/_base.scss */
+/* line 129, ../../source_sass/_base.scss */
 #quote {
   font-size: 20px; }
 
