@@ -4283,7 +4283,7 @@ h1 {
 /* line 114, ../../source_sass/_base.scss */
 #profile {
   height: 1000px;
-  border-radius: 5%; }
+  border-radius: 2%; }
 
 /* line 119, ../../source_sass/_base.scss */
 .small-centered {
@@ -4299,24 +4299,81 @@ h1 {
   border-radius: 50%;
   margin: 20px auto;
   top: 50px;
-  border: 2px solid lightgreen; }
+  border: 2px solid white; }
 
 /* line 135, ../../source_sass/_base.scss */
-#profile-top {
-  height: 300px; }
-
-/* line 139, ../../source_sass/_base.scss */
-#request-container {
-  border-bottom: 1px solid gray;
+#servicer-name-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: 10px;
+  color: white; }
+
+/* line 142, ../../source_sass/_base.scss */
+#profile-top {
+  height: 250px; }
+
+/* line 146, ../../source_sass/_base.scss */
+#request-container {
+  border-bottom: 2px solid #51c285;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
   padding-top: 10px; }
 
-/* line 148, ../../source_sass/_base.scss */
+/* line 155, ../../source_sass/_base.scss */
+#details-container {
+  display: block;
+  height: 800px;
+  /*    display: flex;
+      align-items: center;
+      justify-content: center;*/ }
+
+/* line 163, ../../source_sass/_base.scss */
 .send-request {
-  position: relative; }
+  position: relative;
+  background-color: #51c285;
+  color: white; }
+
+/* line 169, ../../source_sass/_base.scss */
+.servicer {
+  width: 80%;
+  min-height: 30%;
+  height: auto;
+  border: 1px solid #51c285;
+  border-radius: 25px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  margin: 20px auto; }
+
+/* line 181, ../../source_sass/_base.scss */
+.servicer-contact {
+  width: 80%;
+  height: 15%;
+  border: 1px solid #51c285;
+  border-radius: 25px;
+  padding-left: 20px;
+  padding-top: 10px;
+  margin: 20px auto; }
+
+/* line 191, ../../source_sass/_base.scss */
+.servicer-services {
+  width: 80%;
+  min-height: 22%;
+  height: auto;
+  border: 1px solid #51c285;
+  border-radius: 25px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  margin: 20px auto; }
+
+/* line 203, ../../source_sass/_base.scss */
+#services-table {
+  border-radius: 25px;
+  -moz-border-radius: 25px;
+  -webkit-border-radius: 25px; }
 
 /*
   NOTE: Do not touch this file. Write the bulk of your custom styles
