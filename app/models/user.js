@@ -5,7 +5,12 @@ var userSchema = mongoose.Schema({
 	local: {
 		email		: String,
 		password	: String
-	}
+	},
+	username: {type: String, default: ""},
+	services: {type:[String], default:[]},
+	completed: {type:[String], default:[]},
+	accepted: {type:[String], default:[]},
+	new: {type:[String], default:[]}
 });
 
 userSchema.methods.generateHash = function(password) {
