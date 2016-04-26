@@ -4282,37 +4282,39 @@ h1 {
 
 /* line 114, ../../source_sass/_base.scss */
 #profile {
-  height: 1000px; }
+  height: 1000px;
+  border-radius: 5%; }
 
-/* line 118, ../../source_sass/_base.scss */
+/* line 119, ../../source_sass/_base.scss */
 .small-centered {
   max-height: none; }
 
-/* line 122, ../../source_sass/_base.scss */
+/* line 123, ../../source_sass/_base.scss */
 .profile-picture {
   position: relative;
   width: 200px;
   height: 200px;
-  background: red;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
   margin: 20px auto;
-  top: 50px; }
+  top: 50px;
+  border: 2px solid lightgreen; }
 
-/* line 134, ../../source_sass/_base.scss */
+/* line 135, ../../source_sass/_base.scss */
 #profile-top {
   height: 300px; }
 
-/* line 138, ../../source_sass/_base.scss */
+/* line 139, ../../source_sass/_base.scss */
 #request-container {
   border-bottom: 1px solid gray;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: 10px; }
+  padding-bottom: 10px;
+  padding-top: 10px; }
 
-/* line 146, ../../source_sass/_base.scss */
+/* line 148, ../../source_sass/_base.scss */
 .send-request {
   position: relative; }
 
