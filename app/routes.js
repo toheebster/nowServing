@@ -129,28 +129,48 @@ module.exports = function(app, passport) {
 		});
 	});
 
-	//add new request by customers
+	//customer created new request to a user, will post request and update user
 	app.post('/portfolio/:user_id', function(req,res){
-		var request = new Request();
-		for (var key in req.body) {
-			if (req.body.hasOwnProperty(key)) {
-				if (req.body[key] != null && req.body[key] != undefined && request[key] != undefined) {
-					request[key] = req.body[key];
-				}
-			}
-		}
-		request.save(function (err) {
+		User.findById(req.params.user_id, function(err, user) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
 			}
+			else if (user == "" || user == null || user == undefined) {
+				res.status(404).json({message: 'No user found'});
+			}
 			else {
-				res.status(201).json({message: 'Request created!', data: request});
+				var request = new Request();
+				for (var key in req.body) {
+					if (req.body.hasOwnProperty(key)) {
+						if (req.body[key] != null && req.body[key] != undefined && request[key] != undefined) {
+							request[key] = req.body[key];
+						}
+					}
+				}
+				request.userID = user._id;
+				user.new.push(request._id);
+				user.save(function (err2, user2) {
+					if (err2) {
+						res.status(404).json({message: 'Error happened!', data: err2});
+					}
+					else {
+						request.save(function (err3) {
+							if (err3) {
+								res.status(500).json({message: 'Error happened!', data: err3});
+							}
+							else {
+								res.status(201).json({message: 'Request created', data: request});
+							}
+						});
+					}
+				})
 			}
 		});
+
 	});
 
-	//edit request
-	app.put('/portfolio/:usr_id/reqs/:req_id', function(req, res){
+	//edit request, will also update user's request list
+	app.put('/portfolio/reqs/:req_id', function(req, res){
 		Request.findById(req.params.req_id, function (err, ret) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
@@ -159,43 +179,113 @@ module.exports = function(app, passport) {
 				res.status(404).json({message: 'Invalid request'});
 			}
 			else {
+				var previousStatus = ret.status;
 				for (var key in req.body) {
 					if (req.body.hasOwnProperty(key)) {
+						if (key == "userID") continue; //user id is not allowed to change
 						if (req.body[key] != null && req.body[key] != undefined && ret[key] != undefined) {
 							ret[key] = req.body[key];
 						}
 					}
 				}
-				ret.save(function (err, ret2) {
+				var currentStatus = ret.status;
+				ret.save(function (err) {
 					if (err) {
 						res.status(404).json({message: 'Error happened!', data: err});
 					}
 					else {
-						res.status(200).json({message: 'Request updated!', data: ret2});
+						if (previousStatus != currentStatus) {
+							User.findById(ret.userID, function (err2, user) {
+								if (err2) {
+									res.status(500).json({message: 'Error happened!', data: err2});
+								}
+								else if (user == "" || user == null || user == undefined) {
+									res.status(404).json({message: 'No matched user found'});
+								}
+								else {
+									var status = ["new", 'accepted', 'rejected', 'completed'];
+									var index = user[status[previousStatus]].indexOf(ret._id);
+									if (index > -1) {
+										user[status[previousStatus]].splice(index, 1);
+										if (user[status[currentStatus]].indexOf(ret._id) < 0) {
+											user[status[currentStatus]].push(ret._id);
+										}
+										user.save(function(err3){
+											if (err3) {
+												res.status(200).json({message: 'Requested updated but user update has error!', data: err3});
+											}
+											else {
+												res.status(200).json({message: 'Request updated!', data: ret});
+											}
+										})
+									}
+									else {
+										user[status[currentStatus]].push(ret._id);
+										user.save(function(err3){
+											if (err3) {
+												res.status(200).json({message: 'Requested updated but user update has error!', data: err3});
+											}
+											else {
+												res.status(200).json({message: 'Request updated2!', data: ret});
+											}
+										})
+									}
+								}
+							});
+						}
 					}
 				})
 			}
 		});
-
 	});
 
-	//delete request
+	//delete request, will also update user side
 	app.delete('/deleteRequest/:req_id', function(req, res) {
 		Request.findById(req.params.req_id, function (err, ret) {
-			//Request.findById(req.params.serv_id, function (err, serv) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
 			}
-			else if (ret == '') {
+			else if (ret == '' || ret == null || ret == undefined) {
 				res.status(404).json({message: 'Invalid request!'});
 			}
 			else {
-				ret.remove({_id: req.params.req_id}, function (err) {
-					if (err) {
-						res.status(404).json({message: 'Error happened!', data: err});
+				console.log("0");
+				var uid = ret.userID;
+				var rid = ret._id;
+				var req_status = ret.status;
+				Request.remove({_id: rid},function(err2) {
+					if (err2) {
+						res.status(500).json({message: 'Error happened!', data: err2});
 					}
 					else {
-						res.status(200).json({message: 'Request deleted!'});
+						console.log("1");
+						User.findById(uid, function (err3, user) {
+							if (err3) {
+								res.status(200).json({message: 'Request deleted! But user update has error', data: err3});
+							}
+							else if (user == "" || user == null || user == undefined) {
+								res.status(200).json({message: 'Request deleted! User not found'});
+							}
+							else {
+								console.log("2");
+								var status = ["new", 'accepted', 'rejected', 'completed'];
+								var index = user[status[req_status]].indexOf(rid);
+								if (index > -1) {
+									user[status[req_status]].splice(index, 1);
+									user.save(function(err4){
+										if (err4) {
+											res.status(200).json({message: 'Request deleted! User not updated', data: err4});
+										}
+										else {
+											res.status(200).json({message: 'Request deleted!'});
+										}
+									})
+								}
+								else {
+									res.status(200).json({message: 'Request deleted!'});
+								}
+							}
+						});
 					}
 				});
 			}
@@ -217,6 +307,18 @@ module.exports = function(app, passport) {
 			}
 		})
 	})
+	//delete all users, should be commented out in production code
+	app.delete('/deleteAllUser', function(req, res){
+		User.remove({}, function(err){
+			if (err) {
+				res.status(500).json({message: 'Error happened!', data: err});
+			}
+			else {
+				res.status(200).json({message: 'All users removed!!'});
+			}
+		})
+	})
+
 
 	//get user by id
 	app.get('/portfolio/:user_id', function(req, res) {
@@ -284,7 +386,7 @@ module.exports = function(app, passport) {
 	//	}
 	//});
 
-	//update user info, mostly the request lists
+	//update user info
 	app.put('/portfolio/:user_id', function(req, res) {
 		User.findById(req.params.user_id, function (err, user) {
 			if (err) {
@@ -301,12 +403,12 @@ module.exports = function(app, passport) {
 						}
 					}
 				}
-				user.save(function (err, user2) {
-					if (err) {
-						res.status(404).json({message: 'Error happened!', data: err});
+				user.save(function (err2) {
+					if (err2) {
+						res.status(404).json({message: 'Error happened!', data: err2});
 					}
 					else {
-						res.status(200).json({message: 'User updated!', data: user2});
+						res.status(200).json({message: 'User updated!', data:user});
 					}
 				})
 
@@ -336,7 +438,7 @@ module.exports = function(app, passport) {
 				res.status(500).json({message: 'Error happened!', data: err});
 			}
 			else {
-				res.status(200).json({message: 'All Services removed!!'});
+				res.status(200).json({message: 'All services removed!!'});
 			}
 		})
 	})
@@ -446,12 +548,12 @@ module.exports = function(app, passport) {
 						}
 					}
 				}
-				user.save(function (err, serv2) {
-					if (err) {
-						res.status(404).json({message: 'Error happened!', data: err});
+				serv.save(function (err2) {
+					if (err2) {
+						res.status(404).json({message: 'Error happened!', data: err2});
 					}
 					else {
-						res.status(200).json({message: 'Service updated!', data: serv2});
+						res.status(200).json({message: 'Service updated!', data: serv});
 					}
 				})
 
@@ -468,7 +570,7 @@ module.exports = function(app, passport) {
 				res.status(404).json({message: 'Invalid service!'});
 			}
 			else {
-				serv.remove({_id: req.params.serv_id}, function (err) {
+				Service.remove({_id: req.params.serv_id}, function (err) {
 					if (err) {
 						res.status(404).json({message: 'Error happened!', data: err});
 					}
@@ -498,6 +600,32 @@ module.exports = function(app, passport) {
 
 		})
 		res.status(200).json({keys: s2});
+	})
+
+	//delete all data
+	app.delete('/deleteAll', function(req, res){
+		Service.remove({}, function(err){
+			if (err) {
+				res.status(500).json({message: 'Error happened!', data: err});
+			}
+			else {
+				User.remove({}, function(err2){
+					if (err2) {
+						res.status(500).json({message: 'Error happened!', data: err2});
+					}
+					else {
+						Service.remove({}, function(err3){
+							if (err3) {
+								res.status(500).json({message: 'Error happened!', data: err3});
+							}
+							else {
+								res.status(200).json({message: 'All removed!!'});
+							}
+						})
+					}
+				})
+			}
+		})
 	})
 
 
