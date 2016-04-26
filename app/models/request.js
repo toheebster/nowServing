@@ -8,8 +8,8 @@ var requestSchema = mongoose.Schema({
     contactInfo: {type: String, default: ""},
     status: {type: Number, default:1}, //1 new, 2 accepted, 3 rejected, 4 completed
     proposedTime: {type:[Date], default:[]},
-    acceptedTime: {type:[Date], default:[]}
-
+    acceptedTime: {type:[Date], default:[]},
+    createdTime: {type:Date, default:Date.now()}
 });
 
 module.exports = mongoose.model('Request', requestSchema);
