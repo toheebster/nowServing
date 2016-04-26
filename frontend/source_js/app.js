@@ -6,7 +6,7 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider, $loca
     templateUrl: 'partials/home.html',
     controller: 'HomeCtrl'
   }).
-  when('/serviceprovider/portfolio/:id', {
+  when('/p', {
     templateUrl: './partials/portfolio.html',
     controller: 'PortfolioCtrl'
   }).    
