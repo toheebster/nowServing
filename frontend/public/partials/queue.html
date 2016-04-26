@@ -1,0 +1,49 @@
+<section class="banner small-12">
+    <div class="circle no-overflow small-centered"><a href=""></a></div>
+</section>
+<section>
+    <div class="tabs tabs-style-flip queue">
+        <nav class="queue-tabs small-8 small-offset-1">
+            <ul>
+                <li><a class="fa fa-inbox fa-1x" ng-click="setType(1)"><span>New Request</span></a></li>
+                <li><a class="fa fa-tasks fa-1x" ng-click="setType(2)"><span>In Progress</span></a></li>
+                <li><a class="fa fa-check-square-o fa-1x" ng-click="setType(4)"><span>Completed</span></a></li>
+                <li><a class="fa fa-ban fa-1x" ng-click="setType(3)"><span>Declined</span></a></li>
+            </ul>
+        </nav>
+        <div class="content-wrap" hidden>
+            <section id="section-flip-1" hidden><p hidden>1</p></section>
+            <section id="section-flip-2" hidden><p hidden>2</p></section>
+            <section id="section-flip-3" hidden><p hidden>3</p></section>
+            <section id="section-flip-4" hidden><p hidden>4</p></section>
+        </div><!-- /content -->
+    </div><!-- /tabs -->
+</section>
+
+<section>
+    
+    <div class="row">
+        <div class="medium-offset-1 small-12 medium-8 columns taskList">
+            <div ng-repeat="each in tasks | filter: searchTxt | orderBy: sortBy" class="small-12 task">
+                <div class="small-6 columns"><strong>{{each.customerName}}</strong></div>
+                <div class="small-6 float-right text-right columns"><span>{{each.createdTime}}</span></div>
+                <div class="small-12 columns"><strong>Message:</strong><span>{{each.message}}</span></div>
+            </div>
+        </div>
+        <div class="small-12 medium-2 end columns">
+              <div class="row collapse marginS" id="queueSearch">
+                <div class="large-8 small-9 columns">
+                  <input type="text" placeholder="Find Stuff" class="searchBox" ng-model="searchTxt">
+                </div>
+                <div class="large-4 small-3 columns">
+                  <a href="#" class="button expand searchBt">Search</a>
+                </div>
+              </div>
+        </div>
+    </div>
+
+</section>
+
+
+
+ 
