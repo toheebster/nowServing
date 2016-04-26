@@ -150,9 +150,8 @@ module.exports = function(app, passport) {
 	});
 
 	//edit request
-	app.put('/portfolio/:user_id/queue/:req_id', function(req, res){
-		//Request.findById(req.params.req_id, function (err, ret) {
-		Request.findById(req.body.rid, function (err, ret) {  //this line is for test
+	app.put('/portfolio/:usr_id/reqs/:req_id', function(req, res){
+		Request.findById(req.params.req_id, function (err, ret) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
 			}
@@ -181,7 +180,7 @@ module.exports = function(app, passport) {
 	});
 
 	//delete request
-	app.delete('/deleteRequest', function(req, res) {
+	app.delete('/deleteRequest/:req_id', function(req, res) {
 		Request.findById(req.params.req_id, function (err, ret) {
 			//Request.findById(req.params.serv_id, function (err, serv) {
 			if (err) {
