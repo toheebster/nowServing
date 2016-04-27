@@ -4160,12 +4160,6 @@ table.hover tr:nth-of-type(even):hover {
 .top-bar-right {
   float: right; }
 
-<<<<<<< HEAD
-/*.content{
-	padding-top: 56px;
-}*/
-/* line 7, ../../source_sass/_base.scss */
-=======
 /* line 2, ../../source_sass/_base.scss */
 body {
   background: none !important; }
@@ -4229,34 +4223,34 @@ input, textarea {
   padding: 20px;
   height: 130px;
   color: #2CC185; }
-  /* line 56, ../../source_sass/_base.scss */
-  .task strong {
-    padding-right: 10px; }
 
-/* line 61, ../../source_sass/_base.scss */
+/* line 58, ../../source_sass/_base.scss */
+strong {
+  padding-right: 10px; }
+
+/* line 62, ../../source_sass/_base.scss */
 .queue {
   background: #e7ecea !important;
   border: none !important; }
 
-/* line 65, ../../source_sass/_base.scss */
+/* line 66, ../../source_sass/_base.scss */
 .banner {
   height: 300px;
   background: #aaa !important; }
 
-/* line 73, ../../source_sass/_base.scss */
+/* line 74, ../../source_sass/_base.scss */
 .queue-tabs ul li a span {
   padding-left: 15px; }
 
-/* line 80, ../../source_sass/_base.scss */
+/* line 81, ../../source_sass/_base.scss */
 .bt {
   background-color: #2CC185; }
 
-/* line 84, ../../source_sass/_base.scss */
+/* line 85, ../../source_sass/_base.scss */
 .content {
   padding-top: 56px; }
 
-/* line 88, ../../source_sass/_base.scss */
->>>>>>> bdfcae823970aaf7e48cd6d25cf0d6b528d55b9d
+/* line 89, ../../source_sass/_base.scss */
 .navbar {
   background-color: white;
   height: 55px;
@@ -4267,79 +4261,79 @@ input, textarea {
   -webkit-box-shadow: 0 4px 8px 0 #aaa;
   box-shadow: 0 4px 8px 0 #aaa; }
 
-/* line 98, ../../source_sass/_base.scss */
+/* line 99, ../../source_sass/_base.scss */
 .fixtop {
   position: fixed; }
 
-/* line 101, ../../source_sass/_base.scss */
+/* line 102, ../../source_sass/_base.scss */
 .round {
   border-radius: 25px !important;
   top: 50% !important;
   transform: translateY(20%);
   position: relative; }
 
-/* line 108, ../../source_sass/_base.scss */
+/* line 109, ../../source_sass/_base.scss */
 .fixed {
   position: absolute; }
 
-/* line 112, ../../source_sass/_base.scss */
+/* line 113, ../../source_sass/_base.scss */
 .btshort {
   width: 15px !important;
   padding-left: 5px !important;
   padding-right: 5px !important; }
 
-/* line 116, ../../source_sass/_base.scss */
+/* line 117, ../../source_sass/_base.scss */
 .btshort {
   width: 25px !important;
   padding-left: 5px !important;
   padding-right: 5px !important; }
 
-/* line 119, ../../source_sass/_base.scss */
+/* line 120, ../../source_sass/_base.scss */
 .green {
   color: #2CC185; }
 
-/* line 122, ../../source_sass/_base.scss */
+/* line 123, ../../source_sass/_base.scss */
 .red {
   color: red; }
 
-/* line 126, ../../source_sass/_base.scss */
+/* line 127, ../../source_sass/_base.scss */
 .marginleftS {
   -webkit-margin-left: 5px;
   -moz-margin-left: 5px;
   -ms-margin-left: 5px;
   margin-left: 5px; }
 
-/* line 130, ../../source_sass/_base.scss */
+/* line 131, ../../source_sass/_base.scss */
 .marginleftL {
   -webkit-margin-left: 25px;
   -moz-margin-left: 25px;
   -ms-margin-left: 25px;
   margin-left: 25px; }
 
-/* line 134, ../../source_sass/_base.scss */
+/* line 135, ../../source_sass/_base.scss */
 .marginrightS {
   -webkit-margin-right: 5px;
   -moz-margin-right: 5px;
   -ms-margin-right: 5px;
   margin-right: 5px; }
 
-/* line 138, ../../source_sass/_base.scss */
+/* line 139, ../../source_sass/_base.scss */
 .marginrightL {
   -webkit-margin-right: 25px;
   -moz-margin-right: 25px;
   -ms-margin-right: 25px;
   margin-right: 25px; }
 
-/* line 141, ../../source_sass/_base.scss */
+/* line 142, ../../source_sass/_base.scss */
 .item {
   border-bottom: 1px solid #aaa;
   margin-bottom: 15px; }
 
 @media (max-width: 768px) {
-  /* line 65, ../../source_sass/_base.scss */
+  /* line 152, ../../source_sass/_base.scss */
   h1 {
     font-size: 50px; } }
-/* line 71, ../../source_sass/_base.scss */
+/* line 158, ../../source_sass/_base.scss */
 #home {
   top: -20px;
   position: relative;
@@ -4359,39 +4353,41 @@ input, textarea {
   letter-spacing: 5px;
   font-weight: 900; }
 
-/* line 91, ../../source_sass/_base.scss */
+/* line 178, ../../source_sass/_base.scss */
 h1 {
   font-family: 'Open Sans';
   letter-spacing: 5px;
   font-weight: 900; }
 
-/* line 97, ../../source_sass/_base.scss */
+/* line 184, ../../source_sass/_base.scss */
 #intro {
   width: 800px;
   height: 350px; }
 
-/* line 102, ../../source_sass/_base.scss */
+/* line 189, ../../source_sass/_base.scss */
 #now-serving {
-  font-size: 100px; }
+  font-size: 100px;
+  margin-bottom: 15px;
+  margin-top: 75px; }
 
-/* line 106, ../../source_sass/_base.scss */
+/* line 195, ../../source_sass/_base.scss */
 #quote {
   font-size: 20px; }
 
-/* line 110, ../../source_sass/_base.scss */
+/* line 199, ../../source_sass/_base.scss */
 .row {
   max-height: none; }
 
-/* line 114, ../../source_sass/_base.scss */
+/* line 203, ../../source_sass/_base.scss */
 #profile {
   height: 1000px;
   border-radius: 2%; }
 
-/* line 119, ../../source_sass/_base.scss */
+/* line 208, ../../source_sass/_base.scss */
 .small-centered {
   max-height: none; }
 
-/* line 123, ../../source_sass/_base.scss */
+/* line 212, ../../source_sass/_base.scss */
 .profile-picture {
   position: relative;
   width: 200px;
@@ -4403,18 +4399,18 @@ h1 {
   top: 50px;
   border: 2px solid white; }
 
-/* line 135, ../../source_sass/_base.scss */
+/* line 224, ../../source_sass/_base.scss */
 #servicer-name-container {
   display: flex;
   align-items: center;
   justify-content: center;
   color: white; }
 
-/* line 142, ../../source_sass/_base.scss */
+/* line 231, ../../source_sass/_base.scss */
 #profile-top {
   height: 250px; }
 
-/* line 146, ../../source_sass/_base.scss */
+/* line 235, ../../source_sass/_base.scss */
 #request-container {
   border-bottom: 2px solid #51c285;
   display: flex;
@@ -4423,21 +4419,22 @@ h1 {
   padding-bottom: 20px;
   padding-top: 10px; }
 
-/* line 155, ../../source_sass/_base.scss */
+/* line 244, ../../source_sass/_base.scss */
 #details-container {
   display: block;
   height: 800px;
   /*    display: flex;
       align-items: center;
-      justify-content: center;*/ }
+      justify-content: center;
+      */ }
 
-/* line 163, ../../source_sass/_base.scss */
+/* line 253, ../../source_sass/_base.scss */
 .send-request {
   position: relative;
   background-color: #51c285;
   color: white; }
 
-/* line 169, ../../source_sass/_base.scss */
+/* line 259, ../../source_sass/_base.scss */
 .servicer {
   width: 80%;
   min-height: 30%;
@@ -4449,7 +4446,7 @@ h1 {
   padding-top: 10px;
   margin: 20px auto; }
 
-/* line 181, ../../source_sass/_base.scss */
+/* line 271, ../../source_sass/_base.scss */
 .servicer-contact {
   width: 80%;
   height: 15%;
@@ -4459,7 +4456,7 @@ h1 {
   padding-top: 10px;
   margin: 20px auto; }
 
-/* line 191, ../../source_sass/_base.scss */
+/* line 281, ../../source_sass/_base.scss */
 .servicer-services {
   width: 80%;
   min-height: 22%;
@@ -4471,7 +4468,7 @@ h1 {
   padding-top: 10px;
   margin: 20px auto; }
 
-/* line 203, ../../source_sass/_base.scss */
+/* line 293, ../../source_sass/_base.scss */
 #services-table {
   border-radius: 25px;
   -moz-border-radius: 25px;
