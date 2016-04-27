@@ -1,6 +1,10 @@
 var express = require('express'),
 	app = express(),
+<<<<<<< HEAD
 	port = process.env.PORT || 8080,
+=======
+	port = process.env.PORT || 4000,
+>>>>>>> 58877f5fe090deefc7c81458943a78052c8521e7
 	mongoose = require('mongoose'),
 	passport = require('passport'),
 	morgan = require('morgan'),
