@@ -4335,13 +4335,13 @@ strong {
     font-size: 50px; } }
 /* line 158, ../../source_sass/_base.scss */
 #home {
-  top: -20px;
+  top: -75px;
   position: relative;
   background-image: url("../images/icecream2.jpg");
   background-color: black;
   background-repeat: no-repeat;
   width: 100%;
-  height: 1000px;
+  height: 1400px;
   background-size: cover;
   background-attachment: fixed;
   display: flex;
@@ -4362,32 +4362,33 @@ h1 {
 /* line 184, ../../source_sass/_base.scss */
 #intro {
   width: 800px;
-  height: 350px; }
+  height: 350px;
+  margin-top: -40px; }
 
-/* line 189, ../../source_sass/_base.scss */
+/* line 190, ../../source_sass/_base.scss */
 #now-serving {
   font-size: 100px;
   margin-bottom: 15px;
   margin-top: 75px; }
 
-/* line 195, ../../source_sass/_base.scss */
+/* line 196, ../../source_sass/_base.scss */
 #quote {
   font-size: 20px; }
 
-/* line 199, ../../source_sass/_base.scss */
+/* line 200, ../../source_sass/_base.scss */
 .row {
   max-height: none; }
 
-/* line 203, ../../source_sass/_base.scss */
+/* line 204, ../../source_sass/_base.scss */
 #profile {
   height: 1000px;
   border-radius: 2%; }
 
-/* line 208, ../../source_sass/_base.scss */
+/* line 209, ../../source_sass/_base.scss */
 .small-centered {
   max-height: none; }
 
-/* line 212, ../../source_sass/_base.scss */
+/* line 213, ../../source_sass/_base.scss */
 .profile-picture {
   position: relative;
   width: 200px;
@@ -4399,18 +4400,18 @@ h1 {
   top: 50px;
   border: 2px solid white; }
 
-/* line 224, ../../source_sass/_base.scss */
+/* line 225, ../../source_sass/_base.scss */
 #servicer-name-container {
   display: flex;
   align-items: center;
   justify-content: center;
   color: white; }
 
-/* line 231, ../../source_sass/_base.scss */
+/* line 232, ../../source_sass/_base.scss */
 #profile-top {
   height: 250px; }
 
-/* line 235, ../../source_sass/_base.scss */
+/* line 236, ../../source_sass/_base.scss */
 #request-container {
   border-bottom: 2px solid #51c285;
   display: flex;
@@ -4419,7 +4420,7 @@ h1 {
   padding-bottom: 20px;
   padding-top: 10px; }
 
-/* line 244, ../../source_sass/_base.scss */
+/* line 245, ../../source_sass/_base.scss */
 #details-container {
   display: block;
   height: 800px;
@@ -4428,13 +4429,13 @@ h1 {
       justify-content: center;
       */ }
 
-/* line 253, ../../source_sass/_base.scss */
+/* line 254, ../../source_sass/_base.scss */
 .send-request {
   position: relative;
   background-color: #51c285;
   color: white; }
 
-/* line 259, ../../source_sass/_base.scss */
+/* line 260, ../../source_sass/_base.scss */
 .servicer {
   width: 80%;
   min-height: 30%;
@@ -4446,7 +4447,7 @@ h1 {
   padding-top: 10px;
   margin: 20px auto; }
 
-/* line 271, ../../source_sass/_base.scss */
+/* line 272, ../../source_sass/_base.scss */
 .servicer-contact {
   width: 80%;
   height: 15%;
@@ -4456,7 +4457,7 @@ h1 {
   padding-top: 10px;
   margin: 20px auto; }
 
-/* line 281, ../../source_sass/_base.scss */
+/* line 282, ../../source_sass/_base.scss */
 .servicer-services {
   width: 80%;
   min-height: 22%;
@@ -4468,7 +4469,7 @@ h1 {
   padding-top: 10px;
   margin: 20px auto; }
 
-/* line 293, ../../source_sass/_base.scss */
+/* line 294, ../../source_sass/_base.scss */
 #services-table {
   border-radius: 25px;
   -moz-border-radius: 25px;
