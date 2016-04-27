@@ -18,6 +18,10 @@ module.exports = function(app, passport) {
 		});
 	});
 
+	app.get('/queue/:user_id', isLoggedIn, function(req, res) {
+		res.redirect('/serviceprovider/:user_id');
+	});
+
 	app.get('/logout', function(req, res) {
 		req.logout();
 		res.redirect('/');
@@ -37,6 +41,7 @@ module.exports = function(app, passport) {
 
 	//get all request
 	app.get('/getAllReq', function(req,res){
+		console.log(req['user']);
 		Request.find(function(err,ret){
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
@@ -115,7 +120,7 @@ module.exports = function(app, passport) {
 
 
 	//get request by id
-	app.get('/request/:req_id', function(req, res) {
+	app.get('/request/:req_id/user_id', function(req, res) {
 		Request.findById(req.params.req_id, function(err, ret) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
@@ -130,7 +135,7 @@ module.exports = function(app, passport) {
 	});
 
 	//customer created new request to a user, will post request and update user
-	app.post('/portfolio/:user_id', function(req,res){
+	app.post('/addRequest/:user_id', function(req,res){
 		User.findById(req.params.user_id, function(err, user) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
@@ -170,7 +175,8 @@ module.exports = function(app, passport) {
 	});
 
 	//edit request, will also update user's request list
-	app.put('/portfolio/reqs/:req_id', function(req, res){
+	app.put('/editRequest/:req_id/:user_id', isLoggedIn, function(req, res){
+		if(req['user']._id !== user_id) return;
 		Request.findById(req.params.req_id, function (err, ret) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
@@ -249,7 +255,7 @@ module.exports = function(app, passport) {
 				res.status(404).json({message: 'Invalid request!'});
 			}
 			else {
-				console.log("0");
+				//console.log("0");
 				var uid = ret.userID;
 				var rid = ret._id;
 				var req_status = ret.status;
@@ -258,7 +264,7 @@ module.exports = function(app, passport) {
 						res.status(500).json({message: 'Error happened!', data: err2});
 					}
 					else {
-						console.log("1");
+						//console.log("1");
 						User.findById(uid, function (err3, user) {
 							if (err3) {
 								res.status(200).json({message: 'Request deleted! But user update has error', data: err3});
@@ -267,7 +273,7 @@ module.exports = function(app, passport) {
 								res.status(200).json({message: 'Request deleted! User not found'});
 							}
 							else {
-								console.log("2");
+								//console.log("2");
 								var status = ["new", 'accepted', 'rejected', 'completed'];
 								var index = user[status[req_status]].indexOf(rid);
 								if (index > -1) {
@@ -321,7 +327,7 @@ module.exports = function(app, passport) {
 
 
 	//get user by id
-	app.get('/portfolio/:user_id', function(req, res) {
+	app.get('/user/:user_id', function(req, res) {
 		User.findById(req.params.user_id, function(err, user) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
@@ -387,7 +393,7 @@ module.exports = function(app, passport) {
 	//});
 
 	//update user info
-	app.put('/portfolio/:user_id', function(req, res) {
+	app.put('/user/:user_id', function(req, res) {
 		User.findById(req.params.user_id, function (err, user) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
@@ -512,27 +518,46 @@ module.exports = function(app, passport) {
 	});
 
 	// post service
-	app.post('/portfolio/:user_id/queue', function(req, res) {
-		var service = new Service();
-		for (var key in req.body) {
-			if (req.body.hasOwnProperty(key)) {
-				if (req.body[key] != null && req.body[key] != undefined && service[key] != undefined) {
-					service[key] = req.body[key];
-				}
-			}
-		}
-		service.save(function (err) {
+	app.post('/addService/:user_id', function(req, res) {
+		User.findById(req.params.user_id, function(err, user) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
 			}
+			else if (user == "" || user == null || user == undefined) {
+				res.status(404).json({message: 'No user found'});
+			}
 			else {
-				res.status(201).json({message: 'Service created!', data: service});
+				var service = new Service();
+				for (var key in req.body) {
+					if (req.body.hasOwnProperty(key)) {
+						if (req.body[key] != null && req.body[key] != undefined && service[key] != undefined) {
+							service[key] = req.body[key];
+						}
+					}
+				}
+				service.userID = user._id;
+				user.services.push(service._id);
+				user.save(function (err2, user2) {
+					if (err2) {
+						res.status(404).json({message: 'Error happened!', data: err2});
+					}
+					else {
+						service.save(function (err3) {
+							if (err3) {
+								res.status(500).json({message: 'Error happened!', data: err3});
+							}
+							else {
+								res.status(201).json({message: 'Service created!', data: service});
+							}
+						});
+					}
+				})
 			}
 		});
 	});
 
 	// update service, for future use
-	app.put('/service/:serv_id', function(req, res) {
+	app.put('/editService/:serv_id/:user_id', function(req, res) {
 		Service.findById(req.params.serv_id, function (err, serv) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
@@ -561,7 +586,7 @@ module.exports = function(app, passport) {
 		});
 	})
 	//delete service
-	app.delete('/portfolio', function(req, res) {
+	app.delete('/deleteService/:serv_id', function(req, res) {
 		Service.findById(req.params.serv_id, function (err, serv) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
@@ -570,12 +595,37 @@ module.exports = function(app, passport) {
 				res.status(404).json({message: 'Invalid service!'});
 			}
 			else {
-				Service.remove({_id: req.params.serv_id}, function (err) {
-					if (err) {
-						res.status(404).json({message: 'Error happened!', data: err});
+				var uid = serv.userID;
+				Service.remove({_id: req.params.serv_id}, function (err2) {
+					if (err2) {
+						res.status(404).json({message: 'Error happened!', data: err2});
 					}
 					else {
-						res.status(200).json({message: 'Service deleted!'});
+						User.findById(uid, function (err3, user) {
+							if (err3) {
+								res.status(200).json({message: 'Service deleted! But user update has error', data: err3});
+							}
+							else if (user == "" || user == null || user == undefined) {
+								res.status(200).json({message: 'Service deleted! User not found'});
+							}
+							else {
+								var index = user["services"].indexOf(serv._id);
+								if (index > -1) {
+									user["services"].splice(index, 1);
+									user.save(function(err4){
+										if (err4) {
+											res.status(200).json({message: 'Service deleted! User not updated', data: err4});
+										}
+										else {
+											res.status(200).json({message: 'Service deleted!'});
+										}
+									})
+								}
+								else {
+									res.status(200).json({message: 'Service deleted!'});
+								}
+							}
+						});
 					}
 				});
 			}
@@ -627,10 +677,5 @@ module.exports = function(app, passport) {
 			}
 		})
 	})
-
-
-	app.post('/portfolio/:user_id', function(req,res) {
-		res.json({message: 'Hello World!'});
-	});
 
 };
