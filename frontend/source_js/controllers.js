@@ -1,5 +1,9 @@
 var mp4Controllers = angular.module('mp4Controllers', ['720kb.datepicker', 'ngResource', 'ngDialog']);
 
+var newRequest = 1;
+var inProgress = 2;
+var completed = 4;
+var declined = 3;
 
 mp4Controllers
 // Not require login
@@ -19,14 +23,12 @@ mp4Controllers
 
 }])
 
-.controller('QueueCtrl', ['$scope', '$http', '$resource', function($scope, $http, $resource) {
-
-    var newRequest = 1;
-    var inProgress = 2;
-    var completed = 4;
-    var declined = 3;
+.controller('QueueCtrl', ['$scope', '$http', 'request', '$routeParams', 'user', function($scope, $http, request, $routeParams, user) {
     var curType = 1;
     $scope.sortBy = '+';
+    var SPID = $routeParams.id;
+    var reqids = [];
+
     // init tabs
     [].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {new CBPFWTabs( el );});
 
@@ -58,21 +60,68 @@ mp4Controllers
     $scope.reload = function(){
         //query for status = curType
 
+        console.log("reload") 
+        //get SP info
+        var SP;
+        user.get(SPID).then(function(res){
+            console.log("got data")
+            SP = res.data.data;
+    
+            console.log(SP)
+            console.log("get req type: "+curType)
+            if(curType == newRequest){
+                reqids = SP.new;
+            }else if(curType == inProgress){
+                reqids = SP.accepted;
+            }else if(curType == declined){
+                reqids = SP.rejected;
+            }else if(curType == completed){
+                reqids = SP.completed;
+            }
+            console.log(reqids)
+            angular.forEach(reqids, function(i, key) {
+                var t = request.get(i, SPID).then(function(res){
+                    var req = res.data.data 
+                    console.log(req)
+                    $scope.tasks.push(req)
+                });
+            }, $scope.tasks);
+
+
+        });
     }    
 
-    $scope.reload()
+    $scope.seeDetail = function(i){
+        var ID = $scope.tasks[i]._id;
+        console.log("id is: "+ID);
+        //$location.path('#/request/'+ID)
+    }
+ 
+    $scope.reload();
 }])
 
 
 
 // Tasks Pages
-.controller('DetailCtrl', ['$scope', '$http', '$resource', function($scope, $http, $resource) {
+.controller('DetailCtrl', ['$scope', '$http', '$resource', '$routeParams', 'request', function($scope, $http, $resource, $routeParams, request) {
+    
+    var RID = $routeParams.id;
 
+    $scope.reload = function(){
+        request.get(RID, i).then(function(res){
+                    $scope.req = res.data.data 
+                    console.log($scope.req)
+        });
+
+    }
+
+    $scope.reload();
 
 }])
 
-.controller('NewRequestCtrl', ['$scope', '$http', '$resource', 'SP', function($scope, $http, $resource, SP) {
-    $scope.SP = SP.get()
+.controller('NewRequestCtrl', ['$scope', '$http', '$resource', 'SP', 'request', function($scope, $http, $resource, SP, request) {
+    
+    var SPID = $routeParams.id;  
 
 }])
 
