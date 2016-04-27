@@ -6,8 +6,8 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider, $loca
     templateUrl: 'partials/home.html',
     controller: 'HomeCtrl'
   }).
-  when('/p', {
-    templateUrl: './partials/portfolio.html',
+  when('/serviceprovider/portfolio/:id', {
+    templateUrl: 'partials/portfolio.html',
     controller: 'PortfolioCtrl'
   }).    
 
@@ -16,14 +16,18 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider, $loca
     templateUrl: 'partials/edit_portfolio.html',
     controller: 'EditPortfolioCtrl'
   }).    
-  when('/serviceprovider/:id/', {
-    templateUrl: './partials/queue.html',
+  when('/serviceprovider/:id', {
+    templateUrl: 'partials/queue.html',
     controller: 'QueueCtrl'
   }).    
   when('/request/:id', {
-    templateUrl: './partials/requestDetail.html',
+    templateUrl: 'partials/requestDetail.html',
     controller: 'DetailCtrl'
   }).
+  when('/newrequest/:id', {
+    templateUrl: 'partials/newRequest.html',
+    controller: 'NewRequestCtrl'
+  }).  
 
   otherwise({
     redirectTo: '/'
