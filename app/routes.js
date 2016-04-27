@@ -13,6 +13,7 @@ module.exports = function(app, passport) {
 	});
 
 	app.get('/profile', isLoggedIn, function(req, res) {
+		console.log(req['user']);
 		res.json({
 			user: req.user
 		});
@@ -28,8 +29,11 @@ module.exports = function(app, passport) {
 	});
 
 	function isLoggedIn(req, res, next) {
-		if (req.isAuthenticated())
+		console.log("in islogin");
+		if (req.isAuthenticated()) {
+			console.log("logged in")
 			return next();
+		}
 
 		res.json({
 			error: "User not logged in"
@@ -38,6 +42,20 @@ module.exports = function(app, passport) {
 	}
 
 
+	//test authentication
+	app.get('/testA/:user_id',isLoggedIn, function(req,res) {
+		console.log(req.params.user_id);
+		if (req.params.user_id == req['user']._id) {
+			res.json({
+				data: req['user']
+			});
+		}
+		else {
+			res.json({
+				data: "invalid"
+			})
+		}
+	})
 
 	//get all request
 	app.get('/getAllReq', function(req,res){
@@ -175,8 +193,8 @@ module.exports = function(app, passport) {
 	});
 
 	//edit request, will also update user's request list
-	app.put('/editRequest/:req_id/:user_id', isLoggedIn, function(req, res){
-		if(req['user']._id !== user_id) return;
+	app.put('/editRequest/:req_id/:user_id', function(req, res){
+		//if(req['user']._id != req.params.user_id) return;
 		Request.findById(req.params.req_id, function (err, ret) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
@@ -246,7 +264,7 @@ module.exports = function(app, passport) {
 	});
 
 	//delete request, will also update user side
-	app.delete('/deleteRequest/:req_id', function(req, res) {
+	app.delete('/deleteRequest/:req_id/:user_id', function(req, res) {
 		Request.findById(req.params.req_id, function (err, ret) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
@@ -417,7 +435,6 @@ module.exports = function(app, passport) {
 						res.status(200).json({message: 'User updated!', data:user});
 					}
 				})
-
 			}
 		});
 	})
@@ -586,7 +603,8 @@ module.exports = function(app, passport) {
 		});
 	})
 	//delete service
-	app.delete('/deleteService/:serv_id', function(req, res) {
+	app.delete('/deleteService/:serv_id/:user_id', function(req, res) {
+		//if(req['user']._id != req.params.user_id) return;
 		Service.findById(req.params.serv_id, function (err, serv) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
