@@ -8,8 +8,26 @@ mp4Controllers
 }])
 
 .controller('PortfolioCtrl', ['$scope', '$http', '$resource', function($scope, $http, $resource) {
-
-
+    $scope.user = {
+        _id: "1234",
+        username: "Michael Kim",
+        email: "michael@kim.com",
+        businessName: "Kim's Kuts",
+        intro: "",
+        services: [
+        {
+            serviceName: "Iphone Fixes",
+            availability: "Fridays Only"
+        }, 
+        {
+            serviceName: "Haircuts",
+            availability: "Fridays & Saturdays"
+        }, 
+        {
+            serviceName: "Cook you a nice meal",
+            availability: "Fridays & Saturdays"
+        }]
+    };
 }])
 
 

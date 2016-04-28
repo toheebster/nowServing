@@ -9,8 +9,9 @@
 	  	<div class="row">
 	  		<div id="servicer-name-container" class="small-12  small-centered columns" style="background-color: lightgray">
 	  			<div id="servicer-name">
-	  				<h4>Joe Shmoe</h4>
-	  			</div>	
+	  					<h4>{{user.businessName}}<br><h6>by {{user.username}}</h6></h4>
+<!-- 	  					<h6></h6>	  				
+ -->	  			</div>	
 	  		</div>
 	  	</div>
 
@@ -23,9 +24,9 @@
 	  		<div id="details-container" class="small-12 small-centered columns" style="background-color: white; border: 1px solid lightgray">
 	  			<div id="servicer-intro" class="servicer">
 	  				<div>
-		  				<h5>A little bit about Joe Schmoe:</h5>
+		  				<h5>A little bit about me and what I do:</h5>
 		  				<p>
-		  					"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+		  					"{{user.intro}}"
 		  				</p>
 	  				</div>
 	  			</div>
@@ -36,22 +37,16 @@
 	  						<th>Service</th>
 	  						<th>Availability</th>
 	  					</tr>
-	  					<tr>
-	  						<td>Iphone Fixes</td>
-	  						<td>Fridays only</td>
+	  					<tr ng-repeat="service in user.services">
+	  						<td>{{service.serviceName}}</td>
+	  						<td>{{service.availability}}</td>
 	  					</tr>
-	  					<tr>
-	  						<td>Haircuts</td>
-	  						<td>Fridays & Saturdays</td>
-	  					</tr>
-	  					<tr>
-	  						<td>Cook you a nice meal</td>
-	  						<td>Fridays & Saturdays</td>
-	  					</tr>
+	  					
 	  				</table>
 	  			</div>
 	  			<div id="servicer-contact-information" class="servicer-contact">
-	  				<h5>Contact:</h5>
+	  				<h5 style="margin: 0 auto;">Contact: </h5>
+	  				<h6 >{{user.email}}</h6>
 	  			</div>
 	  		</div>	
 		</div>
