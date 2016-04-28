@@ -4,13 +4,36 @@ var Request = require('./models/request')
 
 module.exports = function(app, passport) {
 
-	app.post('/signup', passport.authenticate('local-signup'), function(req, res) {
-		res.redirect('/profile.html');
+	app.post('/signup', function(req, res, next) {
+		passport.authenticate('local-signup', function(err, user, info) {
+			if (err) { return next(err); }
+			if (!user && info.message == 'User already exists.') { return res.send(400,{'status': 400,'message': 'User already exists'});}
+			return res.send(200,{'status':200,'message':'Successful Signup'});
+
+		})(req, res, next);
 	});
 
-	app.post('/login', passport.authenticate('local-login'), function(req, res) {
-		res.redirect('/profile.html');
+
+	app.post('/login', function(req, res, next) {
+		passport.authenticate('local-login', function(err, user, info) {
+			if (err) { return next(err); }
+			if (!user && info.message == 'user not existed') { return res.send(404,{'status': 404,'message': 'User not found'});}
+			if (!user && info.message == 'password incorrect'){return res.send(404,{'status': 404,'message': 'Password incorrect'});}
+			return res.send(200,{'status':200,'message':'Login Success'});
+
+		})(req, res, next);
 	});
+
+
+
+
+	//app.post('/signup', passport.authenticate('local-signup'), function(req, res) {
+	//	res.redirect('/profile.html');
+	//});
+    //
+	//app.post('/login', passport.authenticate('local-login'), function(req, res) {
+	//	res.redirect('/profile.html');
+	//});
 
 	app.get('/profile', isLoggedIn, function(req, res) {
 		console.log(req['user']);
@@ -29,16 +52,15 @@ module.exports = function(app, passport) {
 	});
 
 	function isLoggedIn(req, res, next) {
-		console.log("in islogin");
+		//console.log("in islogin");
 		if (req.isAuthenticated()) {
-			console.log("logged in")
+			//console.log("logged in")
 			return next();
 		}
-
 		res.json({
 			error: "User not logged in"
 		});
-		res.redirect('/login.html');
+		//res.redirect('/login.html');
 	}
 
 
@@ -85,7 +107,7 @@ module.exports = function(app, passport) {
 	})
 
 
-	//get request with query
+	//get request with query, this isn't needed
 	app.get('/portfolio/:user_id/queue/', function(req, res) {
 		var where = null;
 		var sort = null;

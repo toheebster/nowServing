@@ -8,6 +8,9 @@ var express = require('express'),
 	bodyParser = require('body-parser'),
 	session = require('express-session'),
 	configDB = require('./config/database.js');
+	flash = require('connect-flash');
+
+app.use(flash());
 
 mongoose.connect(configDB.url); // db connection
 require('./config/passport')(passport);
