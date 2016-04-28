@@ -6,17 +6,17 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider, $loca
     templateUrl: 'partials/home.html',
     controller: 'HomeCtrl'
   }).
-  when('/serviceprovider/portfolio/:id', {
+  when('/user/portfolio/:id', {
     templateUrl: 'partials/portfolio.html',
     controller: 'PortfolioCtrl'
   }).    
 
   // logged in
-  when('/serviceprovider/edit/:id', {
+  when('/user/edit/:id', {
     templateUrl: 'partials/edit_portfolio.html',
     controller: 'EditPortfolioCtrl'
   }).    
-  when('/serviceprovider/:id', {
+  when('/user/:id', {
     templateUrl: 'partials/queue.html',
     controller: 'QueueCtrl'
   }).    
