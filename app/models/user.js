@@ -7,10 +7,12 @@ var userSchema = mongoose.Schema({
 		password	: String
 	},
 	username: {type: String, default: ""},
-	services: {type:[String], default:[]},
-	rejected: {type:[String], default:[]},
-	completed: {type:[String], default:[]},
-	accepted: {type:[String], default:[]},
+	businessName: {type: String, default: ""},
+	intro: {type: String, default: ""},
+	services: {type:[String], default:[]},  //store service ids
+	rejected: {type:[String], default:[]},  //store request ids
+	completed: {type:[String], default:[]}, //store request ids
+	accepted: {type:[String], default:[]},  //store request ids
 	new: {type:[String], default:[]}
 });
 
