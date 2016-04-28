@@ -138,7 +138,7 @@ module.exports = function(app, passport) {
 
 
 	//get request by id
-	app.get('/request/:req_id/user_id', function(req, res) {
+	app.get('/request/:req_id/:user_id', function(req, res) {
 		Request.findById(req.params.req_id, function(err, ret) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
@@ -584,9 +584,11 @@ module.exports = function(app, passport) {
 			}
 			else {
 				for (var key in req.body) {
-					if (req.body.hasOwnProperty(key)) {
-						if (req.body[key] != null && req.body[key] != undefined && serv[key] != undefined) {
-							serv[key] = req.body[key];
+					if (key != "userID") {
+						if (req.body.hasOwnProperty(key)) {
+							if (req.body[key] != null && req.body[key] != undefined && serv[key] != undefined) {
+								serv[key] = req.body[key];
+							}
 						}
 					}
 				}
