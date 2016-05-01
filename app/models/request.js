@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var requestSchema = mongoose.Schema({
+    creatorID: {type: String, default: ""},
     userID: {type: String, default: ""},
     message: {type: String, default: ""},
     service: {type: String, default: ""},

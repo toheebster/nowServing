@@ -29,7 +29,11 @@ module.exports = function(passport) {
 					newUser.local.email = email;
 					newUser.local.password = newUser.generateHash(password);
 					newUser.username = req.body.username;
+<<<<<<< HEAD
 					newUser.businessName =  req.body.businessName;
+=======
+					newUser.businessName = req.body.businessName;
+>>>>>>> b8cdcca41d632a714576da35facb015659a2a508
 					newUser.save(function(err) {
 						if(err)
 							throw err;
@@ -72,7 +76,7 @@ module.exports = function(passport) {
 	//			return done(null, false);
 	//		} else {
 	//			var newUser = new User();
-	//
+    //
 	//			newUser.local.email = email;
 	//			newUser.local.password = newUser.generateHash(password);
 	//			newUser.username = req.username;
@@ -82,10 +86,10 @@ module.exports = function(passport) {
 	//				return done(null, newUser);
 	//			});
 	//		}
-	//
+    //
 	//	});
 	//}));
-    //
+
 	//passport.use('local-login', new LocalStrategy({
 	//	usernameField: 'email',
 	//	passwordField: 'password',
