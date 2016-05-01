@@ -8,12 +8,20 @@ module.exports = function(app, passport) {
 		passport.authenticate('local-signup', function(err, user, info) {
 			if (err) { return next(err); }
 			if (!user && info.message == 'User already exists.') { return res.send(400,{'status': 400,'message': 'User already exists'});}
+<<<<<<< HEAD
 			else {
 				console.log(req.body);
 				console.log(user);
 				return res.send(200,{'status':200,'message':'Successful Signup', data: user});
 			}
 			
+=======
+			req.logIn(user,function(err){
+				if (err) { return next(err); }
+				return res.send(200,{'status':200,'message':'Successful Signup', data: user});
+			});
+
+>>>>>>> b8cdcca41d632a714576da35facb015659a2a508
 		})(req, res, next);
 	});
 
@@ -21,35 +29,40 @@ module.exports = function(app, passport) {
 	app.post('/login', function(req, res, next) {
 		passport.authenticate('local-login', function(err, user, info) {
 			if (err) { return next(err); }
-			if (!user && info.message == 'user not existed') { return res.send(404,{'status': 404,'message': 'User not found'});}
+			if (!user && info.message == 'user not existed') {return res.send(404,{'status': 404,'message': 'User not found'});}
 			if (!user && info.message == 'password incorrect'){return res.send(404,{'status': 404,'message': 'Password incorrect'});}
+<<<<<<< HEAD
 			console.log(user);
 			return res.send(200,{'status':200,'message':'Login Success', data: user});
 
+=======
+			req.logIn(user,function(err){
+				if (err) { return next(err); }
+				return res.send(200,{'status':200,'message':'Login Success', data: user});
+			});
+>>>>>>> b8cdcca41d632a714576da35facb015659a2a508
 		})(req, res, next);
 	});
-
 
 
 
 	//app.post('/signup', passport.authenticate('local-signup'), function(req, res) {
 	//	res.redirect('/profile.html');
 	//});
-    //
+
 	//app.post('/login', passport.authenticate('local-login'), function(req, res) {
+    //
 	//	res.redirect('/profile.html');
 	//});
 
 	app.get('/profile', isLoggedIn, function(req, res) {
 		console.log(req['user']);
-		res.json({
-			user: req.user
-		});
+		res.status(200).json({user: req.user});
 	});
 
-	app.get('/queue/:user_id', isLoggedIn, function(req, res) {
-		res.redirect('/serviceprovider/:user_id');
-	});
+	//app.get('/queue/:user_id', isLoggedIn, function(req, res) {
+	//	res.redirect('/serviceprovider/:user_id');
+	//});
 
 	app.get('/logout', function(req, res) {
 		req.logout();
@@ -73,15 +86,29 @@ module.exports = function(app, passport) {
 	app.get('/testA/:user_id',isLoggedIn, function(req,res) {
 		console.log(req.params.user_id);
 		if (req.params.user_id == req['user']._id) {
-			res.json({
-				data: req['user']
-			});
+			res.json({data: req['user']});
 		}
 		else {
-			res.json({
-				data: "invalid"
-			})
+			res.json({data: "invalid"})
 		}
+	})
+	app.get('/testB/:user_id', function(req,res) {
+		console.log(req.params.user_id);
+		if (req.isAuthenticated()) {
+			if (req.params.user_id == req['user']._id) {
+				res.json({
+					data: req['user']
+				});
+			}
+			else {
+				res.json({
+					data: "invalid"
+				})
+			}
+		}
+		res.json({
+			msg: "User not logged in"
+		});
 	})
 
 	//get all request
@@ -112,8 +139,8 @@ module.exports = function(app, passport) {
 	})
 
 
-	//get request with query, this isn't needed
-	app.get('/portfolio/:user_id/queue/', function(req, res) {
+	//get request with query, not used
+	app.get('/request', function(req, res) {
 		var where = null;
 		var sort = null;
 		var select = null;
@@ -165,7 +192,7 @@ module.exports = function(app, passport) {
 
 
 	//get request by id
-	app.get('/request/:req_id/:user_id', function(req, res) {
+	app.get('/request/:req_id', function(req, res) {
 		Request.findById(req.params.req_id, function(err, ret) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
@@ -179,7 +206,7 @@ module.exports = function(app, passport) {
 		});
 	});
 
-	//customer created new request to a user, will post request and update user
+	//customer created new request to a user, will post request and update user, if customer is loggedin, his/her myrequests list will be updated
 	app.post('/addRequest/:user_id', function(req,res){
 		User.findById(req.params.user_id, function(err, user) {
 			if (err) {
@@ -199,17 +226,40 @@ module.exports = function(app, passport) {
 				}
 				request.userID = user._id;
 				user.new.push(request._id);
-				user.save(function (err2, user2) {
-					if (err2) {
-						res.status(404).json({message: 'Error happened!', data: err2});
+				user.save(function (err, user) {
+					if (err) {
+						res.status(404).json({message: 'Error happened!', data: err});
 					}
 					else {
-						request.save(function (err3) {
-							if (err3) {
-								res.status(500).json({message: 'Error happened!', data: err3});
+						if (req.isAuthenticated()) {
+							request.creatorID = req['user']._id;
+						}
+						request.save(function (err) {
+							if (err) {
+								res.status(500).json({message: 'Error happened!', data: err});
 							}
 							else {
-								res.status(201).json({message: 'Request created', data: request});
+								if (req.isAuthenticated()) {
+									User.findById(req['user']._id, function(err, user) {
+										if (err || user == "" || user == null || user == undefined) {
+											res.status(201).json({message: 'request created but could not find current user!', data: request});
+										}
+										else {
+											user.myrequests.push(request.id);
+											user.save(function(err, user) {
+												if (err || user == "" || user == null || user == undefined) {
+													res.status(201).json({message: 'Request created but not added to creator', data: request});
+												}
+												else {
+													res.status(201).json({message: 'Request created and added to creator', data: request});
+												}
+											})
+										}
+									})
+								}
+								else {
+									res.status(201).json({message: 'Request created by non-registered user', data: request});
+								}
 							}
 						});
 					}
@@ -220,7 +270,7 @@ module.exports = function(app, passport) {
 	});
 
 	//edit request, will also update user's request list
-	app.put('/editRequest/:req_id/:user_id', function(req, res){
+	app.put('/editRequest/:req_id', function(req, res){
 		//if(req['user']._id != req.params.user_id) return;
 		Request.findById(req.params.req_id, function (err, ret) {
 			if (err) {
@@ -246,9 +296,9 @@ module.exports = function(app, passport) {
 					}
 					else {
 						if (previousStatus != currentStatus) {
-							User.findById(ret.userID, function (err2, user) {
-								if (err2) {
-									res.status(500).json({message: 'Error happened!', data: err2});
+							User.findById(ret.userID, function (err, user) {
+								if (err) {
+									res.status(500).json({message: 'Error happened!', data: err});
 								}
 								else if (user == "" || user == null || user == undefined) {
 									res.status(404).json({message: 'No matched user found'});
@@ -261,9 +311,9 @@ module.exports = function(app, passport) {
 										if (user[status[currentStatus]].indexOf(ret._id) < 0) {
 											user[status[currentStatus]].push(ret._id);
 										}
-										user.save(function(err3){
-											if (err3) {
-												res.status(200).json({message: 'Requested updated but user update has error!', data: err3});
+										user.save(function(err){
+											if (err) {
+												res.status(200).json({message: 'Requested updated but user update has error!', data: err});
 											}
 											else {
 												res.status(200).json({message: 'Request updated!', data: ret});
@@ -272,9 +322,9 @@ module.exports = function(app, passport) {
 									}
 									else {
 										user[status[currentStatus]].push(ret._id);
-										user.save(function(err3){
-											if (err3) {
-												res.status(200).json({message: 'Requested updated but user update has error!', data: err3});
+										user.save(function(err){
+											if (err) {
+												res.status(200).json({message: 'Requested updated but user update has error!', data: err});
 											}
 											else {
 												res.status(200).json({message: 'Request updated2!', data: ret});
@@ -291,7 +341,7 @@ module.exports = function(app, passport) {
 	});
 
 	//delete request, will also update user side
-	app.delete('/deleteRequest/:req_id/:user_id', function(req, res) {
+	app.delete('/deleteRequest/:req_id', function(req, res) {
 		Request.findById(req.params.req_id, function (err, ret) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
@@ -304,15 +354,16 @@ module.exports = function(app, passport) {
 				var uid = ret.userID;
 				var rid = ret._id;
 				var req_status = ret.status;
-				Request.remove({_id: rid},function(err2) {
-					if (err2) {
-						res.status(500).json({message: 'Error happened!', data: err2});
+				var cid = ret.creatorID;
+				Request.remove({_id: rid},function(err) {
+					if (err) {
+						res.status(500).json({message: 'Error happened!', data: err});
 					}
 					else {
 						//console.log("1");
-						User.findById(uid, function (err3, user) {
-							if (err3) {
-								res.status(200).json({message: 'Request deleted! But user update has error', data: err3});
+						User.findById(uid, function (err, user) {
+							if (err) {
+								res.status(200).json({message: 'Request deleted! But user update has error', data: err});
 							}
 							else if (user == "" || user == null || user == undefined) {
 								res.status(200).json({message: 'Request deleted! User not found'});
@@ -323,9 +374,9 @@ module.exports = function(app, passport) {
 								var index = user[status[req_status]].indexOf(rid);
 								if (index > -1) {
 									user[status[req_status]].splice(index, 1);
-									user.save(function(err4){
-										if (err4) {
-											res.status(200).json({message: 'Request deleted! User not updated', data: err4});
+									user.save(function(err){
+										if (err) {
+											res.status(200).json({message: 'Request deleted! User not updated', data: err});
 										}
 										else {
 											res.status(200).json({message: 'Request deleted!'});
@@ -334,6 +385,28 @@ module.exports = function(app, passport) {
 								}
 								else {
 									res.status(200).json({message: 'Request deleted!'});
+								}
+
+								if (cid != "") {
+									User.findById(cid, function(err, user) {
+										if (err || user == "" || user == null || user == undefined) {
+											res.status(200).json({message: 'Request deleteted! User not updated2'});
+										}
+										else {
+											var index2 = user["myrequests"].indexOf(rid);
+											if (index2 > -1) {
+												user["myrequests"].splice(index2, 1);
+												user.save(function(err){
+													if (err) {
+														res.status(200).json({message: 'Request deleted! User not updated3', data: err});
+													}
+													else {
+														res.status(200).json({message: 'Request deleted! Logged in user updated'});
+													}
+												})
+											}
+										}
+									})
 								}
 							}
 						});
@@ -454,9 +527,9 @@ module.exports = function(app, passport) {
 						}
 					}
 				}
-				user.save(function (err2) {
-					if (err2) {
-						res.status(404).json({message: 'Error happened!', data: err2});
+				user.save(function (err) {
+					if (err) {
+						res.status(404).json({message: 'Error happened!', data: err});
 					}
 					else {
 						res.status(200).json({message: 'User updated!', data:user});
@@ -548,7 +621,7 @@ module.exports = function(app, passport) {
 
 	//get service by id
 	app.get('/service/:serv_id', function(req, res) {
-		Service.findById(req.params.user_id, function(err, serv) {
+		Service.findById(req.params.serv_id, function(err, serv) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
 			}
@@ -581,14 +654,14 @@ module.exports = function(app, passport) {
 				}
 				service.userID = user._id;
 				user.services.push(service._id);
-				user.save(function (err2, user2) {
-					if (err2) {
-						res.status(404).json({message: 'Error happened!', data: err2});
+				user.save(function (err, user) {
+					if (err) {
+						res.status(404).json({message: 'Error happened!', data: err});
 					}
 					else {
-						service.save(function (err3) {
-							if (err3) {
-								res.status(500).json({message: 'Error happened!', data: err3});
+						service.save(function (err) {
+							if (err) {
+								res.status(500).json({message: 'Error happened!', data: err});
 							}
 							else {
 								res.status(201).json({message: 'Service created!', data: service});
@@ -601,7 +674,7 @@ module.exports = function(app, passport) {
 	});
 
 	// update service, for future use
-	app.put('/editService/:serv_id/:user_id', function(req, res) {
+	app.put('/editService/:serv_id', function(req, res) {
 		Service.findById(req.params.serv_id, function (err, serv) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
@@ -619,9 +692,9 @@ module.exports = function(app, passport) {
 						}
 					}
 				}
-				serv.save(function (err2) {
-					if (err2) {
-						res.status(404).json({message: 'Error happened!', data: err2});
+				serv.save(function (err) {
+					if (err) {
+						res.status(404).json({message: 'Error happened!', data: err});
 					}
 					else {
 						res.status(200).json({message: 'Service updated!', data: serv});
@@ -632,7 +705,7 @@ module.exports = function(app, passport) {
 		});
 	})
 	//delete service
-	app.delete('/deleteService/:serv_id/:user_id', function(req, res) {
+	app.delete('/deleteService/:serv_id', function(req, res) {
 		//if(req['user']._id != req.params.user_id) return;
 		Service.findById(req.params.serv_id, function (err, serv) {
 			if (err) {
@@ -643,14 +716,14 @@ module.exports = function(app, passport) {
 			}
 			else {
 				var uid = serv.userID;
-				Service.remove({_id: req.params.serv_id}, function (err2) {
-					if (err2) {
-						res.status(404).json({message: 'Error happened!', data: err2});
+				Service.remove({_id: req.params.serv_id}, function (err) {
+					if (err) {
+						res.status(404).json({message: 'Error happened!', data: err});
 					}
 					else {
-						User.findById(uid, function (err3, user) {
-							if (err3) {
-								res.status(200).json({message: 'Service deleted! But user update has error', data: err3});
+						User.findById(uid, function (err, user) {
+							if (err) {
+								res.status(200).json({message: 'Service deleted! But user update has error', data: err});
 							}
 							else if (user == "" || user == null || user == undefined) {
 								res.status(200).json({message: 'Service deleted! User not found'});
@@ -659,9 +732,9 @@ module.exports = function(app, passport) {
 								var index = user["services"].indexOf(serv._id);
 								if (index > -1) {
 									user["services"].splice(index, 1);
-									user.save(function(err4){
-										if (err4) {
-											res.status(200).json({message: 'Service deleted! User not updated', data: err4});
+									user.save(function(err){
+										if (err) {
+											res.status(200).json({message: 'Service deleted! User not updated', data: err});
 										}
 										else {
 											res.status(200).json({message: 'Service deleted!'});
@@ -706,14 +779,14 @@ module.exports = function(app, passport) {
 				res.status(500).json({message: 'Error happened!', data: err});
 			}
 			else {
-				User.remove({}, function(err2){
-					if (err2) {
-						res.status(500).json({message: 'Error happened!', data: err2});
+				User.remove({}, function(err){
+					if (err) {
+						res.status(500).json({message: 'Error happened!', data: err});
 					}
 					else {
-						Service.remove({}, function(err3){
-							if (err3) {
-								res.status(500).json({message: 'Error happened!', data: err3});
+						Request.remove({}, function(err){
+							if (err) {
+								res.status(500).json({message: 'Error happened!', data: err});
 							}
 							else {
 								res.status(200).json({message: 'All removed!!'});
