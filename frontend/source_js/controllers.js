@@ -157,7 +157,8 @@ mp4Controllers
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).success(function (data, status, headers, config) {
             console.log(data.data._id);
-            $location.path('/user/portfolio/'+data.data._id);
+            if(data.data._id !== undefined)
+                $location.path('/user/portfolio/'+data.data._id);
          }).error(function (data, status, headers, config) {}); 
     }
 }])
