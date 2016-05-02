@@ -73,6 +73,7 @@ module.exports = function(passport) {
 	//		} else {
 	//			var newUser = new User();
     //
+	//
 	//			newUser.local.email = email;
 	//			newUser.local.password = newUser.generateHash(password);
 	//			newUser.username = req.username;
@@ -86,6 +87,10 @@ module.exports = function(passport) {
 	//	});
 	//}));
 
+	//
+	//	});
+	//}));
+    //
 	//passport.use('local-login', new LocalStrategy({
 	//	usernameField: 'email',
 	//	passwordField: 'password',

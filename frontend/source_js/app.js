@@ -27,8 +27,7 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider, $loca
   when('/newrequest/:id', {
     templateUrl: 'partials/newRequest.html',
     controller: 'NewRequestCtrl'
-  }).  
-
+  }).
   otherwise({
     redirectTo: '/'
   });
