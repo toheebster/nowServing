@@ -2,31 +2,31 @@ var mp4Services = angular.module('mp4Services', ['ngRoute', 'ngResource']);
 var baseUrl = "http://localhost:8080";
 
 mp4Services.factory('SP', function(){
-    var SPname  = "Hany";
-    var service = { set: function(u){ SPname = u; },
-                    get: function(){ return SPname; }
+    var SP=null;
+    var service = { set: function(u){ SP = u; },
+                    get: function(){ return SP; }
                     };
   return service;
 })
 .factory('request', function($http) {
    return {
-       get: function(req_id, user_id) {
-           return $http.get(baseUrl+'/request/'+req_id+'/'+user_id);
+       get: function(req_id) {
+           return $http.get(baseUrl+'/request/'+req_id);
        },
        post: function(user_id, obj, callback) {
            $http.post(baseUrl+'/addRequest/'+user_id, obj).success(function(data){
                callback(data);
            });
        },
-       update: function(req_id, user_id, obj, callback){
-           var baseUrl = $window.sessionStorage.baseurl;
-           $http.put(baseUrl+'/editRequest/'+req_id+'/'+user_id, obj).success(function(){
+       update: function(req_id, obj, callback){
+           
+           $http.put(baseUrl+'/editRequest/'+req_id, obj).success(function(){
                callback();
            });
        },
-       delete_task: function(taskID, callback){
-           var baseUrl = $window.sessionStorage.baseurl;
-           $http.delete(baseUrl+'/deleteRequest/'+req_id+'/'+user_id).success(function(){
+       delete: function(req_id, callback){
+           
+           $http.delete(baseUrl+'/deleteRequest/'+req_id).success(function(){
                callback();
            });
        }
@@ -43,14 +43,14 @@ mp4Services.factory('SP', function(){
            });
        },
        update: function(user_id, obj, callback){
-           var baseUrl = $window.sessionStorage.baseurl;
+           
            $http.put(baseUrl+'/user/'+user_id, obj).success(function(){
                callback();
            });
        },
-       delete_task: function(taskID, callback){
-           var baseUrl = $window.sessionStorage.baseurl;
-           $http.delete(baseUrl+'/deleteRequest/'+req_id+'/'+user_id).success(function(){
+       delete: function(req_id, callback){
+           
+           $http.delete(baseUrl+'/deleteRequest/'+req_id).success(function(){
                callback();
            });
        }
@@ -66,15 +66,15 @@ mp4Services.factory('SP', function(){
                callback(data);
            });
        },
-       update: function(serv_id, user_id, obj, callback){
-           var baseUrl = $window.sessionStorage.baseurl;
-           $http.put(baseUrl+'/editService/'+serv_id+'/'+user_id, obj).success(function(){
+       update: function(serv_id, obj, callback){
+           
+           $http.put(baseUrl+'/editService/'+serv_id, obj).success(function(){
                callback();
            });
        },
-       delete_task: function(serv_id, user_id, callback){
-           var baseUrl = $window.sessionStorage.baseurl;
-           $http.delete(baseUrl+'/deleteService/'+serv_id+'/'+user_id, obj).success(function(){
+       delete: function(serv_id, callback){
+           
+           $http.delete(baseUrl+'/deleteService/'+serv_id, obj).success(function(){
                callback();
            });
        }

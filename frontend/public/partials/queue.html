@@ -1,14 +1,17 @@
 <section class="banner small-12">
+    <div class="small-12">
+        <div class="bt round small-5 medium-2 float-right topright" ng-click="addService()">Add Service</div>
+    </div>
     <div class="circle no-overflow small-centered"><a href=""></a></div>
 </section>
 <section>
     <div class="tabs tabs-style-flip queue">
         <nav class="queue-tabs small-8 small-offset-1">
             <ul>
-                <li><a class="fa fa-inbox fa-1x" ng-click="setType(1)"><span>New Request</span></a></li>
-                <li><a class="fa fa-tasks fa-1x" ng-click="setType(2)"><span>In Progress</span></a></li>
-                <li><a class="fa fa-check-square-o fa-1x" ng-click="setType(4)"><span>Completed</span></a></li>
-                <li><a class="fa fa-ban fa-1x" ng-click="setType(3)"><span>Declined</span></a></li>
+                <li><a class="fa fa-inbox fa-1x" ng-click="setType(0)"><span>New Request</span></a></li>
+                <li><a class="fa fa-tasks fa-1x" ng-click="setType(1)"><span>In Progress</span></a></li>
+                <li><a class="fa fa-check-square-o fa-1x" ng-click="setType(3)"><span>Completed</span></a></li>
+                <li><a class="fa fa-ban fa-1x" ng-click="setType(2)"><span>Declined</span></a></li>
             </ul>
         </nav>
         <div class="content-wrap" hidden>
@@ -25,7 +28,7 @@
     <div class="row">
         <div class="medium-offset-1 small-12 medium-8 columns taskList">
             <div ng-repeat="each in tasks | filter: searchTxt | orderBy: sortBy" class="small-12 task" ng-click="seeDetail($index)">
-            <a ng-href="#/request/{{each._id}}">
+            <!--<a ng-href="#/request/{{each._id}}"> -->
                 <div class="small-6 columns"><strong>{{each.customerName}}</strong></div>
                 <div class="small-6 float-right text-right columns"><span>{{each.createdTime}}</span></div>
                 <div class="small-12 columns"><strong>Message:</strong><span>{{each.message}}</span></div>

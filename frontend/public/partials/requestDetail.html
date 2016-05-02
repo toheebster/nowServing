@@ -1,12 +1,32 @@
-<div class="request small-11 medium-6 small-centered centerVertically">
-    <form id="newRequest">
-        <div class="row"><span>Name:</span></div>
-        <div class="row textbox">{{req.customerName}}</div>
-        <div class="row"><span>Contact Info:</span></div>
-        <div class="row textbox">{{req.contactInfo}}</div>
-        <div class="row"><span>Message:</span></div>
-        <div class="row textbox">{{req.message}}</div>
-        <div class="row"><span>Status:</span></div>
-        <div class="row textbox">{{req.status}}</div>
-    </form>
+<div class="request small-11 medium-9 small-centered paddingTopBottomM">
+    <div class="row">
+        <span class="columns small-12 text-left">Name:</span>
+    </div>
+    <div class="row textbox"><span class="columns small-12">{{req.customerName}}</span></div>
+    <div class="row"><span class="columns small-12">Contact Info:</span></div>
+    <div class="row textbox"><span class="columns small-12">{{req.contactInfo}}</span></div>
+    <div class="row"><span class="columns small-12">Message:</span></div>
+    <div class="row textbox"><span class="columns small-12">{{req.message}}</span></div>
+    <div class="row"><span class="columns small-12">Status:</span></div>
+    <div class="row textbox"><span class="columns small-12">{{req.status}}</span></div>
+    
+    <div ng-show="req.proposedTime[0]">
+        <div class="row">
+            <span class="columns small-12" ng-if="curType == 0">Choose a time to accept:</span>
+            <span class="columns small-12" ng-if="curType != 0">Chosen Time:</span>
+        </div>
+        <div class="marginLRS greyroundborder paddingLRM marginS row">
+            <div ng-repeat="slot in req.proposedTime" class="small-12 medium-4 end bt round columns" id="slot_{{$index}}" ng-click="acceptTime($index)"
+                ng-class="{'selected': req.acceptedTime[$index]}">{{slot | date:'MMM d, h:mm:ss a, y'}}</div>
+        </div>
+    </div>    
+
+    <div class="small-9 small-centered marginS">
+        <button class="small-12 bt round" ng-click="accept()" ng-if="curType == 0">Accept</button>
+        <button class="small-12 bt round" ng-click="complete()" ng-if="curType == 1">Complete</button>
+    </div>
+
+    <div class="row"><span class="columns small-12">Or Decline:</span></div>
+    
+    <div class="small-9 small-centered"><button class="small-12 bt round" ng-click="decline()">Decline</button></div>
 </div>
