@@ -16,6 +16,7 @@ mp4Controllers
     }).error(function (data, status, headers, config) {
         console.log(data);
     });
+
     // $scope.user = {
     //     _id: "1234",
     //     username: "Michael Kim",
@@ -40,7 +41,47 @@ mp4Controllers
 
 
 // Queue Pages
-.controller('EditPortfolioCtrl', ['$scope', '$http', '$resource', function($scope, $http, $resource) {
+.controller('EditPortfolioCtrl', ['$scope', '$http', '$resource', '$routeParams', 'user', '$route', function($scope, $http, $resource, $routeParams, user, $route) {
+
+    user.get($routeParams.id)
+    .then(function (data) {
+        $scope.user = data.data.data;
+        console.log($scope.user);
+        $scope.businessName = $scope.user.businessName;
+        $scope.intro = $scope.user.intro;
+        $scope.email = $scope.user.local.email;
+        // $scope.services = $scope.user.services;
+    });
+
+    $scope.updateUsername = function (data) {
+        sendData = {username: data}
+        user.update($routeParams.id, sendData, function(data) {
+            $route.reload();
+        });
+    }
+
+    $scope.updateIntro = function (data) {
+        sendData = {intro: data}
+        user.update($routeParams.id, sendData, function(data) {
+            $route.reload();
+        });
+    }
+
+    $scope.updateBusinessName = function (data) {
+        sendData = {businessName: data}
+        user.update($routeParams.id, sendData, function(data) {
+            $route.reload();
+        });
+    }
+    $scope.updateEmail = function (data) {
+        sendData = {local: {email: data, password: $scope.user.local.password}}
+
+        user.update($routeParams.id, sendData, function(data) {
+            $route.reload();
+        });
+    }
+
+
 
 
 }])
@@ -121,6 +162,30 @@ mp4Controllers
     }
 }])
 
+.controller('signupCtrl', ['$scope', '$http', '$resource', 'SP', 'user', '$location', function($scope, $http, $resource, SP, user, $location) {
+    $scope.password;
+    $scope.email;
+    $scope.signup = function() {
+        $http({
+            method: 'POST',
+            url: 'http://localhost:8080/signup',
+            data: $.param({
+                email: $scope.email,
+                password: $scope.password
+            }),
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).success(function (data, status, headers, config) {
+            console.log(data.data);
+            if(data.data._id !== undefined)
+                $location.path('/user/portfolio/'+data.data._id);
+            else 
+                $location.path('/');
+         }).error(function (data, status, headers, config) {}); 
+    }
+}])
+
+
+
 
 // general controllers
 .controller('TopbarCtrl', ['$scope', '$http', '$resource', 'ngDialog', function($scope, $http, $resource, ngDialog) {
@@ -130,7 +195,7 @@ mp4Controllers
       }
 
     $scope.showSignup = function() {
-        ngDialog.open({ template: './partials/signup.html', className: 'ngdialog-theme-default' })
+        ngDialog.open({ template: './partials/signup.html', className: 'ngdialog-theme-default', controller: 'signupCtrl' })
     }  
 
 
@@ -167,3 +232,5 @@ mp4Controllers
     </div>'
   };
 })
+
+

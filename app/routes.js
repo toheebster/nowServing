@@ -435,6 +435,17 @@ module.exports = function(app, passport) {
 		})
 	})
 
+	app.delete('/user/:user_id', function(req, res) {
+		User.findByIdAndRemove(req.params.user_id, function(err) {
+			if(err) {
+				res.status(500).json({message: 'Error finding and deleting user', data: err});
+			}
+			else {
+				res.status(200).json({message: "User Deleted"});
+			}
+		});
+	});
+
 
 	//get user by id
 	app.get('/user/:user_id', function(req, res) {

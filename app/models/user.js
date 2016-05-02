@@ -10,7 +10,7 @@ var userSchema = mongoose.Schema({
 	businessName: {type: String, default: ""},
 	intro: {type: String, default: ""},
 	gender: {type: Number, default: 0},  //0 not specified, 1 male, 2 female
-	services: {type:[String], default:[]},  //store service ids
+	services: {type: Array, default:[]},  //store service ids
 	rejected: {type:[String], default:[]},  //store request ids
 	completed: {type:[String], default:[]}, //store request ids
 	accepted: {type:[String], default:[]},  //store request ids
