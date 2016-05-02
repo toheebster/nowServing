@@ -13,7 +13,7 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider, $loca
 
   // logged in
   when('/user/edit/:id', {
-    templateUrl: 'partials/edit_portfolio.html',
+    templateUrl: 'partials/editPortfolio.html',
     controller: 'EditPortfolioCtrl'
   }).    
   when('/user/:id', {

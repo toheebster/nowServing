@@ -8,20 +8,10 @@ module.exports = function(app, passport) {
 		passport.authenticate('local-signup', function(err, user, info) {
 			if (err) { return next(err); }
 			if (!user && info.message == 'User already exists.') { return res.send(400,{'status': 400,'message': 'User already exists'});}
-<<<<<<< HEAD
-			else {
-				console.log(req.body);
-				console.log(user);
-				return res.send(200,{'status':200,'message':'Successful Signup', data: user});
-			}
-			
-=======
 			req.logIn(user,function(err){
 				if (err) { return next(err); }
 				return res.send(200,{'status':200,'message':'Successful Signup', data: user});
 			});
-
->>>>>>> b8cdcca41d632a714576da35facb015659a2a508
 		})(req, res, next);
 	});
 
@@ -31,16 +21,10 @@ module.exports = function(app, passport) {
 			if (err) { return next(err); }
 			if (!user && info.message == 'user not existed') {return res.send(404,{'status': 404,'message': 'User not found'});}
 			if (!user && info.message == 'password incorrect'){return res.send(404,{'status': 404,'message': 'Password incorrect'});}
-<<<<<<< HEAD
-			console.log(user);
-			return res.send(200,{'status':200,'message':'Login Success', data: user});
-
-=======
 			req.logIn(user,function(err){
 				if (err) { return next(err); }
 				return res.send(200,{'status':200,'message':'Login Success', data: user});
 			});
->>>>>>> b8cdcca41d632a714576da35facb015659a2a508
 		})(req, res, next);
 	});
 
