@@ -5,7 +5,7 @@ var IN_PROGRESS = 1;
 var COMPLETED = 3;
 var DECLINED = 2;
 
-var homeurl = "http://locationhost:8080"
+var homeurl = "http://localhost:8080"
 
 mp4Controllers
 // Not require login
@@ -89,8 +89,9 @@ mp4Controllers
       
     }
 
-    $scope.addService = function(){
-        $location.path(homeurl+"/newservice/"+SPID)
+    $scope.showAddService = function(){
+        console.log("add service modal")
+        $scope.dialog = ngDialog.open({ template: './partials/newService.html', className: 'ngdialog-theme-default request-dialog-width', controller: 'AddServiceCtrl', scope:$scope })
     }
  
     $scope.reload();
@@ -98,7 +99,29 @@ mp4Controllers
   
 }])
 
+.controller('AddServiceCtrl', ['$scope', '$http', 'service', '$routeParams', 'user', function($scope, $http, service, $routeParams, user) {
 
+    var SPID = $routeParams.id;
+    
+    $scope.newService = {
+        userID: SPID,
+        availability: "",
+        serviceName: "",
+        description: ""
+    };
+
+    $scope.addService= function(){
+        console.log("adding service")
+        console.log($scope.newService)
+
+        service.post(SPID, $scope.newService, function(res){
+            console.log(res)
+            $scope.dialog.close()            
+        })
+
+    }
+
+}])
 
 // Tasks Pages
 .controller('DetailCtrl', ['$scope', '$http', 'request', '$routeParams', 'user', function($scope, $http, request, $routeParams, user) {
@@ -134,20 +157,7 @@ mp4Controllers
                     console.log(data)
                     $scope.reload()
                     $scope.dialog.close()
-                })
-        
-        
-                // // update user queue
-                // console.log('Before splice')
-                // console.log($scope.SP)
-                // var i = $scope.SP.new.indexOf($scope.req._id)
-                // $scope.SP.new.splice(i, 1);
-                // $scope.SP.accepted.push($scope.req._id);
-                // console.log('After splice')
-                // console.log($scope.SP)
-                // user.update($scope.SP._id, $scope.SP, function(data){
-                //     console.log(data)
-                // })       
+                })  
                 
         }
 
@@ -163,27 +173,6 @@ mp4Controllers
             $scope.reload()
             $scope.dialog.close()
         })
-
-/*
-        // update user queue
-        console.log('Before splice')
-        console.log($scope.SP)
-        var i = $scope.SP.new.indexOf($scope.req._id)
-        if(i>=0){
-            $scope.SP.new.splice(i, 1);
-            $scope.SP.rejected.push($scope.req._id);
-        }
-        i = $scope.SP.accepted.indexOf($scope.req._id)
-        if(i>=0){
-            $scope.SP.accepted.splice(i, 1);
-            $scope.SP.rejected.push($scope.req._id);
-        }
-        console.log('After splice')
-        console.log($scope.SP)
-        user.update($scope.SP._id, $scope.SP, function(data){
-            console.log(data)
-        })
-*/
     }
 
     $scope.complete = function(){
@@ -196,28 +185,6 @@ mp4Controllers
             $scope.reload()
             $scope.dialog.close()            
         })
-
-/*
-        // update user queue
-        console.log('Before splice')
-        console.log($scope.SP)
-        var i = $scope.SP.new.indexOf($scope.req._id)
-        if(i>=0){
-            $scope.SP.new.splice(i, 1);
-            $scope.SP.completed.push($scope.req._id);
-        }
-        i = $scope.SP.accepted.indexOf($scope.req._id)
-        if(i>=0){
-            $scope.SP.accepted.splice(i, 1);
-            $scope.SP.completed.push($scope.req._id);
-        }
-        console.log('After splice')
-        console.log($scope.SP)
-        user.update($scope.SP._id, $scope.SP, function(data){
-            console.log(data)
-        })
-*/
-
     }
 
     $scope.showAcceptedTime = function(){
@@ -279,39 +246,63 @@ mp4Controllers
     $scope.login = function() {
         $http({
             method: 'POST',
-            url: 'http://localhost:8080/login',
+            url: homeurl+'/login',
             data: $.param({
                 email: $scope.email,
                 password: $scope.password
             }),
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).success(function (data, status, headers, config) {
-            console.log(data.data._id);
+            
             SP.set(data.data) // set cur user
+            console.log("SP: ")
+            console.log(SP.get());
+            $scope.curUser = SP.get()
+            console.log("curUser: ")
+            console.log($scope.curUser._id)
+            console.log($scope.setUser($scope.curUser))
+            $scope.dialog.close()
             $location.path('/serviceprovider/'+data.data._id);
-         }).error(function (data, status, headers, config) {}); 
+         }).error(function (data, status, headers, config) {
+            console.log("data: "+data);
+            console.log("status: "+status);
+            console.log("headers: "+headers);
+            $scope.dialog.close()
+         }); 
     }
 }])
-// login & signup controllers
-// .controller('loginCtrl', ['$scope', '$http', '$resource', 'SP', 'user', '$location', function($scope, $http, $resource, SP, user, $location) {
-//     $scope.password;
-//     $scope.email;
-//     $scope.login = function() {
-//         $http({
-//             method: 'POST',
-//             url: 'http://localhost:8080/login',
-//             data: $.param({
-//                 email: $scope.email,
-//                 password: $scope.password
-//             }),
-//             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-//         }).success(function (data, status, headers, config) {
-//             console.log(data.data._id);
-//             SP.set(data.data) // set cur user
-//             $location.path('/serviceprovider/'+data.data._id);
-//          }).error(function (data, status, headers, config) {}); 
-//     }
-// }])
+
+.controller('signUpCtrl', ['$scope', '$http', '$resource', 'SP', 'user', '$location', function($scope, $http, $resource, SP, user, $location) {
+    $scope.password;
+    $scope.email;
+    $scope.username;
+    $scope.businessName;
+    $scope.signup = function() {
+        $http({
+            method: 'POST',
+            url: homeurl+'/signup',
+            data: $.param({
+                email: $scope.email,
+                password: $scope.password,
+                username: $scope.username,
+                businessName: $scope.businessName
+            }),
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).success(function (data, status, headers, config) {
+            console.log(data.data._id);
+            SP.set(data.data) // set cur user
+            $scope.curUser = SP.get()
+            console.log($scope.setUser($scope.curUser))
+            $scope.dialog.close()
+            $location.path('/serviceprovider/'+data.data._id);
+         }).error(function (data, status, headers, config) {
+            console.log("data: "+data);
+            console.log("status: "+status);
+            console.log("headers: "+headers);
+            $scope.dialog.close()
+         }); 
+    }
+}])
 
 // data passed between pages
 
@@ -320,25 +311,50 @@ mp4Controllers
 
 // general controllers
 .controller('TopbarCtrl', ['$scope', '$http', '$resource', 'ngDialog', 'SP', '$location', function($scope, $http, $resource, ngDialog, SP, $location) {
-
+    $scope.curUser = null;
     $scope.showLogin = function() {
-        ngDialog.open({ template: './partials/login.html', className: 'ngdialog-theme-default', controller: 'loginCtrl' })
+        $scope.dialog = ngDialog.open({ template: './partials/login.html', className: 'ngdialog-theme-default', controller: 'loginCtrl', scope:$scope })   
     }
 
     $scope.showSignup = function() {
-        ngDialog.open({ template: './partials/signup.html', className: 'ngdialog-theme-default', controller: 'signUpCtrl' })
+        $scope.dialog = ngDialog.open({ template: './partials/signup.html', className: 'ngdialog-theme-default', controller: 'signUpCtrl', scope:$scope })
     }  
 
     $scope.viewMyQueue = function(){
         var url="/serviceprovider/"
-        var curUser = SP.get()
-        if(!curUser){
+        $scope.curUser = SP.get()
+        if(!$scope.curUser){
             $scope.showLogin()
         }else{
-            console.log(url+curUser._id)
-            $location.path(url+curUser._id)
+            console.log(url+$scope.curUser._id)
+            $location.path(url+$scope.curUser._id)
         }
     }
+    $scope.logout = function(){
+        $http({
+            method: 'GET',
+            url: homeurl+'/logout',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).success(function (data, status, headers, config) {
+            SP.set(null);
+            $scope.curUser=null;
+         }).error(function (data, status, headers, config) {
+            console.log("data: "+data);
+            console.log("status: "+status);
+            console.log("headers: "+headers);
+         });         
+    }
+    $scope.setUser = function(newval){
+        $scope.curUser = newval
+        console.log("showLogout: ")
+        console.log($scope.curUser)
+    }
+    $scope.showLogout = function(){
+        return ($scope.curUser==null) ? false: true;
+    }
+    $scope.$watch('curUser', function(){
+        $scope.showLogout();
+    })
 
 }])
 .controller('profileController', ['$scope', '$http', function($scope, $http) {
@@ -360,15 +376,22 @@ mp4Controllers
             <div class="float-left small-6 large-4 columns">
                 <div class="row">
                     <div class="columns small-4"><a href="#/" class="bt round">Service</a></div>
-                    <div class="columns small-8 end" ng-click="viewMyQueue()"><a class="bt round">My Queue</a></div>
+                    <div ng-show="showLogout()" id="MyQueueBt" class="columns small-8 end" ng-click="viewMyQueue()"><a class="bt round">My Queue</a></div>
                 </div>
             </div>
             <div class="float-right small-6 large-4 columns">
-                <div class="float-right row">
+                <div class="float-right row" id="SignUpLoginBt" ng-hide="showLogout()">
                     <div class="columns small-6 float-right" ng-click="showSignup()"><a  class="bt round float-right">Signup</a></div>
                     <div class="columns small-4 end float-right" ng-click="showLogin()"><a class="bt round float-right">Login</a></div>
                 </div>
-
+                <div class="float-right row" id="LogoutBt" ng-show="showLogout()">
+                    <div class="column small-6 float-right centertext align-self-middle">
+                        <span>Hi, {{curUser.username}}</span>
+                    </div>
+                    <div class="columns small-4 end float-right" ng-click="logout()">
+                        <a class="bt round float-right">Logout</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>'

@@ -2,9 +2,20 @@ var mp4Services = angular.module('mp4Services', ['ngRoute', 'ngResource']);
 var baseUrl = "http://localhost:8080";
 
 mp4Services.factory('SP', function(){
-    var SP=null;
-    var service = { set: function(u){ SP = u; },
-                    get: function(){ return SP; }
+    var SP =  {
+        username: "",
+        businessName: "",
+        intro: "",
+        gender: 0,  //0 not specified, 1 male, 2 female
+        services: [],  //store service ids
+        rejected: [],  //store request ids
+        completed: [], //store request ids
+        accepted: [],  //store request ids
+        new: [],
+        myrequests: [],  //store request ids
+    };
+    var service = { set: function(u){ SP = u; console.log("fact SP: "); console.log(SP)},
+                    get: function(){ console.log("fact SP: "); console.log(SP); return SP; }
                     };
   return service;
 })

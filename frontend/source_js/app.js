@@ -19,14 +19,6 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider, $loca
   when('/serviceprovider/:id', {
     templateUrl: 'partials/queue.html',
     controller: 'QueueCtrl'
-  }).    
-  when('/request/:id', {
-    templateUrl: 'partials/requestDetail.html',
-    controller: 'DetailCtrl'
-  }).
-  when('/newrequest/:id', {
-    templateUrl: 'partials/newRequest.html',
-    controller: 'NewRequestCtrl'
   }).
   otherwise({
     redirectTo: '/'

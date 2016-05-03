@@ -3,9 +3,11 @@ body{
 	background: none !important;
 }
 input, textarea{
-	border-radius: $roundcorner !important
+	border-radius: $roundcorner !important;
+	resize:none !important;
 }
-#newRequest{
+
+#newRequest, #newService{
 	textarea{
 		height: 100px !important;
 		resize:none;
@@ -126,6 +128,16 @@ input, textarea{
 	padding-right: 20px;
 	-webkit-box-shadow: 0 4px 8px 0 #aaa;
 	box-shadow: 0 4px 8px 0 #aaa;
+	.centertext{
+		height: 55px;
+		line-height: 100%;
+		text-align: center;	
+		span{
+		  display: inline-block;
+		  vertical-align: middle;
+		  line-height: normal; 
+		}
+	}
 }
 .fixtop{
 	position: fixed;
