@@ -542,7 +542,7 @@ module.exports = function(app, passport) {
 	//});
 
 	//update user info
-	app.put('/user', isLoggedIn, function(req, res) {
+	app.put('/editUser', isLoggedIn, function(req, res) {
 		User.findById(req['user']._id, function (err, user) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
