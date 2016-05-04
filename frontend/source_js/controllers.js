@@ -7,36 +7,20 @@ mp4Controllers
 
 }])
 
-.controller('PortfolioCtrl', ['$scope', '$http', '$resource', 'user', '$routeParams', 'ngDialog', function($scope, $http, $resource, user, $routeParams, ngDialog ) {    
+.controller('PortfolioCtrl', ['$scope', '$http', '$resource', 'user', '$routeParams', 'ngDialog', 'service', function($scope, $http, $resource, user, $routeParams, ngDialog, service) {    
     ngDialog.close()
     user.get($routeParams.id)
     .success(function (data, status, headers, config) {
         $scope.user = data.data;
-        console.log($scope.user);
+        $scope.services = [];
+        angular.forEach($scope.user.services, function(serviceID) {
+            service.get(serviceID).then(function (data) {
+                $scope.services.push(data.data.data);
+            });
+        });
     }).error(function (data, status, headers, config) {
         console.log(data);
     });
-
-    // $scope.user = {
-    //     _id: "1234",
-    //     username: "Michael Kim",
-    //     email: "michael@kim.com",
-    //     businessName: "Kim's Kuts",
-    //     intro: "PlanningSDLC for NetworkerIan Szetho: Product OwnerMaleek Akeju: Product ManagerSheri Lambesis: UX ExpertToheeb Okenla: Software Dev.Why should we build this system?What value will it provide?How long will it take to make this systemConsidering tech, org, & economical feasibilityFirst iteration Mobile app  ~ 60 hours",
-    //     services: [
-    //     {
-    //         serviceName: "Iphone Fixes",
-    //         availability: "Fridays Only"
-    //     }, 
-    //     {
-    //         serviceName: "Haircuts",
-    //         availability: "Fridays & Saturdays"
-    //     }, 
-    //     {
-    //         serviceName: "Cook you a nice meal",
-    //         availability: "Fridays & Saturdays"
-    //     }]
-    // };
 }])
 
 
@@ -157,8 +141,7 @@ mp4Controllers
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).success(function (data, status, headers, config) {
             console.log(data.data._id);
-            if(data.data._id !== undefined)
-                $location.path('/user/portfolio/'+data.data._id);
+            $location.path('/user/portfolio/'+data.data._id);
          }).error(function (data, status, headers, config) {}); 
     }
 }])
