@@ -8,8 +8,8 @@ var requestSchema = mongoose.Schema({
     customerName: {type: String, default: ""},
     contactInfo: {type: String, default: ""},
     status: {type: Number, default:0}, //0 new, 1 accepted, 2 rejected, 3 completed
-    proposedTime: {type:[Date], default:[]},
-    acceptedTime: {type:[Date], default:[]},
+    proposedTime: {type: [String], default: []},
+    acceptedTime: {type: [Boolean], default: []},
     createdTime: {type:Date, default:Date.now()}
 });
 
