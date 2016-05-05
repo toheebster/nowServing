@@ -56,9 +56,9 @@ mp4Services.factory('SP', function(){
                callback(data);
            });
        },
-       update: function(user_id, obj, callback){
+       update: function(obj, callback){
            
-           $http.put(baseUrl+'/user/'+user_id, obj).success(function(){
+           $http.put(baseUrl+'/editUser', obj).success(function(){
                callback();
            });
        },
@@ -76,7 +76,7 @@ mp4Services.factory('SP', function(){
            return $http.get(baseUrl+'/service/'+serv_id);
        },
        post: function(user_id, obj, callback) {
-           $http.post(baseUrl+'/addService/'+user_id, obj).success(function(data){
+           $http.post(baseUrl+'/addService', obj).success(function(data){
                callback(data);
            });
        },

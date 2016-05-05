@@ -46,11 +46,15 @@ mp4Controllers
             angular.forEach($scope.servicesid, function(i, key) {
                 var t = service.get(i).then(function(res){
                     var serv = res.data.data 
+                    console.log("serv")
                     console.log(serv)
                     $scope.services.push(serv)
                     console.log($scope.services);            
                 });
             }, $scope.services); 
+
+            $scope.img = '../userImage/' + $scope.user._id + '.jpg';
+            console.log($scope.img);
     
         }).error(function (data, status, headers, config) {
             console.log(data);
@@ -85,9 +89,29 @@ mp4Controllers
         $scope.showEdit();
     }) 
 
+    $scope.showEditPortfolio = function() {
+        //console.log($scope.img);
+        $scope.dialog = ngDialog.open({ template: './partials/editPortfolio.html', className: 'ngdialog-theme-default', controller: 'editPortfolioCtrl', scope:$scope });
+
+    }
     $scope.reload()
 }])
+.controller('editPortfolioCtrl', ['$scope', '$http', 'user', '$routeParams', '$route', function($scope, $http, user, $routeParams, $route) {
 
+    var SPID = $routeParams.id;
+    $scope.editUser = function() {
+        console.log("edit profile");
+        console.log($scope.user);
+        user.update($scope.user, function(res){
+            console.log("$scope.user");
+            console.log(res);
+            $scope.dialog.close();
+            $route.reload();
+        })
+
+    }
+
+}])
 .controller('EditServiceCtrl', ['$scope', '$http', 'service', '$routeParams', 'user', '$route', function($scope, $http, service, $routeParams, user, $route) {
 
     $scope.service = angular.copy($scope.oldservice)
@@ -201,6 +225,8 @@ mp4Controllers
                 });
             }, $scope.tasks);
 
+            $scope.img = '../userImage/' + $scope.SP._id + '.jpg';
+            console.log($scope.img);
 
         });
     }    
@@ -483,6 +509,7 @@ mp4Controllers
         $scope.dialog = ngDialog.open({ template: './partials/signup.html', className: 'ngdialog-theme-default', controller: 'signUpCtrl', scope:$scope })
     }  
 
+
     $scope.viewMyQueue = function(){
         var url="/user/"
         //$scope.curUser = SP.get()
@@ -550,13 +577,27 @@ mp4Controllers
             $scope.profile = true;
             $scope.user = data.user;
         }
-   });
+
+   }); 
  }])
+.directive('checkImage', function($http) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            attrs.$observe('ngSrc', function(ngSrc) {
+                $http.get(ngSrc).success(function(){
+                }).error(function(){
+                    element.attr('src', '../userImage/user-default.png'); // set default image
+                });
+            });
+        }
+    }; 
+})
 .directive('topbar', function() {
   return {
     template: '
     <div class="small-12 fixtop navbar" ng-controller = "TopbarCtrl">
-              <div class="small-12 small-centered columns">
+        <div class="small-12 small-centered columns">
             <div class="float-left small-6 large-4 columns">
                 <div class="row">
                     <div class="columns small-4"><a href="#/" class="bt round">Service</a></div>

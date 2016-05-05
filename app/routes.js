@@ -2,6 +2,19 @@ var User = require('./models/user');
 var Service = require('./models/service');
 var Request = require('./models/request');
 var mail = require('./mail');
+var multer  = require('multer');
+
+var storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+		cb(null, 'frontend/public/userImage/');
+	},
+	filename: function (req, file, cb) {
+		var extension = file.originalname.split(/[. ]+/).pop();
+		cb(null, req['user']._id+ '.' + extension);
+	}
+});
+
+var upload = multer({ storage: storage });
 
 
 module.exports = function(app, passport) {
@@ -185,7 +198,6 @@ module.exports = function(app, passport) {
 
 	//get request by id
 	app.get('/request/:req_id', isLoggedIn, function(req, res) {
-		console.log("here");
 		Request.findById(req.params.req_id, function(err, ret) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
@@ -360,7 +372,7 @@ module.exports = function(app, passport) {
 	});
 
 	//delete request, will also update user side
-	app.delete('/deleteRequest/:req_id', function(req, res) {
+app.delete('/deleteRequest/:req_id', function(req, res) {
 		Request.findById(req.params.req_id, function (err, ret) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
@@ -873,4 +885,22 @@ module.exports = function(app, passport) {
 		})
 	})
 
+	app.post('/fs/upload',isLoggedIn,function (req, res) {
+		console.log("into upload")
+		var image_receiver = upload.single('avatar');
+		image_receiver(req, res, function (err) {
+			if (err) {
+				// An error occurred when uploading
+				console.log("error in /fs/upload : " + err );
+				return;
+			}
+			// Everything went fine
+			//res.redirect('/#/user/portfolio/' + req['user']._id);
+			//res.status(200).json({message:"Image uploaded successfully"});
+		})
+	});
+
+	app.get('/loggedin', isLoggedIn,function(req,res) {
+		res.status(200).json({message: "loggedin"});
+	});
 };
