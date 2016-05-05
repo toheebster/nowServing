@@ -4169,69 +4169,94 @@ input, textarea {
   border-radius: 10px !important;
   resize: none !important; }
 
-/* line 9, ../../source_sass/_base.scss */
+/* line 10, ../../source_sass/_base.scss */
+nav div {
+  z-index: 999; }
+/* line 13, ../../source_sass/_base.scss */
+nav .top-bar {
+  z-index: 99;
+  background-color: white; }
+  /* line 17, ../../source_sass/_base.scss */
+  nav .top-bar .top-bar-right li {
+    background-color: white; }
+/* line 22, ../../source_sass/_base.scss */
+nav .title-bar {
+  height: 56px;
+  background-color: white; }
+  /* line 25, ../../source_sass/_base.scss */
+  nav .title-bar .title-bar-title {
+    color: #2CC185; }
+  /* line 29, ../../source_sass/_base.scss */
+  nav .title-bar button i {
+    color: #2CC185; }
+
+/* line 35, ../../source_sass/_base.scss */
 .send-request {
   position: relative;
   background-color: #2CC185;
   color: white;
   margin: 0 auto; }
 
-/* line 15, ../../source_sass/_base.scss */
+/* line 41, ../../source_sass/_base.scss */
 .servicebox {
   padding: 20px; }
 
-/* line 18, ../../source_sass/_base.scss */
+/* line 44, ../../source_sass/_base.scss */
 .service {
   padding: 10px 0; }
 
-/* line 23, ../../source_sass/_base.scss */
+/* line 49, ../../source_sass/_base.scss */
 #newRequest textarea, #newService textarea {
   height: 100px !important;
   resize: none; }
 
-/* line 28, ../../source_sass/_base.scss */
+/* line 54, ../../source_sass/_base.scss */
 .ngdialog.ngdialog-theme-default.request-dialog-width .ngdialog-content {
   width: 66.6%; }
 
-/* line 31, ../../source_sass/_base.scss */
+/* line 57, ../../source_sass/_base.scss */
 .selected {
   background-color: #1583cc !important;
   color: #fff !important; }
 
-/* line 35, ../../source_sass/_base.scss */
+/* line 61, ../../source_sass/_base.scss */
 .greyroundborder, .service {
   border-radius: 10px !important;
   border: #ddd 1px solid; }
 
-/* line 39, ../../source_sass/_base.scss */
+/* line 65, ../../source_sass/_base.scss */
 #queueSearch {
   margin: 15px 0; }
 
-/* line 42, ../../source_sass/_base.scss */
+/* line 68, ../../source_sass/_base.scss */
 .paddingTopBottomM {
   padding: 25px 0; }
 
-/* line 45, ../../source_sass/_base.scss */
+/* line 71, ../../source_sass/_base.scss */
+.paddingTopBottomS {
+  padding: 5px 0; }
+
+/* line 74, ../../source_sass/_base.scss */
 .paddingLRM {
   padding: 0 25px; }
 
-/* line 48, ../../source_sass/_base.scss */
+/* line 77, ../../source_sass/_base.scss */
 .marginS {
   margin: 15px 0; }
 
-/* line 51, ../../source_sass/_base.scss */
+/* line 80, ../../source_sass/_base.scss */
 .BG {
   background-color: #e7ecea;
   width: 100%; }
 
-/* line 55, ../../source_sass/_base.scss */
+/* line 84, ../../source_sass/_base.scss */
 .topright {
   top: 0px;
   position: absolute;
   margin-top: 0px;
   margin-right: 15px; }
 
-/* line 61, ../../source_sass/_base.scss */
+/* line 90, ../../source_sass/_base.scss */
 .circle {
   width: 200px;
   height: 200px;
@@ -4239,19 +4264,19 @@ input, textarea {
   background-color: white;
   transform: translateY(25%); }
 
-/* line 68, ../../source_sass/_base.scss */
+/* line 97, ../../source_sass/_base.scss */
 .marginLRS {
   margin: 0px 15px !important; }
 
-/* line 71, ../../source_sass/_base.scss */
+/* line 100, ../../source_sass/_base.scss */
 .centerVertically {
   transform: translateY(25%); }
 
-/* line 74, ../../source_sass/_base.scss */
+/* line 103, ../../source_sass/_base.scss */
 .taskList, .serviceList {
   min-height: 200px; }
 
-/* line 77, ../../source_sass/_base.scss */
+/* line 106, ../../source_sass/_base.scss */
 .searchBox {
   border-top-left-radius: 10px !important;
   border-bottom-left-radius: 10px !important;
@@ -4261,7 +4286,7 @@ input, textarea {
   font-size: 15px !important;
   line-height: 5px !important; }
 
-/* line 86, ../../source_sass/_base.scss */
+/* line 115, ../../source_sass/_base.scss */
 .searchBt {
   border-top-right-radius: 15px !important;
   border-bottom-right-radius: 15px !important;
@@ -4270,7 +4295,7 @@ input, textarea {
   font-size: 15px !important;
   line-height: 5px !important; }
 
-/* line 94, ../../source_sass/_base.scss */
+/* line 123, ../../source_sass/_base.scss */
 .task {
   border: 1px #ddd solid;
   border-radius: 10px;
@@ -4278,58 +4303,58 @@ input, textarea {
   padding: 20px;
   height: 130px;
   color: #2CC185; }
-  /* line 101, ../../source_sass/_base.scss */
+  /* line 130, ../../source_sass/_base.scss */
   .task strong {
     padding-right: 10px; }
 
-/* line 106, ../../source_sass/_base.scss */
+/* line 135, ../../source_sass/_base.scss */
 .queue {
   background: #e7ecea !important;
   border: none !important; }
 
-/* line 110, ../../source_sass/_base.scss */
+/* line 139, ../../source_sass/_base.scss */
 .banner, .portfoliobanner {
   height: 300px;
   background: #aaa !important; }
 
-/* line 114, ../../source_sass/_base.scss */
+/* line 143, ../../source_sass/_base.scss */
 .portfoliobanner {
   height: 400px;
   color: white; }
 
-/* line 119, ../../source_sass/_base.scss */
+/* line 148, ../../source_sass/_base.scss */
 .portfolioname {
   margin-top: 6%; }
 
-/* line 127, ../../source_sass/_base.scss */
+/* line 156, ../../source_sass/_base.scss */
 .queue-tabs ul li a span {
   padding-left: 15px; }
 
-/* line 134, ../../source_sass/_base.scss */
+/* line 163, ../../source_sass/_base.scss */
 .bt, .bigbt, .namebt {
   background-color: #2CC185;
   font-size: 14px; }
 
-/* line 139, ../../source_sass/_base.scss */
+/* line 168, ../../source_sass/_base.scss */
 .bigbt {
   font-size: 18px;
   margin: 0 auto; }
 
-/* line 144, ../../source_sass/_base.scss */
+/* line 173, ../../source_sass/_base.scss */
 .namebt {
   border: #2CC185 1px solid;
   background: none;
   color: #2CC185; }
-  /* line 149, ../../source_sass/_base.scss */
+  /* line 178, ../../source_sass/_base.scss */
   .namebt :hover {
     background-color: #2199e8;
     border: white 0px solid !important; }
 
-/* line 154, ../../source_sass/_base.scss */
+/* line 183, ../../source_sass/_base.scss */
 .content {
   padding-top: 56px; }
 
-/* line 158, ../../source_sass/_base.scss */
+/* line 187, ../../source_sass/_base.scss */
 .navbar {
   z-index: 999;
   background-color: white;
@@ -4340,81 +4365,81 @@ input, textarea {
   padding-right: 20px;
   -webkit-box-shadow: 0 4px 8px 0 #aaa;
   box-shadow: 0 4px 8px 0 #aaa; }
-  /* line 168, ../../source_sass/_base.scss */
+  /* line 197, ../../source_sass/_base.scss */
   .navbar .centertext {
     height: 55px;
     line-height: 100%;
     text-align: center; }
-    /* line 172, ../../source_sass/_base.scss */
+    /* line 201, ../../source_sass/_base.scss */
     .navbar .centertext span {
       display: inline-block;
       vertical-align: middle;
       line-height: normal; }
 
-/* line 179, ../../source_sass/_base.scss */
+/* line 208, ../../source_sass/_base.scss */
 .fixtop {
   position: fixed !important; }
 
-/* line 182, ../../source_sass/_base.scss */
+/* line 211, ../../source_sass/_base.scss */
 .round {
   border-radius: 25px !important;
   top: 50% !important;
   transform: translateY(20%);
   position: relative; }
 
-/* line 189, ../../source_sass/_base.scss */
+/* line 218, ../../source_sass/_base.scss */
 .fixed {
   position: absolute; }
 
-/* line 193, ../../source_sass/_base.scss */
+/* line 222, ../../source_sass/_base.scss */
 .btshort {
   width: 15px !important;
   padding-left: 5px !important;
   padding-right: 5px !important; }
 
-/* line 197, ../../source_sass/_base.scss */
+/* line 226, ../../source_sass/_base.scss */
 .btshort {
   width: 25px !important;
   padding-left: 5px !important;
   padding-right: 5px !important; }
 
-/* line 200, ../../source_sass/_base.scss */
+/* line 229, ../../source_sass/_base.scss */
 .green {
   color: #2CC185; }
 
-/* line 203, ../../source_sass/_base.scss */
+/* line 232, ../../source_sass/_base.scss */
 .red {
   color: red; }
 
-/* line 207, ../../source_sass/_base.scss */
+/* line 236, ../../source_sass/_base.scss */
 .marginleftS {
   -webkit-margin-left: 5px;
   -moz-margin-left: 5px;
   -ms-margin-left: 5px;
   margin-left: 5px; }
 
-/* line 211, ../../source_sass/_base.scss */
+/* line 240, ../../source_sass/_base.scss */
 .marginleftL {
   -webkit-margin-left: 25px;
   -moz-margin-left: 25px;
   -ms-margin-left: 25px;
   margin-left: 25px; }
 
-/* line 215, ../../source_sass/_base.scss */
+/* line 244, ../../source_sass/_base.scss */
 .marginrightS {
   -webkit-margin-right: 5px;
   -moz-margin-right: 5px;
   -ms-margin-right: 5px;
   margin-right: 5px; }
 
-/* line 219, ../../source_sass/_base.scss */
+/* line 248, ../../source_sass/_base.scss */
 .marginrightL {
   -webkit-margin-right: 25px;
   -moz-margin-right: 25px;
   -ms-margin-right: 25px;
   margin-right: 25px; }
 
-/* line 222, ../../source_sass/_base.scss */
+/* line 251, ../../source_sass/_base.scss */
 .item {
   border-bottom: 1px solid #aaa;
   margin-bottom: 15px; }

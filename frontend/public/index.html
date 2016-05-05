@@ -45,7 +45,61 @@
 </head>
 
 <body ng-app="mp4">
-    <topbar></topbar>
+    <nav ng-controller = "TopbarCtrl">
+        <div class="title-bar fixtop small-12" data-responsive-toggle="nav-menu" data-hide-for="medium">
+            <button class="float-right" type="button" data-toggle><i class="fa fa-bars"></i></button>
+            <div class="title-bar-title float-right">Menu</div>
+        </div>
+        <div class="top-bar fixtop medium-12 small-offset-7 medium-offset-0 small-5 float-right" id="nav-menu">
+            <div class="top-bar-title hide-for-small-only small-6 ">
+                <div class="float-left small-12 columns">
+                    <div class="row">
+                        <div class="columns small-4 medium-3"><a href="#/" class="bt round">Service</a></div>
+                        <div ng-show="showLogout()" id="MyQueueBt" class="columns small-8 medium-9 end" ng-click="viewMyQueue()"><a class="bt round">My Queue</a></div>
+                    </div>
+                </div>
+            </div>
+            
+              <div class="top-bar-right nav-text medium-5">
+                <ul class="vertical dropdown menu small-12 " data-dropdown-menu>
+                    <li class="small-12" name = "nav_bar_items" id = "about_me" 
+                        data-hide-for="medium" data-responsive-toggle="nav-menu">
+                        <div class="small-12 paddingTopBottomS"><a href="#/" class="bt round">Service</a></div>
+                        <div ng-show="showLogout()" id="MyQueueBt" class="small-12 paddingTopBottomS" ng-click="viewMyQueue()"><a class="bt round">My Queue</a></div>
+                    </li>
+
+                    <li class="small-12" name = "nav_bar_items" id = "contact">
+                        <!-- not in small -->
+                        <div class="float-right row medium-12" id="SignUpLoginBt hide-for-small-only" ng-hide="showLogout()">
+                            <div class="columns medium-6 small-12 float-right" ng-click="showSignup()"><a  class="bt round float-right">Signup</a></div>
+                            <div class="columns medium-4 small-12 end float-right" ng-click="showLogin()"><a class="bt round float-right">Login</a></div>
+                        </div>
+                        <div class="float-right row hide-for-small-only " id="LogoutBt" ng-show="showLogout()">
+                            <div class="column small-7 float-right">
+                                <a class="namebt round" ng-href="#/user/portfolio/{{curUser._id}}">Hi, {{curUser.username}}</a>
+                            </div>
+                            <div class="columns small-4 end float-right" ng-click="logout()">
+                                <a class="bt round float-right">Logout</a>
+                            </div>
+                        </div>   
+
+                        <!-- in small -->
+                        <div data-hide-for="medium" data-responsive-toggle="nav-menu">
+                            <div class="float-right row medium-12" id="SignUpLoginBt paddingTopBottomS" ng-hide="showLogout()">
+                                <div class="columns medium-6 small-12 float-right" ng-click="showSignup()"><a  class="bt round float-right">Signup</a></div>
+                                <div class="columns medium-4 small-12 end float-right" ng-click="showLogin()"><a class="bt round float-right">Login</a></div>
+                            </div>
+                            <div class="float-right row paddingTopBottomS" id="LogoutBt" ng-show="showLogout()">
+                                <div class="columns small-12" ng-click="logout()">
+                                    <a class="bt round float-right">Logout</a>
+                                </div>
+                            </div>
+                        </div>       
+                    </li>
+                </ul>
+              </div>
+        </div>        
+    </nav>    
     <div class="content" ng-view></div>
 
 

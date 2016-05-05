@@ -1,5 +1,13 @@
 <section class="portfoliobanner small-12">
-    <div class="circle no-overflow small-centered"><a href=""></a></div>
+<!--     <div class="circle no-overflow small-centered"><a href=""></a></div> -->
+
+    <div class="small-12" style="position: absolute;">
+        <div class="bt round small-5 medium-2 float-right topright" ng-show="showEdit()" ng-click="showEditPortfolio()">Edit profile</div>
+    </div>
+    <div class="row" style="text-align: center">
+        <img class="circle no-overflow small-centered" ng-src="{{img}}" err-src="../userImage/user-default.png" check-image>
+    </div>
+
     <div class="portfolioname">
         <div class="small-centered small-12 text-center">{{user.businessName}}</div>
         <div class="small-centered small-12 text-center">by</div>
@@ -19,7 +27,7 @@
                         <a ng-click="editService($index); $event.stopPropagation();" class="float-right" ng-show="showEdit()"><i class="fa fa-cog" aria-hidden="true"></i></a>
                     </div>
                     <div class="small-10 small-centered"><strong>Availability:</strong><span>{{each.availability}}</span></div>
-                    <div class="small-10 small-centered"><strong>Descrition:</strong><br/> 
+                    <div class="small-10 small-centered"><strong>Description:</strong><br/> 
                         <span>{{each.description}}</span>
                     </div>
                 </div>
