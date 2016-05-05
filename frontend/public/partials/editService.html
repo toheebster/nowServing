@@ -1,0 +1,15 @@
+<div class="request small-11 medium-9 small-centered paddingTopBottomM">
+    <form id="newService" class="row small-12">
+        <div class="row">
+        	<strong>Edit </strong> 
+        	<big class="green">{{oldservice.serviceName}}</big>
+        </div>
+        <div class="row"><span>New Service Name:</span></div>
+        <div class="row textbox"><input type="text" placeholder="Service Name" ng-model="service.serviceName"></div>
+        <div class="row"><span>Your Availability:</span></div>
+        <div class="row textbox"><input type="text" placeholder="Like Tuesday afternoon, Friday..." ng-model="service.availability"></div>
+        <div class="row"><span>What is this service about?</span></div>
+        <div class="row textbox"><textarea type="text" ng-model="service.description"></textarea></div>
+        <div class="row"><button class="small-12 bt round medium-6 small-centered columns" ng-click="updateService()">Finish</button></div>
+    </form>
+</div>

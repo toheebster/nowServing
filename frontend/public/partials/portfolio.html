@@ -1,64 +1,32 @@
-<div class="container">
-	<div class="row" id="profile" style="border-top-color: lightgreen;">
-	  <div class="small-12 small-centered columns">
-	  	<div class="row">
-	  		<div id="profile-top" class="small-12  small-centered columns" style="background-color: lightgray">
-	  			<div class="profile-picture"></div>
-	  		</div>
-	  	</div>
-	  	<div class="row">
-	  		<div id="servicer-name-container" class="small-12  small-centered columns" style="background-color: lightgray">
-	  			<div id="servicer-name">
-	  					<h4>{{user.businessName}}<br></h4>
-	  					<h6 style="text-align: center">by {{user.username}}</h6>
-<!-- 	  					<h6></h6>	  				
- -->	  			</div>	
-	  		</div>
-	  	</div>
+<section class="portfoliobanner small-12">
+    <div class="circle no-overflow small-centered"><a href=""></a></div>
+    <div class="portfolioname">
+        <div class="small-centered small-12 text-center">{{user.businessName}}</div>
+        <div class="small-centered small-12 text-center">by</div>
+        <div class="small-centered small-12 text-center">{{user.username}}</div>
+    </div>
+</section>
 
-	  	<div class="row">
-	  		<div id="request-container" class="small-12 small-centered columns" style="background-color: lightgray">
-	  			<a href="#" class="btn btn-lg send-request">Send Request</a>
-	  		</div>
-	  	</div>
-		<div class="row">
-	  		<div id="details-container" class="small-12 small-centered columns" style="background-color: white; border: 1px solid lightgray">
-	  			<div id="servicer-intro" class="servicer">
-	  				<div>
-		  				<h5>A little bit about me and what I do:</h5>
-		  				<p>
-		  					"{{user.intro}}"
-		  				</p>
-	  				</div>
-	  			</div>
-	  			<div id="services-provided" class="servicer-services">
-	  				<h5>Services:</h5>
-	  				<table id="services-table">
-	  					<tr>
-	  						<th>Service</th>
-	  						<th>Availability</th>
-	  					</tr>
-	  					<tr ng-repeat="service in services">
-	  						<td>{{service.serviceName}}</td>
-	  						<td>{{service.availability}}</td>
-	  					</tr>
-	  					
-	  				</table>
-	  			</div>
-	  			<div id="servicer-contact-information" class="servicer-contact">
-	  				<h5 style="margin: 0 auto;">Contact: </h5>
-	  				<h6 >{{user.local.email}}</h6>
-	  			</div>
-	  		</div>	
-		</div>
-	  </div>
-	</div>
-</div>
+<section>
+    
+    <div class="row">
+        <div class="small-12 medium-10 small-centered columns serviceList">
+            <div ng-repeat="each in services | filter: searchTxt | orderBy: sortBy" class="small-12 medium-4 end columns servicebox" ng-click="sendRequest($index)">
+                <div class="service">
+                <!--<a ng-href="#/request/{{each._id}}"> -->
+                    <div class="small-10 small-centered">
+                        <strong>{{each.serviceName}}</strong>
+                        <a ng-click="editService($index); $event.stopPropagation();" class="float-right" ng-show="showEdit()"><i class="fa fa-cog" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="small-10 small-centered"><strong>Availability:</strong><span>{{each.availability}}</span></div>
+                    <div class="small-10 small-centered"><strong>Descrition:</strong><br/> 
+                        <span>{{each.description}}</span>
+                    </div>
+                </div>
+            </div>
+            </div>
 
+        </div>
+    </div>
 
-<!-- <ul class="dropdown menu" data-dropdown-menu>
-  <li><a href="#">Item 1</a></li>
-  <li><a href="#">Item 2</a></li>
-  <li><a href="#">Item 3</a></li>
-  <li><a href="#">Item 4</a></li>
-</ul> -->
+</section>

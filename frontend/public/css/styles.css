@@ -1977,7 +1977,7 @@ kbd {
   h3 {
     page-break-after: avoid; } }
 /* line 193, ../foundation6_lib/scss/components/_button.scss */
-.button, .bt {
+.button, .bt, .bigbt, .namebt {
   display: inline-block;
   text-align: center;
   line-height: 1;
@@ -1993,125 +1993,125 @@ kbd {
   background-color: #2199e8;
   color: #fff; }
   /* line 161, ../foundation6_lib/scss/util/_mixins.scss */
-  [data-whatinput='mouse'] .button, [data-whatinput='mouse'] .bt {
+  [data-whatinput='mouse'] .button, [data-whatinput='mouse'] .bt, [data-whatinput='mouse'] .bigbt, [data-whatinput='mouse'] .namebt {
     outline: 0; }
   /* line 112, ../foundation6_lib/scss/components/_button.scss */
-  .button:hover, .bt:hover, .button:focus, .bt:focus {
+  .button:hover, .bt:hover, .bigbt:hover, .namebt:hover, .button:focus, .bt:focus, .bigbt:focus, .namebt:focus {
     background-color: #1583cc;
     color: #fff; }
   /* line 197, ../foundation6_lib/scss/components/_button.scss */
-  .button.tiny, .tiny.bt {
+  .button.tiny, .tiny.bt, .tiny.bigbt, .tiny.namebt {
     font-size: 0.6rem; }
   /* line 198, ../foundation6_lib/scss/components/_button.scss */
-  .button.small, .small.bt {
+  .button.small, .small.bt, .small.bigbt, .small.namebt {
     font-size: 0.75rem; }
   /* line 199, ../foundation6_lib/scss/components/_button.scss */
-  .button.large, .large.bt {
+  .button.large, .large.bt, .large.bigbt, .large.namebt {
     font-size: 1.25rem; }
   /* line 200, ../foundation6_lib/scss/components/_button.scss */
-  .button.expanded, .expanded.bt {
+  .button.expanded, .expanded.bt, .expanded.bigbt, .expanded.namebt {
     display: block;
     width: 100%;
     margin-left: 0;
     margin-right: 0; }
   /* line 205, ../foundation6_lib/scss/components/_button.scss */
-  .button.primary, .primary.bt {
+  .button.primary, .primary.bt, .primary.bigbt, .primary.namebt {
     background-color: #2199e8;
     color: #fff; }
     /* line 112, ../foundation6_lib/scss/components/_button.scss */
-    .button.primary:hover, .primary.bt:hover, .button.primary:focus, .primary.bt:focus {
+    .button.primary:hover, .primary.bt:hover, .primary.bigbt:hover, .primary.namebt:hover, .button.primary:focus, .primary.bt:focus, .primary.bigbt:focus, .primary.namebt:focus {
       background-color: #147cc0;
       color: #fff; }
   /* line 205, ../foundation6_lib/scss/components/_button.scss */
-  .button.secondary, .secondary.bt {
+  .button.secondary, .secondary.bt, .secondary.bigbt, .secondary.namebt {
     background-color: #777;
     color: #fff; }
     /* line 112, ../foundation6_lib/scss/components/_button.scss */
-    .button.secondary:hover, .secondary.bt:hover, .button.secondary:focus, .secondary.bt:focus {
+    .button.secondary:hover, .secondary.bt:hover, .secondary.bigbt:hover, .secondary.namebt:hover, .button.secondary:focus, .secondary.bt:focus, .secondary.bigbt:focus, .secondary.namebt:focus {
       background-color: #5f5f5f;
       color: #fff; }
   /* line 205, ../foundation6_lib/scss/components/_button.scss */
-  .button.success, .success.bt {
+  .button.success, .success.bt, .success.bigbt, .success.namebt {
     background-color: #3adb76;
     color: #fff; }
     /* line 112, ../foundation6_lib/scss/components/_button.scss */
-    .button.success:hover, .success.bt:hover, .button.success:focus, .success.bt:focus {
+    .button.success:hover, .success.bt:hover, .success.bigbt:hover, .success.namebt:hover, .button.success:focus, .success.bt:focus, .success.bigbt:focus, .success.namebt:focus {
       background-color: #22bb5b;
       color: #fff; }
   /* line 205, ../foundation6_lib/scss/components/_button.scss */
-  .button.alert, .alert.bt {
+  .button.alert, .alert.bt, .alert.bigbt, .alert.namebt {
     background-color: #ec5840;
     color: #fff; }
     /* line 112, ../foundation6_lib/scss/components/_button.scss */
-    .button.alert:hover, .alert.bt:hover, .button.alert:focus, .alert.bt:focus {
+    .button.alert:hover, .alert.bt:hover, .alert.bigbt:hover, .alert.namebt:hover, .button.alert:focus, .alert.bt:focus, .alert.bigbt:focus, .alert.namebt:focus {
       background-color: #da3116;
       color: #fff; }
   /* line 205, ../foundation6_lib/scss/components/_button.scss */
-  .button.warning, .warning.bt {
+  .button.warning, .warning.bt, .warning.bigbt, .warning.namebt {
     background-color: #ffae00;
     color: #fff; }
     /* line 112, ../foundation6_lib/scss/components/_button.scss */
-    .button.warning:hover, .warning.bt:hover, .button.warning:focus, .warning.bt:focus {
+    .button.warning:hover, .warning.bt:hover, .warning.bigbt:hover, .warning.namebt:hover, .button.warning:focus, .warning.bt:focus, .warning.bigbt:focus, .warning.namebt:focus {
       background-color: #cc8b00;
       color: #fff; }
   /* line 222, ../foundation6_lib/scss/components/_button.scss */
-  .button.hollow, .hollow.bt {
+  .button.hollow, .hollow.bt, .hollow.bigbt, .hollow.namebt {
     border: 1px solid #2199e8;
     color: #2199e8; }
     /* line 120, ../foundation6_lib/scss/components/_button.scss */
-    .button.hollow, .hollow.bt, .button.hollow:hover, .hollow.bt:hover, .button.hollow:focus, .hollow.bt:focus {
+    .button.hollow, .hollow.bt, .hollow.bigbt, .hollow.namebt, .button.hollow:hover, .hollow.bt:hover, .hollow.bigbt:hover, .hollow.namebt:hover, .button.hollow:focus, .hollow.bt:focus, .hollow.bigbt:focus, .hollow.namebt:focus {
       background-color: transparent; }
     /* line 132, ../foundation6_lib/scss/components/_button.scss */
-    .button.hollow:hover, .hollow.bt:hover, .button.hollow:focus, .hollow.bt:focus {
+    .button.hollow:hover, .hollow.bt:hover, .hollow.bigbt:hover, .hollow.namebt:hover, .button.hollow:focus, .hollow.bt:focus, .hollow.bigbt:focus, .hollow.namebt:focus {
       border-color: #0c4d78;
       color: #0c4d78; }
     /* line 227, ../foundation6_lib/scss/components/_button.scss */
-    .button.hollow.primary, .hollow.primary.bt {
+    .button.hollow.primary, .hollow.primary.bt, .hollow.primary.bigbt, .hollow.primary.namebt {
       border: 1px solid #2199e8;
       color: #2199e8; }
       /* line 132, ../foundation6_lib/scss/components/_button.scss */
-      .button.hollow.primary:hover, .hollow.primary.bt:hover, .button.hollow.primary:focus, .hollow.primary.bt:focus {
+      .button.hollow.primary:hover, .hollow.primary.bt:hover, .hollow.primary.bigbt:hover, .hollow.primary.namebt:hover, .button.hollow.primary:focus, .hollow.primary.bt:focus, .hollow.primary.bigbt:focus, .hollow.primary.namebt:focus {
         border-color: #0c4d78;
         color: #0c4d78; }
     /* line 227, ../foundation6_lib/scss/components/_button.scss */
-    .button.hollow.secondary, .hollow.secondary.bt {
+    .button.hollow.secondary, .hollow.secondary.bt, .hollow.secondary.bigbt, .hollow.secondary.namebt {
       border: 1px solid #777;
       color: #777; }
       /* line 132, ../foundation6_lib/scss/components/_button.scss */
-      .button.hollow.secondary:hover, .hollow.secondary.bt:hover, .button.hollow.secondary:focus, .hollow.secondary.bt:focus {
+      .button.hollow.secondary:hover, .hollow.secondary.bt:hover, .hollow.secondary.bigbt:hover, .hollow.secondary.namebt:hover, .button.hollow.secondary:focus, .hollow.secondary.bt:focus, .hollow.secondary.bigbt:focus, .hollow.secondary.namebt:focus {
         border-color: #3c3c3c;
         color: #3c3c3c; }
     /* line 227, ../foundation6_lib/scss/components/_button.scss */
-    .button.hollow.success, .hollow.success.bt {
+    .button.hollow.success, .hollow.success.bt, .hollow.success.bigbt, .hollow.success.namebt {
       border: 1px solid #3adb76;
       color: #3adb76; }
       /* line 132, ../foundation6_lib/scss/components/_button.scss */
-      .button.hollow.success:hover, .hollow.success.bt:hover, .button.hollow.success:focus, .hollow.success.bt:focus {
+      .button.hollow.success:hover, .hollow.success.bt:hover, .hollow.success.bigbt:hover, .hollow.success.namebt:hover, .button.hollow.success:focus, .hollow.success.bt:focus, .hollow.success.bigbt:focus, .hollow.success.namebt:focus {
         border-color: #157539;
         color: #157539; }
     /* line 227, ../foundation6_lib/scss/components/_button.scss */
-    .button.hollow.alert, .hollow.alert.bt {
+    .button.hollow.alert, .hollow.alert.bt, .hollow.alert.bigbt, .hollow.alert.namebt {
       border: 1px solid #ec5840;
       color: #ec5840; }
       /* line 132, ../foundation6_lib/scss/components/_button.scss */
-      .button.hollow.alert:hover, .hollow.alert.bt:hover, .button.hollow.alert:focus, .hollow.alert.bt:focus {
+      .button.hollow.alert:hover, .hollow.alert.bt:hover, .hollow.alert.bigbt:hover, .hollow.alert.namebt:hover, .button.hollow.alert:focus, .hollow.alert.bt:focus, .hollow.alert.bigbt:focus, .hollow.alert.namebt:focus {
         border-color: #881f0e;
         color: #881f0e; }
     /* line 227, ../foundation6_lib/scss/components/_button.scss */
-    .button.hollow.warning, .hollow.warning.bt {
+    .button.hollow.warning, .hollow.warning.bt, .hollow.warning.bigbt, .hollow.warning.namebt {
       border: 1px solid #ffae00;
       color: #ffae00; }
       /* line 132, ../foundation6_lib/scss/components/_button.scss */
-      .button.hollow.warning:hover, .hollow.warning.bt:hover, .button.hollow.warning:focus, .hollow.warning.bt:focus {
+      .button.hollow.warning:hover, .hollow.warning.bt:hover, .hollow.warning.bigbt:hover, .hollow.warning.namebt:hover, .button.hollow.warning:focus, .hollow.warning.bt:focus, .hollow.warning.bigbt:focus, .hollow.warning.namebt:focus {
         border-color: #805700;
         color: #805700; }
   /* line 235, ../foundation6_lib/scss/components/_button.scss */
-  .button.disabled, .disabled.bt, .button[disabled], [disabled].bt {
+  .button.disabled, .disabled.bt, .disabled.bigbt, .disabled.namebt, .button[disabled], [disabled].bt, [disabled].bigbt, [disabled].namebt {
     opacity: 0.25;
     cursor: not-allowed;
     pointer-events: none; }
   /* line 154, ../foundation6_lib/scss/components/_button.scss */
-  .button.dropdown::after, .dropdown.bt::after {
+  .button.dropdown::after, .dropdown.bt::after, .dropdown.bigbt::after, .dropdown.namebt::after {
     content: '';
     display: block;
     width: 0;
@@ -2126,7 +2126,7 @@ kbd {
     margin-left: 1em;
     display: inline-block; }
   /* line 252, ../foundation6_lib/scss/components/_button.scss */
-  .button.arrow-only::after, .arrow-only.bt::after {
+  .button.arrow-only::after, .arrow-only.bt::after, .arrow-only.bigbt::after, .arrow-only.namebt::after {
     margin-left: 0;
     float: none;
     top: 0.2em; }
@@ -2623,12 +2623,12 @@ select {
   .button-group::after {
     clear: both; }
   /* line 34, ../foundation6_lib/scss/components/_button-group.scss */
-  .button-group .button, .button-group .bt {
+  .button-group .button, .button-group .bt, .button-group .bigbt, .button-group .namebt {
     float: left;
     margin: 0;
     font-size: inherit; }
     /* line 39, ../foundation6_lib/scss/components/_button-group.scss */
-    .button-group .button:not(:last-child), .button-group .bt:not(:last-child) {
+    .button-group .button:not(:last-child), .button-group .bt:not(:last-child), .button-group .bigbt:not(:last-child), .button-group .namebt:not(:last-child) {
       border-right: 1px solid #fefefe; }
   /* line 103, ../foundation6_lib/scss/components/_button-group.scss */
   .button-group.tiny {
@@ -2648,68 +2648,68 @@ select {
     .button-group.expanded::before, .button-group.expanded::after {
       display: none; }
     /* line 64, ../foundation6_lib/scss/components/_button-group.scss */
-    .button-group.expanded .button, .button-group.expanded .bt {
+    .button-group.expanded .button, .button-group.expanded .bt, .button-group.expanded .bigbt, .button-group.expanded .namebt {
       display: table-cell;
       float: none; }
   /* line 111, ../foundation6_lib/scss/components/_button-group.scss */
-  .button-group.primary .button, .button-group.primary .bt {
+  .button-group.primary .button, .button-group.primary .bt, .button-group.primary .bigbt, .button-group.primary .namebt {
     background-color: #2199e8;
     color: #fefefe; }
     /* line 112, ../foundation6_lib/scss/components/_button.scss */
-    .button-group.primary .button:hover, .button-group.primary .bt:hover, .button-group.primary .button:focus, .button-group.primary .bt:focus {
+    .button-group.primary .button:hover, .button-group.primary .bt:hover, .button-group.primary .bigbt:hover, .button-group.primary .namebt:hover, .button-group.primary .button:focus, .button-group.primary .bt:focus, .button-group.primary .bigbt:focus, .button-group.primary .namebt:focus {
       background-color: #147cc0;
       color: #fefefe; }
   /* line 111, ../foundation6_lib/scss/components/_button-group.scss */
-  .button-group.secondary .button, .button-group.secondary .bt {
+  .button-group.secondary .button, .button-group.secondary .bt, .button-group.secondary .bigbt, .button-group.secondary .namebt {
     background-color: #777;
     color: #fefefe; }
     /* line 112, ../foundation6_lib/scss/components/_button.scss */
-    .button-group.secondary .button:hover, .button-group.secondary .bt:hover, .button-group.secondary .button:focus, .button-group.secondary .bt:focus {
+    .button-group.secondary .button:hover, .button-group.secondary .bt:hover, .button-group.secondary .bigbt:hover, .button-group.secondary .namebt:hover, .button-group.secondary .button:focus, .button-group.secondary .bt:focus, .button-group.secondary .bigbt:focus, .button-group.secondary .namebt:focus {
       background-color: #5f5f5f;
       color: #fefefe; }
   /* line 111, ../foundation6_lib/scss/components/_button-group.scss */
-  .button-group.success .button, .button-group.success .bt {
+  .button-group.success .button, .button-group.success .bt, .button-group.success .bigbt, .button-group.success .namebt {
     background-color: #3adb76;
     color: #fefefe; }
     /* line 112, ../foundation6_lib/scss/components/_button.scss */
-    .button-group.success .button:hover, .button-group.success .bt:hover, .button-group.success .button:focus, .button-group.success .bt:focus {
+    .button-group.success .button:hover, .button-group.success .bt:hover, .button-group.success .bigbt:hover, .button-group.success .namebt:hover, .button-group.success .button:focus, .button-group.success .bt:focus, .button-group.success .bigbt:focus, .button-group.success .namebt:focus {
       background-color: #22bb5b;
       color: #fefefe; }
   /* line 111, ../foundation6_lib/scss/components/_button-group.scss */
-  .button-group.alert .button, .button-group.alert .bt {
+  .button-group.alert .button, .button-group.alert .bt, .button-group.alert .bigbt, .button-group.alert .namebt {
     background-color: #ec5840;
     color: #fefefe; }
     /* line 112, ../foundation6_lib/scss/components/_button.scss */
-    .button-group.alert .button:hover, .button-group.alert .bt:hover, .button-group.alert .button:focus, .button-group.alert .bt:focus {
+    .button-group.alert .button:hover, .button-group.alert .bt:hover, .button-group.alert .bigbt:hover, .button-group.alert .namebt:hover, .button-group.alert .button:focus, .button-group.alert .bt:focus, .button-group.alert .bigbt:focus, .button-group.alert .namebt:focus {
       background-color: #da3116;
       color: #fefefe; }
   /* line 111, ../foundation6_lib/scss/components/_button-group.scss */
-  .button-group.warning .button, .button-group.warning .bt {
+  .button-group.warning .button, .button-group.warning .bt, .button-group.warning .bigbt, .button-group.warning .namebt {
     background-color: #ffae00;
     color: #fefefe; }
     /* line 112, ../foundation6_lib/scss/components/_button.scss */
-    .button-group.warning .button:hover, .button-group.warning .bt:hover, .button-group.warning .button:focus, .button-group.warning .bt:focus {
+    .button-group.warning .button:hover, .button-group.warning .bt:hover, .button-group.warning .bigbt:hover, .button-group.warning .namebt:hover, .button-group.warning .button:focus, .button-group.warning .bt:focus, .button-group.warning .bigbt:focus, .button-group.warning .namebt:focus {
       background-color: #cc8b00;
       color: #fefefe; }
   /* line 75, ../foundation6_lib/scss/components/_button-group.scss */
-  .button-group.stacked .button, .button-group.stacked .bt, .button-group.stacked-for-small .button, .button-group.stacked-for-small .bt {
+  .button-group.stacked .button, .button-group.stacked .bt, .button-group.stacked .bigbt, .button-group.stacked .namebt, .button-group.stacked-for-small .button, .button-group.stacked-for-small .bt, .button-group.stacked-for-small .bigbt, .button-group.stacked-for-small .namebt {
     width: 100%; }
     /* line 78, ../foundation6_lib/scss/components/_button-group.scss */
-    .button-group.stacked .button:not(:last-child), .button-group.stacked .bt:not(:last-child), .button-group.stacked-for-small .button:not(:last-child), .button-group.stacked-for-small .bt:not(:last-child) {
+    .button-group.stacked .button:not(:last-child), .button-group.stacked .bt:not(:last-child), .button-group.stacked .bigbt:not(:last-child), .button-group.stacked .namebt:not(:last-child), .button-group.stacked-for-small .button:not(:last-child), .button-group.stacked-for-small .bt:not(:last-child), .button-group.stacked-for-small .bigbt:not(:last-child), .button-group.stacked-for-small .namebt:not(:last-child) {
       border-right: 1px solid; }
   @media screen and (min-width: 40em) {
     /* line 89, ../foundation6_lib/scss/components/_button-group.scss */
-    .button-group.stacked-for-small .button, .button-group.stacked-for-small .bt {
+    .button-group.stacked-for-small .button, .button-group.stacked-for-small .bt, .button-group.stacked-for-small .bigbt, .button-group.stacked-for-small .namebt {
       width: auto; }
       /* line 92, ../foundation6_lib/scss/components/_button-group.scss */
-      .button-group.stacked-for-small .button:not(:last-child), .button-group.stacked-for-small .bt:not(:last-child) {
+      .button-group.stacked-for-small .button:not(:last-child), .button-group.stacked-for-small .bt:not(:last-child), .button-group.stacked-for-small .bigbt:not(:last-child), .button-group.stacked-for-small .namebt:not(:last-child) {
         border-right: 1px solid #fefefe; } }
   @media screen and (min-width: 0em) and (max-width: 39.9375em) {
     /* line 134, ../foundation6_lib/scss/components/_button-group.scss */
     .button-group.stacked-for-small.expanded {
       display: block; }
       /* line 138, ../foundation6_lib/scss/components/_button-group.scss */
-      .button-group.stacked-for-small.expanded .button, .button-group.stacked-for-small.expanded .bt {
+      .button-group.stacked-for-small.expanded .button, .button-group.stacked-for-small.expanded .bt, .button-group.stacked-for-small.expanded .bigbt, .button-group.stacked-for-small.expanded .namebt {
         display: block;
         border-right: 0; } }
 
@@ -4099,7 +4099,7 @@ table.hover tr:nth-of-type(even):hover {
     width: 200px;
     margin-right: 1rem; }
   /* line 41, ../foundation6_lib/scss/components/_top-bar.scss */
-  .top-bar input.button, .top-bar input.bt {
+  .top-bar input.button, .top-bar input.bt, .top-bar input.bigbt, .top-bar input.namebt {
     width: auto; }
 
 @media screen and (max-width: 39.9375em) {
@@ -4166,56 +4166,72 @@ body {
 
 /* line 5, ../../source_sass/_base.scss */
 input, textarea {
-  border-radius: 10px !important; }
+  border-radius: 10px !important;
+  resize: none !important; }
 
 /* line 9, ../../source_sass/_base.scss */
-#newRequest textarea {
+.send-request {
+  position: relative;
+  background-color: #2CC185;
+  color: white;
+  margin: 0 auto; }
+
+/* line 15, ../../source_sass/_base.scss */
+.servicebox {
+  padding: 20px; }
+
+/* line 18, ../../source_sass/_base.scss */
+.service {
+  padding: 10px 0; }
+
+/* line 23, ../../source_sass/_base.scss */
+#newRequest textarea, #newService textarea {
   height: 100px !important;
   resize: none; }
 
-/* line 14, ../../source_sass/_base.scss */
+/* line 28, ../../source_sass/_base.scss */
 .ngdialog.ngdialog-theme-default.request-dialog-width .ngdialog-content {
   width: 66.6%; }
 
-/* line 17, ../../source_sass/_base.scss */
+/* line 31, ../../source_sass/_base.scss */
 .selected {
   background-color: #1583cc !important;
   color: #fff !important; }
 
-/* line 21, ../../source_sass/_base.scss */
-.greyroundborder {
+/* line 35, ../../source_sass/_base.scss */
+.greyroundborder, .service {
   border-radius: 10px !important;
   border: #ddd 1px solid; }
 
-/* line 25, ../../source_sass/_base.scss */
+/* line 39, ../../source_sass/_base.scss */
 #queueSearch {
   margin: 15px 0; }
 
-/* line 28, ../../source_sass/_base.scss */
+/* line 42, ../../source_sass/_base.scss */
 .paddingTopBottomM {
   padding: 25px 0; }
 
-/* line 31, ../../source_sass/_base.scss */
+/* line 45, ../../source_sass/_base.scss */
 .paddingLRM {
   padding: 0 25px; }
 
-/* line 34, ../../source_sass/_base.scss */
+/* line 48, ../../source_sass/_base.scss */
 .marginS {
   margin: 15px 0; }
 
-/* line 37, ../../source_sass/_base.scss */
+/* line 51, ../../source_sass/_base.scss */
 .BG {
   background-color: #e7ecea;
   width: 100%; }
 
-/* line 41, ../../source_sass/_base.scss */
+/* line 55, ../../source_sass/_base.scss */
 .topright {
   top: 0px;
   position: absolute;
   margin-top: 0px;
   margin-right: 15px; }
 
-/* line 47, ../../source_sass/_base.scss */
+/* line 61, ../../source_sass/_base.scss */
 .circle {
   width: 200px;
   height: 200px;
@@ -4223,19 +4239,19 @@ input, textarea {
   background-color: white;
   transform: translateY(25%); }
 
-/* line 54, ../../source_sass/_base.scss */
+/* line 68, ../../source_sass/_base.scss */
 .marginLRS {
   margin: 0px 15px !important; }
 
-/* line 57, ../../source_sass/_base.scss */
+/* line 71, ../../source_sass/_base.scss */
 .centerVertically {
   transform: translateY(25%); }
 
-/* line 60, ../../source_sass/_base.scss */
-.taskList {
+/* line 74, ../../source_sass/_base.scss */
+.taskList, .serviceList {
   min-height: 200px; }
 
-/* line 63, ../../source_sass/_base.scss */
+/* line 77, ../../source_sass/_base.scss */
 .searchBox {
   border-top-left-radius: 10px !important;
   border-bottom-left-radius: 10px !important;
@@ -4245,7 +4261,7 @@ input, textarea {
   font-size: 15px !important;
   line-height: 5px !important; }
 
-/* line 72, ../../source_sass/_base.scss */
+/* line 86, ../../source_sass/_base.scss */
 .searchBt {
   border-top-right-radius: 15px !important;
   border-bottom-right-radius: 15px !important;
@@ -4254,7 +4270,7 @@ input, textarea {
   font-size: 15px !important;
   line-height: 5px !important; }
 
-/* line 80, ../../source_sass/_base.scss */
+/* line 94, ../../source_sass/_base.scss */
 .task {
   border: 1px #ddd solid;
   border-radius: 10px;
@@ -4263,33 +4279,58 @@ input, textarea {
   height: 130px;
   color: #2CC185; }
 
-/* line 89, ../../source_sass/_base.scss */
+/* line 103, ../../source_sass/_base.scss */
 strong {
   padding-right: 10px; }
 
-/* line 93, ../../source_sass/_base.scss */
+/* line 107, ../../source_sass/_base.scss */
 .queue {
   background: #e7ecea !important;
   border: none !important; }
 
-/* line 97, ../../source_sass/_base.scss */
-.banner {
+/* line 111, ../../source_sass/_base.scss */
+.banner, .portfoliobanner {
   height: 300px;
   background: #aaa !important; }
 
-/* line 105, ../../source_sass/_base.scss */
+/* line 115, ../../source_sass/_base.scss */
+.portfoliobanner {
+  height: 400px;
+  color: white; }
+
+/* line 120, ../../source_sass/_base.scss */
+.portfolioname {
+  margin-top: 6%; }
+
+/* line 128, ../../source_sass/_base.scss */
 .queue-tabs ul li a span {
   padding-left: 15px; }
 
-/* line 112, ../../source_sass/_base.scss */
-.bt {
-  background-color: #2CC185; }
+/* line 135, ../../source_sass/_base.scss */
+.bt, .bigbt, .namebt {
+  background-color: #2CC185;
+  font-size: 14px; }
 
-/* line 116, ../../source_sass/_base.scss */
+/* line 140, ../../source_sass/_base.scss */
+.bigbt {
+  font-size: 18px;
+  margin: 0 auto; }
+
+/* line 145, ../../source_sass/_base.scss */
+.namebt {
+  border: #2CC185 1px solid;
+  background: none;
+  color: #2CC185; }
+  /* line 150, ../../source_sass/_base.scss */
+  .namebt :hover {
+    background-color: #2199e8;
+    border: white 0px solid !important; }
+
+/* line 155, ../../source_sass/_base.scss */
 .content {
   padding-top: 56px; }
 
-/* line 120, ../../source_sass/_base.scss */
+/* line 159, ../../source_sass/_base.scss */
 .navbar {
   z-index: 999;
   background-color: white;
@@ -4300,80 +4341,90 @@ strong {
   padding-right: 20px;
   -webkit-box-shadow: 0 4px 8px 0 #aaa;
   box-shadow: 0 4px 8px 0 #aaa; }
+  /* line 169, ../../source_sass/_base.scss */
+  .navbar .centertext {
+    height: 55px;
+    line-height: 100%;
+    text-align: center; }
+    /* line 173, ../../source_sass/_base.scss */
+    .navbar .centertext span {
+      display: inline-block;
+      vertical-align: middle;
+      line-height: normal; }
 
-/* line 131, ../../source_sass/_base.scss */
+/* line 180, ../../source_sass/_base.scss */
 .fixtop {
-  position: fixed; }
+  position: fixed !important; }
 
-/* line 134, ../../source_sass/_base.scss */
+/* line 183, ../../source_sass/_base.scss */
 .round {
   border-radius: 25px !important;
   top: 50% !important;
   transform: translateY(20%);
   position: relative; }
 
-/* line 141, ../../source_sass/_base.scss */
+/* line 190, ../../source_sass/_base.scss */
 .fixed {
   position: absolute; }
 
-/* line 145, ../../source_sass/_base.scss */
+/* line 194, ../../source_sass/_base.scss */
 .btshort {
   width: 15px !important;
   padding-left: 5px !important;
   padding-right: 5px !important; }
 
-/* line 149, ../../source_sass/_base.scss */
+/* line 198, ../../source_sass/_base.scss */
 .btshort {
   width: 25px !important;
   padding-left: 5px !important;
   padding-right: 5px !important; }
 
-/* line 152, ../../source_sass/_base.scss */
+/* line 201, ../../source_sass/_base.scss */
 .green {
   color: #2CC185; }
 
-/* line 155, ../../source_sass/_base.scss */
+/* line 204, ../../source_sass/_base.scss */
 .red {
   color: red; }
 
-/* line 159, ../../source_sass/_base.scss */
+/* line 208, ../../source_sass/_base.scss */
 .marginleftS {
   -webkit-margin-left: 5px;
   -moz-margin-left: 5px;
   -ms-margin-left: 5px;
   margin-left: 5px; }
 
-/* line 163, ../../source_sass/_base.scss */
+/* line 212, ../../source_sass/_base.scss */
 .marginleftL {
   -webkit-margin-left: 25px;
   -moz-margin-left: 25px;
   -ms-margin-left: 25px;
   margin-left: 25px; }
 
-/* line 167, ../../source_sass/_base.scss */
+/* line 216, ../../source_sass/_base.scss */
 .marginrightS {
   -webkit-margin-right: 5px;
   -moz-margin-right: 5px;
   -ms-margin-right: 5px;
   margin-right: 5px; }
 
-/* line 171, ../../source_sass/_base.scss */
+/* line 220, ../../source_sass/_base.scss */
 .marginrightL {
   -webkit-margin-right: 25px;
   -moz-margin-right: 25px;
   -ms-margin-right: 25px;
   margin-right: 25px; }
 
-/* line 174, ../../source_sass/_base.scss */
+/* line 223, ../../source_sass/_base.scss */
 .item {
   border-bottom: 1px solid #aaa;
   margin-bottom: 15px; }
 
 @media (max-width: 768px) {
-  /* line 184, ../../source_sass/_base.scss */
+  /* line 233, ../../source_sass/_base.scss */
   h1 {
     font-size: 50px; } }
-/* line 190, ../../source_sass/_base.scss */
+/* line 239, ../../source_sass/_base.scss */
 #home {
   top: -75px;
   position: relative;
@@ -4393,42 +4444,42 @@ strong {
   letter-spacing: 5px;
   font-weight: 900; }
 
-/* line 210, ../../source_sass/_base.scss */
+/* line 259, ../../source_sass/_base.scss */
 h1 {
   font-family: 'Open Sans';
   letter-spacing: 5px;
   font-weight: 900; }
 
-/* line 216, ../../source_sass/_base.scss */
+/* line 265, ../../source_sass/_base.scss */
 #intro {
   width: 800px;
   height: 350px;
   margin-top: -40px; }
 
-/* line 222, ../../source_sass/_base.scss */
+/* line 271, ../../source_sass/_base.scss */
 #now-serving {
   font-size: 100px;
   margin-bottom: 15px;
   margin-top: 75px; }
 
-/* line 228, ../../source_sass/_base.scss */
+/* line 277, ../../source_sass/_base.scss */
 #quote {
   font-size: 20px; }
 
-/* line 232, ../../source_sass/_base.scss */
+/* line 281, ../../source_sass/_base.scss */
 .row {
   max-height: none; }
 
-/* line 236, ../../source_sass/_base.scss */
+/* line 285, ../../source_sass/_base.scss */
 #profile {
   height: 1000px;
   border-radius: 2%; }
 
-/* line 241, ../../source_sass/_base.scss */
+/* line 290, ../../source_sass/_base.scss */
 .small-centered {
   max-height: none; }
 
-/* line 245, ../../source_sass/_base.scss */
+/* line 294, ../../source_sass/_base.scss */
 .profile-picture {
   position: relative;
   width: 200px;
@@ -4440,18 +4491,18 @@ h1 {
   top: 50px;
   border: 2px solid white; }
 
-/* line 257, ../../source_sass/_base.scss */
+/* line 306, ../../source_sass/_base.scss */
 #servicer-name-container {
   display: flex;
   align-items: center;
   justify-content: center;
   color: white; }
 
-/* line 264, ../../source_sass/_base.scss */
+/* line 313, ../../source_sass/_base.scss */
 #profile-top {
   height: 250px; }
 
-/* line 268, ../../source_sass/_base.scss */
+/* line 317, ../../source_sass/_base.scss */
 #request-container {
   border-bottom: 2px solid #51c285;
   display: flex;
@@ -4460,7 +4511,7 @@ h1 {
   padding-bottom: 20px;
   padding-top: 10px; }
 
-/* line 277, ../../source_sass/_base.scss */
+/* line 326, ../../source_sass/_base.scss */
 #details-container {
   display: block;
   min-height: 390px;
@@ -4470,17 +4521,17 @@ h1 {
       justify-content: center;
       */ }
 
-/* line 287, ../../source_sass/_base.scss */
+/* line 336, ../../source_sass/_base.scss */
 .send-request {
   position: relative;
   background-color: #51c285;
   color: white; }
 
-/* line 293, ../../source_sass/_base.scss */
+/* line 342, ../../source_sass/_base.scss */
 #servicer-name {
   margin: 0 auto; }
 
-/* line 297, ../../source_sass/_base.scss */
+/* line 346, ../../source_sass/_base.scss */
 .servicer {
   width: 80%;
   min-height: 22%;
@@ -4492,7 +4543,7 @@ h1 {
   padding-top: 10px;
   margin: 20px auto; }
 
-/* line 309, ../../source_sass/_base.scss */
+/* line 358, ../../source_sass/_base.scss */
 .servicer-contact {
   width: 80%;
   min-height: 15%;
@@ -4503,7 +4554,7 @@ h1 {
   padding-top: 10px;
   margin: 20px auto; }
 
-/* line 320, ../../source_sass/_base.scss */
+/* line 369, ../../source_sass/_base.scss */
 .servicer-services {
   width: 80%;
   min-height: 22%;
@@ -4515,13 +4566,13 @@ h1 {
   padding-top: 10px;
   margin: 20px auto; }
 
-/* line 332, ../../source_sass/_base.scss */
+/* line 381, ../../source_sass/_base.scss */
 #services-table {
   border-radius: 25px;
   -moz-border-radius: 25px;
   -webkit-border-radius: 25px; }
 
-/* line 338, ../../source_sass/_base.scss */
+/* line 387, ../../source_sass/_base.scss */
 .editable-intro {
   width: 800px; }
 

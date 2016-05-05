@@ -520,7 +520,6 @@ module.exports = function(app, passport) {
 		});
 	});
 
-
 	/*    get user by query   */
 	//app.get('/portfolio/:user_id', function(req, res) {
 	//	var where = null;

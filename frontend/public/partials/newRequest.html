@@ -1,10 +1,16 @@
-<div class="request small-11 medium-6 small-centered centerVertically">
+<div class="request small-11 medium-6 small-centered">
     <form id="newRequest" class="row small-12">
-        <div class="row"><span>Send a request to <big class="green">{{SP.username}}</big></span></div>
+        <div class="row text-center"><span>Send a request to <big class="green">{{SP.username}}</big></span></div>
+        <div class="row text-center"><span>for <big class="green">{{curService.serviceName}}</big></span></div>
         <div class="row"><span>Your Name:</span></div>
         <div class="row textbox"><input type="text" placeholder="Your Name" ng-model="newRequest.customerName"></div>
         <div class="row"><span>Email Address:</span></div>
         <div class="row textbox"><input type="text" placeholder="Your Email" ng-model="newRequest.contactInfo"></div>
+        <div class="row" id="inputdiv_1">
+            <input id="input_1" ng-click="newInputField(1)" readonly="true">
+        </div>
+
+
         <div class="row"><span>What should the Service Provider know about you?</span></div>
         <div class="row textbox"><textarea type="text" placeholder="Any requirements, additional information. Anything you want the service provider to know." ng-model="newRequest.message"></textarea></div>
         <div class="row"><button class="small-12 bt round medium-6 small-centered columns" ng-click="sendRequest()">Send Request</button></div>

@@ -3,9 +3,23 @@ body{
 	background: none !important;
 }
 input, textarea{
-	border-radius: $roundcorner !important
+	border-radius: $roundcorner !important;
+	resize:none !important;
 }
-#newRequest{
+.send-request {
+    position: relative;
+    background-color: $green; 
+    color: white;
+    margin: 0 auto;
+}
+.servicebox{
+	padding: 20px;
+}
+.service{
+	@extend .greyroundborder;	
+	padding: 10px 0;
+}
+#newRequest, #newService{
 	textarea{
 		height: 100px !important;
 		resize:none;
@@ -57,7 +71,7 @@ input, textarea{
 .centerVertically{
   transform: translateY(25%);
 }
-.taskList{
+.taskList, .serviceList{
 	min-height: 200px;
 }
 .searchBox{
@@ -98,6 +112,15 @@ strong{
 	height: 300px;
 	background:#aaa!important;
 }
+.portfoliobanner{
+	@extend .banner;
+	height: 400px;
+	color:white;
+}
+.portfolioname{
+	margin-top:6%;
+}
+
 .queue-tabs{
 	ul{
 		li{
@@ -112,6 +135,22 @@ strong{
 .bt{
 	@extend .button;
 	background-color: #2CC185;
+	font-size: 14px;
+}
+.bigbt{
+	@extend .bt;
+	font-size: 18px;
+	margin: 0 auto;
+}
+.namebt{
+	@extend .bt;
+	border:#2CC185 1px solid;
+	background: none;
+	color: #2CC185;
+	:hover{
+		background-color:$hover;
+		border:white 0px solid !important;
+	}
 }
 .content{
 	padding-top: 56px;
@@ -127,9 +166,19 @@ strong{
 	padding-right: 20px;
 	-webkit-box-shadow: 0 4px 8px 0 #aaa;
 	box-shadow: 0 4px 8px 0 #aaa;
+	.centertext{
+		height: 55px;
+		line-height: 100%;
+		text-align: center;	
+		span{
+		  display: inline-block;
+		  vertical-align: middle;
+		  line-height: normal; 
+		}
+	}
 }
 .fixtop{
-	position: fixed;
+	position: fixed !important;
 }
 .round{
 	border-radius:25px !important;
