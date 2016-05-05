@@ -57,11 +57,15 @@ mp4Controllers
         });
     }
 
+    
     $scope.sendRequest = function(i){
-        $scope.curService = $scope.services[i]
-        console.log("curService")
-        console.log($scope.curService)
-        $scope.dialog = ngDialog.open({ template: './partials/newRequest.html', className: 'ngdialog-theme-default request-dialog-width', controller: 'NewRequestCtrl', scope:$scope })
+        if(curSPID !== SPID){
+            $scope.curService = $scope.services[i]
+            console.log("curService")
+            console.log($scope.curService)
+            $scope.dialog = ngDialog.open({ template: './partials/newRequest.html', className: 'ngdialog-theme-default request-dialog-width', controller: 'NewRequestCtrl', scope:$scope })
+        }
+
     }
 
     $scope.showEdit = function(){
@@ -189,9 +193,10 @@ mp4Controllers
             console.log(reqids)
             $scope.tasks = []
             angular.forEach(reqids, function(i, key) {
+                console.log(i);
+                console.log(key);
                 var t = request.get(i).then(function(res){
                     var req = res.data.data 
-                    console.log(req)
                     $scope.tasks.push(req)
                 });
             }, $scope.tasks);
@@ -403,6 +408,7 @@ mp4Controllers
     $scope.password;
     $scope.email;
     $scope.login = function() {
+        console.log("in log in");
         $http({
             method: 'POST',
             url: homeurl+'/login',
@@ -420,13 +426,13 @@ mp4Controllers
             // console.log("curUser: ")
             // console.log($scope.curUser._id)
             console.log($scope.setUser(data.data))
-            $scope.dialog.close()
+            $scope.dialog.close();
             $location.path('/user/'+data.data._id);
          }).error(function (data, status, headers, config) {
             console.log("data: "+data);
             console.log("status: "+status);
             console.log("headers: "+headers);
-            $scope.dialog.close()
+            $scope.message = "Login unsuccessful, try again";
          }); 
     }
 }])
@@ -436,6 +442,7 @@ mp4Controllers
     $scope.email;
     $scope.username;
     $scope.businessName;
+
     $scope.signup = function() {
         $http({
             method: 'POST',
@@ -459,7 +466,7 @@ mp4Controllers
             console.log("data: "+data);
             console.log("status: "+status);
             console.log("headers: "+headers);
-            $scope.dialog.close()
+            $scope.message = "Signup unsuccessful, please try again"
          }); 
     }
 }])
