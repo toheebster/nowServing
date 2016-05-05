@@ -7,6 +7,7 @@
     "sskhandek <sskhandek@gmail.com>"
   ],
   "dependencies": {
+    "angular-bootstrap-datetimepicker": "^1.0.1",
     "express": "^4.11.1",
     "grunt": "~0.4.2",
     "grunt-contrib-clean": "^0.6.0",

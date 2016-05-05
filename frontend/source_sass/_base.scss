@@ -6,7 +6,13 @@ input, textarea{
 	border-radius: $roundcorner !important;
 	resize:none !important;
 }
-
+.servicebox{
+	padding: 20px;
+}
+.service{
+	@extend .greyroundborder;	
+	padding: 10px 0;
+}
 #newRequest, #newService{
 	textarea{
 		height: 100px !important;
@@ -59,7 +65,7 @@ input, textarea{
 .centerVertically{
   transform: translateY(25%);
 }
-.taskList{
+.taskList, .serviceList{
 	min-height: 200px;
 }
 .searchBox{
@@ -98,6 +104,14 @@ input, textarea{
 .banner{
 	height: 300px;
 	background:#aaa!important;
+}
+.portfoliobanner{
+	@extend .banner;
+	height: 400px;
+	color:white;
+}
+.portfolioname{
+	top:60%;
 }
 .queue-tabs{
 	ul{

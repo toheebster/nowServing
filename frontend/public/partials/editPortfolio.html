@@ -1,0 +1,61 @@
+<div class="container">
+	<div class="row" id="profile" style="border-top-color: lightgreen;">
+	  <div class="small-12 small-centered columns">
+	  	<div class="row">
+	  		<div id="profile-top" class="small-12  small-centered columns" style="background-color: lightgray">
+	  			<div class="profile-picture"></div>
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div id="servicer-name-container" class="small-12  small-centered columns" style="background-color: lightgray">
+	  			<div id="servicer-name">
+	  				<a href="#" editable-text="businessName" onbeforesave="updateBusinessName($data)">
+	  					<h4>{{user.businessName}}<br></h4>
+	  				</a>
+	  				<a href="#" editable-text="username" onbeforesave="updateUsername($data)">
+	  					<h6 style="text-align: center;">by {{user.username}}</h6>
+	  				</a>
+ 				</div>	
+	  		</div>
+	  	</div>
+
+	  	<div class="row">
+	  		<div id="request-container" class="small-12 small-centered columns" style="background-color: lightgray">
+	  		</div>
+	  	</div>
+		<div class="row">
+	  		<div id="details-container" class="small-12 small-centered columns" style="background-color: white; border: 1px solid lightgray">
+	  			<div id="servicer-intro" class="servicer">
+	  				<div>
+		  				<h5>A little bit about me and what I do:</h5>
+		  				<a href="#" editable-textarea="intro" data-inputclass="editable-intro" onbeforesave="updateIntro($data)">
+	  						<p>"{{user.intro}}"</p>
+	  					</a>
+		  				
+	  				</div>
+	  			</div>
+	  			<div id="services-provided" class="servicer-services">
+	  				<h5>Services:</h5>
+	  				<table id="services-table">
+	  					<tr>
+	  						<th>Service</th>
+	  						<th>Availability</th>
+	  					</tr>
+	  					<tr ng-repeat="service in user.services">
+	  						<td>{{service.serviceName}}</td>
+	  						<td>{{service.availability}}</td>
+	  					</tr>
+	  					
+	  				</table>
+	  			</div>
+	  			<div id="servicer-contact-information" class="servicer-contact">
+	  				<h5 style="margin: 0 auto;">Contact: </h5>
+	  				<a href="#" editable-text="email" onbeforesave="updateEmail($data)">
+	  					<h6>{{email}}</h6>
+	  				</a>
+	  			</div>
+	  		</div>	
+		</div>
+	  </div>
+	</div>
+</div>

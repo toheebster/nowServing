@@ -13,16 +13,68 @@ mp4Controllers
 
 }])
 
-.controller('PortfolioCtrl', ['$scope', '$http', '$resource', function($scope, $http, $resource) {
+.controller('PortfolioCtrl', ['$scope', '$http', 'service', 'user', '$routeParams', 'ngDialog', function($scope, $http, service, user, $routeParams, ngDialog ) {    
+    user.get($routeParams.id)
+    .success(function (data, status, headers, config) {
+        $scope.user = data.data;
+        console.log($scope.user);
 
+        $scope.services = $scope.user.services
+        angular.forEach($scope.services, function(i, key) {
+            var t = service.get(i).then(function(res){
+                var serv = res.data.data 
+                console.log(serv)
+                $scope.services.push(serv)
+                console.log($scope.services);            
+            });
+        }, $scope.services);
 
+    }).error(function (data, status, headers, config) {
+        console.log(data);
+    });
 }])
 
 
 // Queue Pages
-.controller('EditPortfolioCtrl', ['$scope', '$http', '$resource', function($scope, $http, $resource) {
+.controller('EditPortfolioCtrl', ['$scope', '$http', '$resource', '$routeParams', 'user', '$route', function($scope, $http, $resource, $routeParams, user, $route) {
 
+    user.get($routeParams.id)
+    .then(function (data) {
+        $scope.user = data.data.data;
+        console.log($scope.user);
+        $scope.businessName = $scope.user.businessName;
+        $scope.intro = $scope.user.intro;
+        $scope.email = $scope.user.local.email;
+        // $scope.services = $scope.user.services;
+    });
 
+    $scope.updateUsername = function (data) {
+        sendData = {username: data}
+        user.update($routeParams.id, sendData, function(data) {
+            $route.reload();
+        });
+    }
+
+    $scope.updateIntro = function (data) {
+        sendData = {intro: data}
+        user.update($routeParams.id, sendData, function(data) {
+            $route.reload();
+        });
+    }
+
+    $scope.updateBusinessName = function (data) {
+        sendData = {businessName: data}
+        user.update($routeParams.id, sendData, function(data) {
+            $route.reload();
+        });
+    }
+    $scope.updateEmail = function (data) {
+        sendData = {local: {email: data, password: $scope.user.local.password}}
+
+        user.update($routeParams.id, sendData, function(data) {
+            $route.reload();
+        });
+    }
 }])
 
 .controller('QueueCtrl', ['$scope', '$http', 'request', '$routeParams', 'user', 'ngDialog', '$location', function($scope, $http, request, $routeParams, user, ngDialog, $location) {
@@ -194,7 +246,7 @@ mp4Controllers
 
 }])
 
-.controller('NewRequestCtrl', ['$scope', '$http', '$routeParams', 'SP', 'request','user', function($scope, $http, $routeParams, SP, request, user) {
+.controller('NewRequestCtrl', ['$scope', '$http', '$routeParams', 'SP', 'request','user', '$compile', function($scope, $http, $routeParams, SP, request, user, $compile) {
     
     var SPID = $routeParams.id;  
     $scope.SP;
@@ -234,6 +286,99 @@ mp4Controllers
             console.log(data)
         })
     }
+    $scope.newInputField = function(i){
+        // gets input field index
+        // if it is readonly, set it to be editable
+        // if is not, just return
+        var myEl = angular.element(document.querySelector('#input_'+i));
+        myEl.attr('readonly');
+        console.log("input: "+i)
+        if(myEl.attr('readonly')){
+
+            var j = i+1
+            myEl.attr('readonly', false);
+
+            var newInput = '<div class="row" id="inputdiv_'+j+'"><input id="input_'+j+'" ng-click="newInputField('+j+')" readonly="true"></div>';
+            var content = $compile(newInput)($scope);
+            angular.element(document.querySelector('#inputdiv_'+i)).after(content)
+        }   
+    }
+
+
+    // date time picker
+    var that = this;
+
+    var in10Days = new Date();
+    in10Days.setDate(in10Days.getDate() + 10);
+
+    this.dates = {
+        date1: new Date('2015-03-01T00:00:00Z'),
+        date2: new Date('2015-03-01T12:30:00Z'),
+        date3: new Date(),
+        date4: new Date(),
+        date5: in10Days,
+        date6: new Date(),
+        date7: new Date(),
+        date8: new Date(),
+        date9: null,
+        date10: new Date('2015-03-01T09:00:00Z'),
+        date11: new Date('2015-03-01T10:00:00Z')
+    };
+
+    this.open = {
+        date1: false,
+        date2: false,
+        date3: false,
+        date4: false,
+        date5: false,
+        date6: false,
+        date7: false,
+        date8: false,
+        date9: false,
+        date10: false,
+        date11: false
+    };
+
+    // Disable today selection
+    this.disabled = function(date, mode) {
+        return (mode === 'day' && (new Date().toDateString() == date.toDateString()));
+    };
+
+    this.dateOptions = {
+        showWeeks: false,
+        startingDay: 1
+    };
+
+    this.timeOptions = {
+        readonlyInput: false,
+        showMeridian: false
+    };
+
+    this.dateModeOptions = {
+        minMode: 'year',
+        maxMode: 'year'
+    };
+
+    this.openCalendar = function(e, date) {
+        that.open[date] = true;
+    };
+
+    // watch date4 and date5 to calculate difference
+    var unwatch = $scope.$watch(function() {
+        return that.dates;
+    }, function() {
+        if (that.dates.date4 && that.dates.date5) {
+            var diff = that.dates.date4.getTime() - that.dates.date5.getTime();
+            that.dayRange = Math.round(Math.abs(diff/(1000*60*60*24)))
+        } else {
+            that.dayRange = 'n/a';
+        }
+    }, true);
+
+    $scope.$on('$destroy', function() {
+        unwatch();
+    });
+
 
     $scope.reload(); 
 
@@ -254,15 +399,15 @@ mp4Controllers
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).success(function (data, status, headers, config) {
             
-            SP.set(data.data) // set cur user
-            console.log("SP: ")
-            console.log(SP.get());
-            $scope.curUser = SP.get()
-            console.log("curUser: ")
-            console.log($scope.curUser._id)
-            console.log($scope.setUser($scope.curUser))
+            // SP.set(data.data) // set cur user
+            // console.log("SP: ")
+            // console.log(SP.get());
+            // $scope.curUser = SP.get()
+            // console.log("curUser: ")
+            // console.log($scope.curUser._id)
+            console.log($scope.setUser(data.data))
             $scope.dialog.close()
-            $location.path('/serviceprovider/'+data.data._id);
+            $location.path('/user/'+data.data._id);
          }).error(function (data, status, headers, config) {
             console.log("data: "+data);
             console.log("status: "+status);
@@ -290,11 +435,11 @@ mp4Controllers
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).success(function (data, status, headers, config) {
             console.log(data.data._id);
-            SP.set(data.data) // set cur user
-            $scope.curUser = SP.get()
-            console.log($scope.setUser($scope.curUser))
+            // SP.set(data.data) // set cur user
+            // $scope.curUser = SP.get()
+            // console.log($scope.setUser($scope.curUser))
             $scope.dialog.close()
-            $location.path('/serviceprovider/'+data.data._id);
+            $location.path('/user/'+data.data._id);
          }).error(function (data, status, headers, config) {
             console.log("data: "+data);
             console.log("status: "+status);
@@ -321,8 +466,8 @@ mp4Controllers
     }  
 
     $scope.viewMyQueue = function(){
-        var url="/serviceprovider/"
-        $scope.curUser = SP.get()
+        var url="/user/"
+        //$scope.curUser = SP.get()
         if(!$scope.curUser){
             $scope.showLogin()
         }else{
@@ -336,7 +481,8 @@ mp4Controllers
             url: homeurl+'/logout',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).success(function (data, status, headers, config) {
-            SP.set(null);
+            console.log("logged out")
+            // SP.set(null);
             $scope.curUser=null;
          }).error(function (data, status, headers, config) {
             console.log("data: "+data);
@@ -355,6 +501,24 @@ mp4Controllers
     $scope.$watch('curUser', function(){
         $scope.showLogout();
     })
+    $scope.getCurUser = function(){
+        console.log("try get logged in user")
+        $http({
+            method: 'GET',
+            url: homeurl+'/user',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).success(function (data, status, headers, config) {
+            console.log("got logged in user")
+            console.log(data.data)
+            $scope.curUser=data.data;
+         }).error(function (data, status, headers, config) {
+            console.log("get user error")
+            console.log("data: "+data);
+            console.log("status: "+status);
+            console.log("headers: "+headers);
+         });           
+    }
+    $scope.getCurUser();
 
 }])
 .controller('profileController', ['$scope', '$http', function($scope, $http) {
@@ -386,7 +550,7 @@ mp4Controllers
                 </div>
                 <div class="float-right row" id="LogoutBt" ng-show="showLogout()">
                     <div class="column small-6 float-right centertext align-self-middle">
-                        <span>Hi, {{curUser.username}}</span>
+                        <a ng-href="#/user/portfolio/{{curUser._id}}">Hi, {{curUser.username}}</a>
                     </div>
                     <div class="columns small-4 end float-right" ng-click="logout()">
                         <a class="bt round float-right">Logout</a>

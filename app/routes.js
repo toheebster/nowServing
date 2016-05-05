@@ -60,7 +60,7 @@ module.exports = function(app, passport) {
 			//console.log("logged in")
 			return next();
 		}
-		res.json({
+		res.status(404).json({
 			error: "User not logged in"
 		});
 		//res.redirect('/login.html');
@@ -443,6 +443,21 @@ module.exports = function(app, passport) {
 			}
 		});
 	});
+
+	//get logged in user
+	app.get('/user', isLoggedIn, function(req, res) {
+		User.findById(req['user']._id, function(err, user) {
+			if (err) {
+				res.status(500).json({message: 'Error happened!', data: err});
+			}
+			else if (user == "" || user == null || user == undefined) {
+				res.status(404).json({message: 'No data found!'});
+			}
+			else {
+				res.status(200).json({message: 'Data found!', data: user});
+			}
+		});
+	});	
 
 	/*    get user by query   */
 	//app.get('/portfolio/:user_id', function(req, res) {
