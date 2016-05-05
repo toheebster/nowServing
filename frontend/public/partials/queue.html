@@ -29,8 +29,8 @@
         <div class="medium-offset-1 small-12 medium-8 columns taskList">
             <div ng-repeat="each in tasks | filter: searchTxt | orderBy: sortBy" class="small-12 task" ng-click="seeDetail($index)">
             <!--<a ng-href="#/request/{{each._id}}"> -->
-                <div class="small-6 columns"><strong>{{each.customerName}}</strong></div>
-                <div class="small-6 float-right text-right columns"><span>{{each.createdTime}}</span></div>
+                <div class="small-6 columns"><strong>Name:{{each.customerName}}</strong></div>
+                <div class="small-6 float-right text-right columns"><span>{{each.createdTime | date:'MMM, d yyyy'}}</span></div>
                 <div class="small-12 columns"><strong>Message:</strong><span>{{each.message}}</span></div>
             </a>
             </div>

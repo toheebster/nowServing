@@ -29,8 +29,6 @@ module.exports = function(app, passport) {
 			if (err) { return next(err); }
 			if (!user && info.message == 'user not existed') {return res.send(404,{'status': 404,'message': 'User not found'});}
 			if (!user && info.message == 'password incorrect'){return res.send(404,{'status': 404,'message': 'Password incorrect'});}
-			console.log(user);
-			return res.send(200,{'status':200,'message':'Login Success', data: user});
 			req.logIn(user,function(err){
 				if (err) { return next(err); }
 				return res.send(200,{'status':200,'message':'Login Success', data: user});
@@ -187,6 +185,7 @@ module.exports = function(app, passport) {
 
 	//get request by id
 	app.get('/request/:req_id', isLoggedIn, function(req, res) {
+		console.log("here");
 		Request.findById(req.params.req_id, function(err, ret) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
