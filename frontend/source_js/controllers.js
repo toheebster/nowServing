@@ -6,6 +6,7 @@ var COMPLETED = 3;
 var DECLINED = 2;
 
 var homeurl = "http://localhost:8080"
+var curSPID = ""
 
 mp4Controllers
 // Not require login
@@ -14,24 +15,68 @@ mp4Controllers
 }])
 
 .controller('PortfolioCtrl', ['$scope', '$http', 'service', 'user', '$routeParams', 'ngDialog', function($scope, $http, service, user, $routeParams, ngDialog ) {    
-    user.get($routeParams.id)
-    .success(function (data, status, headers, config) {
-        $scope.user = data.data;
-        console.log($scope.user);
+    var SPID = $routeParams.id
+    $scope.reload = function(){
+        user.get($routeParams.id)
+        .success(function (data, status, headers, config) {
+            $scope.user = data.data;
+            console.log($scope.user);
+    
+            $scope.servicesid = $scope.user.services
+            $scope.services=[]
+            angular.forEach($scope.servicesid, function(i, key) {
+                var t = service.get(i).then(function(res){
+                    var serv = res.data.data 
+                    console.log(serv)
+                    $scope.services.push(serv)
+                    console.log($scope.services);            
+                });
+            }, $scope.services); 
+    
+        }).error(function (data, status, headers, config) {
+            console.log(data);
+        });
+    }
 
-        $scope.services = $scope.user.services
-        angular.forEach($scope.services, function(i, key) {
-            var t = service.get(i).then(function(res){
-                var serv = res.data.data 
-                console.log(serv)
-                $scope.services.push(serv)
-                console.log($scope.services);            
-            });
-        }, $scope.services);
+    $scope.sendRequest = function(i){
+        $scope.curService = $scope.services[i]
+        console.log("curService")
+        console.log($scope.curService)
+        $scope.dialog = ngDialog.open({ template: './partials/newRequest.html', className: 'ngdialog-theme-default request-dialog-width', controller: 'NewRequestCtrl', scope:$scope })
+    }
 
-    }).error(function (data, status, headers, config) {
-        console.log(data);
-    });
+    $scope.showEdit = function(){
+        console.log("showEdit: cur / SP")
+        console.log(curSPID)
+        console.log(SPID)
+        return (curSPID == SPID) ? true : false; 
+    }
+
+    $scope.editService = function(i){
+        console.log("show edit service!")
+        $scope.oldservice = $scope.services[i]
+        $scope.dialog = ngDialog.open({ template: './partials/editService.html', className: 'ngdialog-theme-default request-dialog-width', controller: 'EditServiceCtrl', scope:$scope })       
+    }
+    
+    $scope.$watch('curSPID', function(){
+        $scope.showEdit();
+    }) 
+
+    $scope.reload()
+}])
+
+.controller('EditServiceCtrl', ['$scope', '$http', 'service', '$routeParams', 'user', '$route', function($scope, $http, service, $routeParams, user, $route) {
+
+    $scope.service = angular.copy($scope.oldservice)
+
+    $scope.updateService = function () {
+        
+        service.update($scope.service._id, $scope.service, function(data) {
+            $scope.reload();
+            $scope.dialog.close()
+        });
+    }
+
 }])
 
 
@@ -254,7 +299,7 @@ mp4Controllers
         creatorID: "",
         userID: SPID,
         message: "",
-        service: "",
+        service: $scope.curService._id,
         customerName: "",
         contactInfo: "",
         status: NEW_REQUEST, //0 new, 1 accepted, 2 rejected, 3 completed
@@ -284,7 +329,10 @@ mp4Controllers
         request.post(SPID, $scope.newRequest, function(data){
             console.log("sent request")
             console.log(data)
+            $scope.dialog.close()
+
         })
+
     }
     $scope.newInputField = function(i){
         // gets input field index
@@ -304,80 +352,7 @@ mp4Controllers
         }   
     }
 
-
     // date time picker
-    var that = this;
-
-    var in10Days = new Date();
-    in10Days.setDate(in10Days.getDate() + 10);
-
-    this.dates = {
-        date1: new Date('2015-03-01T00:00:00Z'),
-        date2: new Date('2015-03-01T12:30:00Z'),
-        date3: new Date(),
-        date4: new Date(),
-        date5: in10Days,
-        date6: new Date(),
-        date7: new Date(),
-        date8: new Date(),
-        date9: null,
-        date10: new Date('2015-03-01T09:00:00Z'),
-        date11: new Date('2015-03-01T10:00:00Z')
-    };
-
-    this.open = {
-        date1: false,
-        date2: false,
-        date3: false,
-        date4: false,
-        date5: false,
-        date6: false,
-        date7: false,
-        date8: false,
-        date9: false,
-        date10: false,
-        date11: false
-    };
-
-    // Disable today selection
-    this.disabled = function(date, mode) {
-        return (mode === 'day' && (new Date().toDateString() == date.toDateString()));
-    };
-
-    this.dateOptions = {
-        showWeeks: false,
-        startingDay: 1
-    };
-
-    this.timeOptions = {
-        readonlyInput: false,
-        showMeridian: false
-    };
-
-    this.dateModeOptions = {
-        minMode: 'year',
-        maxMode: 'year'
-    };
-
-    this.openCalendar = function(e, date) {
-        that.open[date] = true;
-    };
-
-    // watch date4 and date5 to calculate difference
-    var unwatch = $scope.$watch(function() {
-        return that.dates;
-    }, function() {
-        if (that.dates.date4 && that.dates.date5) {
-            var diff = that.dates.date4.getTime() - that.dates.date5.getTime();
-            that.dayRange = Math.round(Math.abs(diff/(1000*60*60*24)))
-        } else {
-            that.dayRange = 'n/a';
-        }
-    }, true);
-
-    $scope.$on('$destroy', function() {
-        unwatch();
-    });
 
 
     $scope.reload(); 
@@ -438,6 +413,7 @@ mp4Controllers
             // SP.set(data.data) // set cur user
             // $scope.curUser = SP.get()
             // console.log($scope.setUser($scope.curUser))
+            $scope.getCurUser();
             $scope.dialog.close()
             $location.path('/user/'+data.data._id);
          }).error(function (data, status, headers, config) {
@@ -484,6 +460,7 @@ mp4Controllers
             console.log("logged out")
             // SP.set(null);
             $scope.curUser=null;
+            curSPID = null
          }).error(function (data, status, headers, config) {
             console.log("data: "+data);
             console.log("status: "+status);
@@ -492,6 +469,7 @@ mp4Controllers
     }
     $scope.setUser = function(newval){
         $scope.curUser = newval
+        curSPID = newval._id
         console.log("showLogout: ")
         console.log($scope.curUser)
     }
@@ -511,6 +489,7 @@ mp4Controllers
             console.log("got logged in user")
             console.log(data.data)
             $scope.curUser=data.data;
+            curSPID=data.data._id;
          }).error(function (data, status, headers, config) {
             console.log("get user error")
             console.log("data: "+data);
@@ -549,8 +528,8 @@ mp4Controllers
                     <div class="columns small-4 end float-right" ng-click="showLogin()"><a class="bt round float-right">Login</a></div>
                 </div>
                 <div class="float-right row" id="LogoutBt" ng-show="showLogout()">
-                    <div class="column small-6 float-right centertext align-self-middle">
-                        <a ng-href="#/user/portfolio/{{curUser._id}}">Hi, {{curUser.username}}</a>
+                    <div class="column small-7 float-right">
+                        <a class="namebt round" ng-href="#/user/portfolio/{{curUser._id}}">Hi, {{curUser.username}}</a>
                     </div>
                     <div class="columns small-4 end float-right" ng-click="logout()">
                         <a class="bt round float-right">Logout</a>

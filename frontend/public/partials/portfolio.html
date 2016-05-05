@@ -11,17 +11,21 @@
     
     <div class="row">
         <div class="small-12 medium-10 small-centered columns serviceList">
-            
-            <div ng-repeat="each in services | filter: searchTxt | orderBy: sortBy" class="small-12 medium-4 end columns servicebox" ng-click="seeDetail($index)">
+            <div ng-repeat="each in services | filter: searchTxt | orderBy: sortBy" class="small-12 medium-4 end columns servicebox" ng-click="sendRequest($index)">
                 <div class="service">
                 <!--<a ng-href="#/request/{{each._id}}"> -->
-                    <div class="small-10 small-centered"><strong>{{each.serviceName}}</strong></div>
+                    <div class="small-10 small-centered">
+                        <strong>{{each.serviceName}}</strong>
+                        <a ng-click="editService($index); $event.stopPropagation();" class="float-right" ng-show="showEdit()"><i class="fa fa-cog" aria-hidden="true"></i></a>
+                    </div>
                     <div class="small-10 small-centered"><strong>Availability:</strong><span>{{each.availability}}</span></div>
                     <div class="small-10 small-centered"><strong>Descrition:</strong><br/> 
                         <span>{{each.description}}</span>
                     </div>
                 </div>
             </div>
+            </div>
+
         </div>
     </div>
 

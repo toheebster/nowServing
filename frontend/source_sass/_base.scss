@@ -6,6 +6,12 @@ input, textarea{
 	border-radius: $roundcorner !important;
 	resize:none !important;
 }
+.send-request {
+    position: relative;
+    background-color: $green; 
+    color: white;
+    margin: 0 auto;
+}
 .servicebox{
 	padding: 20px;
 }
@@ -111,8 +117,9 @@ input, textarea{
 	color:white;
 }
 .portfolioname{
-	top:60%;
+	margin-top:6%;
 }
+
 .queue-tabs{
 	ul{
 		li{
@@ -127,6 +134,22 @@ input, textarea{
 .bt{
 	@extend .button;
 	background-color: #2CC185;
+	font-size: 14px;
+}
+.bigbt{
+	@extend .bt;
+	font-size: 18px;
+	margin: 0 auto;
+}
+.namebt{
+	@extend .bt;
+	border:#2CC185 1px solid;
+	background: none;
+	color: #2CC185;
+	:hover{
+		background-color:$hover;
+		border:white 0px solid !important;
+	}
 }
 .content{
 	padding-top: 56px;
@@ -154,7 +177,7 @@ input, textarea{
 	}
 }
 .fixtop{
-	position: fixed;
+	position: fixed !important;
 }
 .round{
 	border-radius:25px !important;
