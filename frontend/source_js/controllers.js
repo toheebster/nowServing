@@ -200,6 +200,7 @@ mp4Controllers
         });
     }    
 
+
     $scope.seeDetail = function(i){
         var ID = $scope.tasks[i]._id;
         console.log("id is: "+ID);
