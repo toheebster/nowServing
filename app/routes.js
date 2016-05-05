@@ -1,6 +1,8 @@
 var User = require('./models/user');
 var Service = require('./models/service');
-var Request = require('./models/request')
+var Request = require('./models/request');
+var mail = require('./mail');
+
 
 module.exports = function(app, passport) {
 
@@ -232,6 +234,8 @@ module.exports = function(app, passport) {
 							request.creatorID = req['user']._id;
 						}
 						request.save(function (err) {
+							var message = 'You are in line!\nYour order number is '+request._id+'\nUse this number whenever you want cancel your request.\nYour request:\n   '+req.body.message;
+							var confirmation = {from: 'lineupnowserving@gmail.com', to: req.body.contactInfo, subject: 'Line Up Notification!', text: message };
 							if (err) {
 								res.status(500).json({message: 'Error happened!', data: err});
 							}
@@ -239,23 +243,31 @@ module.exports = function(app, passport) {
 								if (req.isAuthenticated()) {
 									User.findById(req['user']._id, function(err, user) {
 										if (err || user == "" || user == null || user == undefined) {
-											res.status(201).json({message: 'request created but could not find current user!', data: request});
+											mail.sendMail(confirmation);
+											console.log('request created but could not find current user!');
+											res.status(201).json({message:'You should be notified shortly, please check your email and make sure it is not in your junk.' , data: request});
 										}
 										else {
 											user.myrequests.push(request.id);
 											user.save(function(err, user) {
 												if (err || user == "" || user == null || user == undefined) {
-													res.status(201).json({message: 'Request created but not added to creator', data: request});
+													mail.sendMail(confirmation);
+													console.log('Request created but not added to creator');
+													res.status(201).json({message:'You should be notified shortly, please check your email and make sure it is not in your junk.' , data: request});
 												}
 												else {
-													res.status(201).json({message: 'Request created and added to creator', data: request});
+													mail.sendMail(confirmation);
+													console.log('Request created and added to creator');
+													res.status(201).json({message: 'You should be notified shortly, please check your email and make sure it is not in your junk.' , data: request});
 												}
 											})
 										}
 									})
 								}
 								else {
+									mail.sendMail(confirmation);
 									res.status(201).json({message: 'Request created by non-registered user', data: request});
+
 								}
 							}
 						});
