@@ -37,6 +37,9 @@ mp4Services.factory('SP', function(){
        get: function(user_id) {
            return $http.get(baseUrl+'/user/'+user_id);
        },
+       getAll: function() {
+        return $http.get(baseUrl+'/getAllUser');
+       },
        post: function(user_id, obj, callback) {
            $http.post(baseUrl+'/addRequest/'+user_id, obj).success(function(data){
                callback(data);

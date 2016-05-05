@@ -3,12 +3,27 @@ var mp4Controllers = angular.module('mp4Controllers', ['720kb.datepicker', 'ngRe
 
 mp4Controllers
 // Not require login
-.controller('HomeCtrl', ['$scope', '$http', '$resource', 'ngDialog', function($scope, $http, $resource, ngDialog) {
-
+.controller('HomeCtrl', ['$scope', '$http', '$resource', 'ngDialog', 'user', function($scope, $http, $resource, ngDialog, user) {
     $scope.cancelRequest = function () {
         ngDialog.open({ template: './partials/cancelRequest.html', className: 'ngdialog-theme-default', controller: 'cancelReqCtrl' })
-    }
+    };
 
+    $scope.showUsers = function () {
+        ngDialog.open({ template: './partials/searchUsers.html', className: 'ngdialog-theme-default', controller: 'searchUsersCtrl' })
+    };
+
+}])
+
+.controller('searchUsersCtrl', ['$scope', '$http', '$resource', 'ngDialog', 'user', function($scope, $http, $resource, ngDialog, user) {
+    user.getAll().then(function(data) {
+        $scope.users = data.data.data;
+        console.log($scope.users);
+        $scope.searchDomain = [];
+        // angular.forEach($scope.users, function(user) {
+        //     $scope.searchDomain.push(user);
+        // });
+        console.log($scope.searchDomain);
+    });
 }])
 
 .controller('PortfolioCtrl', ['$scope', '$http', '$resource', 'user', '$routeParams', 'ngDialog', 'service', function($scope, $http, $resource, user, $routeParams, ngDialog, service) {    

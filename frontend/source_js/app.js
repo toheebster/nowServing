@@ -28,6 +28,10 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider, $loca
     templateUrl: 'partials/cancelRequest.html',
     controller: 'cancelReqCtrl'
   }).
+  when('/searchUsers', {
+    templateUrl: 'partials/searchUsers.html',
+    controller: 'searchUsersCtrl'
+  }).
   when('/newrequest/:id', {
     templateUrl: 'partials/newRequest.html',
     controller: 'NewRequestCtrl'
