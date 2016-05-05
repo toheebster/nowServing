@@ -8,5 +8,16 @@
 		<div class="small-10 medium-3 small-centered">
 		    <a href="#/" class="bigbt round send-request text-center small-12" ng-click='cancelRequest()' >Or Cancel A Request</a>
 		</div>
+        
+        <div class="small-10 medium-8 small-centered">
+            <form>
+                <div class="form-group">
+                    <input type="text" class="form-control" ng-model="email" placeholder="Search by Service-provider email">
+                </div>
+                <button ng-click ="search()">Search</button>
+                <h5>{{err_mes}}</h5>
+            </form>
+		</div>        
+        
  	</div>
 </div>

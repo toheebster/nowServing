@@ -1,5 +1,5 @@
 var mp4Services = angular.module('mp4Services', ['ngRoute', 'ngResource']);
-var baseUrl = "http://localhost:8080";
+var baseUrl = "http://localhost:8081";
 
 mp4Services.factory('SP', function(){
     var SP =  {
@@ -50,6 +50,10 @@ mp4Services.factory('SP', function(){
        },
        getAll: function() {
         return $http.get(baseUrl+'/getAllUser');
+       },
+       findUser:function(u_email){ 
+           console.log("get url is : " + baseUrl+'/findUser/'+u_email);
+           return $http.get(baseUrl+'/findUser/'+u_email);
        },
        post: function(user_id, obj, callback) {
            $http.post(baseUrl+'/addRequest/'+user_id, obj).success(function(data){
