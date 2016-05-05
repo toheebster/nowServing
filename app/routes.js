@@ -234,8 +234,8 @@ module.exports = function(app, passport) {
 							request.creatorID = req['user']._id;
 						}
 						request.save(function (err) {
-							var message = 'You are in line!\nYour order number is '+request._id+'\nUse this number whenever you want cancel your request.\nYour request:\n   '+req.body.message;
-							var confirmation = {from: 'lineupnowserving@gmail.com', to: req.body.contactInfo, subject: 'Line Up Notification!', text: message };
+							var message = 'You are in line!\nYour request number is '+request._id+'\nUse this number whenever you want cancel your request.\nYour request:\n   '+req.body.message;
+							var confirmation = {from: 'lineupnowserving@gmail.com', to: req.body.contactInfo, subject: 'Line Up Notification! #'+request._id, text: message };
 							if (err) {
 								res.status(500).json({message: 'Error happened!', data: err});
 							}
@@ -289,6 +289,7 @@ module.exports = function(app, passport) {
 				res.status(404).json({message: 'Invalid request'});
 			}
 			else {
+				console.log(req);
 				if (ret.userID == req['user']._id || ret.creatorID == req['user']._id) {
 					var previousStatus = ret.status;
 					for (var key in req.body) {
