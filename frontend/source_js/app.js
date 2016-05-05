@@ -24,6 +24,10 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider, $loca
     templateUrl: 'partials/requestDetail.html',
     controller: 'DetailCtrl'
   }).
+  when('/cancelrequest/:id', {
+    templateUrl: 'partials/cancelRequest.html',
+    controller: 'cancelReqCtrl'
+  }).
   when('/newrequest/:id', {
     templateUrl: 'partials/newRequest.html',
     controller: 'NewRequestCtrl'

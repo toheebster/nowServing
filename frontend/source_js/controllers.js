@@ -5,6 +5,10 @@ mp4Controllers
 // Not require login
 .controller('HomeCtrl', ['$scope', '$http', '$resource', 'ngDialog', function($scope, $http, $resource, ngDialog) {
 
+    $scope.cancelRequest = function () {
+        ngDialog.open({ template: './partials/cancelRequest.html', className: 'ngdialog-theme-default', controller: 'cancelReqCtrl' })
+    }
+
 }])
 
 .controller('PortfolioCtrl', ['$scope', '$http', '$resource', 'user', '$routeParams', 'ngDialog', 'service', function($scope, $http, $resource, user, $routeParams, ngDialog, service) {    
@@ -121,6 +125,19 @@ mp4Controllers
 .controller('DetailCtrl', ['$scope', '$http', '$resource', function($scope, $http, $resource) {
 
 
+}])
+
+.controller('cancelReqCtrl', ['$scope', '$http', '$resource', 'request', function($scope, $http, $resource, request) {
+    $scope.message = 'Your request number can be found in your confirmation email';
+    $scope.requestNumber;
+    $scope.cancel = function() {
+        if($scope.requestNumber || $scope.requestNumber.length > 0){
+            request.delete($scope.requestNumber, function() {
+                $scope.requestNumber = '';
+                $scope.message = 'Request canceled';
+            });
+        }
+    }       
 }])
 
 .controller('NewRequestCtrl', ['$scope', '$http', '$resource', 'SP', function($scope, $http, $resource, SP) {

@@ -289,7 +289,6 @@ module.exports = function(app, passport) {
 				res.status(404).json({message: 'Invalid request'});
 			}
 			else {
-				console.log(req);
 				if (ret.userID == req['user']._id || ret.creatorID == req['user']._id) {
 					var previousStatus = ret.status;
 					for (var key in req.body) {
@@ -362,7 +361,7 @@ module.exports = function(app, passport) {
 	});
 
 	//delete request, will also update user side
-	app.delete('/deleteRequest/:req_id', isLoggedIn, function(req, res) {
+	app.delete('/deleteRequest/:req_id', function(req, res) {
 		Request.findById(req.params.req_id, function (err, ret) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
@@ -372,7 +371,8 @@ module.exports = function(app, passport) {
 			}
 			else {
 				//console.log("0");
-				if (ret.userID == req['user']._id || ret.creatorID == req['user']._id) {
+				// console.log(req);
+				// if (ret.userID == req['user']._id || ret.creatorID == req['user']._id) {
 					var uid = ret.userID;
 					var rid = ret._id;
 					var req_status = ret.status;
@@ -443,10 +443,10 @@ module.exports = function(app, passport) {
 							});
 						}
 					});
-				}
-				else {
-					res.status(404).json({message: 'not your request'});
-				}
+				// }
+				// else {
+				// 	res.status(404).json({message: 'not your request'});
+				// }
 			}
 		});
 	});
