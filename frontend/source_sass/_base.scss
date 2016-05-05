@@ -6,6 +6,32 @@ input, textarea{
 	border-radius: $roundcorner !important;
 	resize:none !important;
 }
+nav{
+	div{
+		z-index: 999;
+	}
+	.top-bar{
+		z-index: 99;
+		background-color: white;
+		.top-bar-right{
+			li{
+				background-color: white;
+			}
+		}
+	}
+	.title-bar{
+		height: 56px;
+		background-color: white;
+		.title-bar-title{
+			color:$green;
+		}
+		button{
+			i{
+				color:$green;
+			}
+		}
+	}
+}
 .send-request {
     position: relative;
     background-color: $green; 
@@ -41,6 +67,9 @@ input, textarea{
 }
 .paddingTopBottomM{
 	padding:$paddingTopBottomM;
+}
+.paddingTopBottomS{
+	padding:$paddingTopBottomS;
 }
 .paddingLRM{
 	padding: $paddingLRM;
@@ -157,7 +186,7 @@ strong{
 }
 
 .navbar{
-	z-index: 999;
+	z-index: 234567;
 	background-color: white;
 	height: 55px;
 	position: relative;
