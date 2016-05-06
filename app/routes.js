@@ -279,6 +279,8 @@ module.exports = function(app, passport) {
 										}
 										else {
 											user.myrequests.push(request.id);
+											//user.myrequests.unshift(request.id);
+
 											user.save(function(err, user) {
 												if (err || user == "" || user == null || user == undefined) {
 													mail.sendMail(confirmation);
@@ -309,10 +311,8 @@ module.exports = function(app, passport) {
 	});
 
 
-	//app.put
-
-	//edit request, will also update user's request list
-	app.put('/editRequest/:req_id', function(req, res){
+	//cancel request
+	app.put('/cancelRequest/:req_id', function(req, res){
 		//if(req['user']._id != req.params.user_id) return;
 		Request.findById(req.params.req_id, function (err, ret) {
 			if (err) {
@@ -332,8 +332,8 @@ module.exports = function(app, passport) {
 							}
 						}
 					}
-					var message = 'You are no longer in line\n  Cancelation of request # '+req_id;
-					var confirmation = {from: 'lineupnowserving@gmail.com', to: req.body.contactInfo, subject: 'Line Up Notification! #'+request._id, text: message };
+					var message = 'You are no longer in line\n  Cancelation of request # '+req.params.req_id;
+					var confirmation = {from: 'lineupnowserving@gmail.com', to: req.body.contactInfo, subject: 'Line Up Notification! #'+ret._id, text: message };
 					var currentStatus = ret.status;
 					ret.save(function (err) {
 						if (err) {
@@ -403,6 +403,93 @@ module.exports = function(app, passport) {
 				//else {
 				//	res.status(404).json({message: 'not your request'});
 				//}
+			}
+		});
+	});
+
+
+	//edit request, will also update user's request list
+	app.put('/editRequest/:req_id', isLoggedIn, function(req, res){
+		//if(req['user']._id != req.params.user_id) return;
+		Request.findById(req.params.req_id, function (err, ret) {
+			if (err) {
+				res.status(500).json({message: 'Error happened!', data: err});
+			}
+			else if (ret == "" || ret == null || ret == undefined) {
+				res.status(404).json({message: 'Invalid request'});
+			}
+			else {
+				if (ret.userID == req['user']._id || ret.creatorID == req['user']._id) {
+					var previousStatus = ret.status;
+					for (var key in req.body) {
+						if (req.body.hasOwnProperty(key)) {
+							if (key == "userID") continue; //user id is not allowed to change
+							if (req.body[key] != null && req.body[key] != undefined && ret[key] != undefined) {
+								ret[key] = req.body[key];
+							}
+						}
+					}
+					var currentStatus = ret.status;
+					ret.save(function (err) {
+						if (err) {
+							res.status(404).json({message: 'Error happened!', data: err});
+						}
+						else {
+							if (previousStatus != currentStatus) {
+								User.findById(ret.userID, function (err, user) {
+									if (err) {
+										res.status(500).json({message: 'Error happened!', data: err});
+									}
+									else if (user == "" || user == null || user == undefined) {
+										res.status(404).json({message: 'No matched user found'});
+									}
+									else {
+										var status = ["new", 'accepted', 'rejected', 'completed', 'cancelled'];
+										var index = user[status[previousStatus]].indexOf(ret._id);
+										if (index > -1) {
+											user[status[previousStatus]].splice(index, 1);
+											if (user[status[currentStatus]].indexOf(ret._id) < 0) {
+												user[status[currentStatus]].push(ret._id);
+											}
+											user.save(function (err) {
+												if (err) {
+
+													res.status(200).json({
+														message: 'Requested updated but user update has error!',
+														data: err
+													});
+												}
+												else {
+
+													res.status(200).json({message: 'Request updated!', data: ret});
+												}
+											})
+										}
+										else {
+											user[status[currentStatus]].push(ret._id);
+											user.save(function (err) {
+												if (err) {
+
+													res.status(200).json({
+														message: 'Requested updated but user update has error!',
+														data: err
+													});
+												}
+												else {
+
+													res.status(200).json({message: 'Request updated2!', data: ret});
+												}
+											})
+										}
+									}
+								});
+							}
+						}
+					})
+				}
+				else {
+					res.status(404).json({message: 'not your request'});
+				}
 			}
 		});
 	});
