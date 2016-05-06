@@ -11,8 +11,11 @@
     "method-override": "~1.0.0",
     "mongoose": "~3.8.1",
     "morgan": "~1.0.0",
+<<<<<<< HEAD
     "nodemailer": "^2.3.2",
     "nodemailer-smtp-transport": "^2.4.2",
+=======
+>>>>>>> 1d6be83d3ea5a27b309d25f111e3353dd600dba9
     "multer": "^1.1.0",
     "passport": "~0.1.17",
     "passport-facebook": "~1.0.2",

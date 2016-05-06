@@ -9,16 +9,11 @@ var homeurl = "http://localhost:8080"
 var curSPID = ""
 mp4Controllers
 // Not require login
-.controller('HomeCtrl', ['$scope','$http','$location', 'user', function($scope, $http, $location, user) {
+.controller('HomeCtrl', ['$scope','$http','$location', 'user', 'ngDialog', function($scope, $http, $location, user, ngDialog) {
     $scope.cancelRequest = function () {
         ngDialog.open({ template: './partials/cancelRequest.html', className: 'ngdialog-theme-default', controller: 'cancelReqCtrl' })
     };
 
-    $scope.showUsers = function () {
-        ngDialog.open({ template: './partials/searchUsers.html', className: 'ngdialog-theme-default', controller: 'searchUsersCtrl' })
-    };
-    
-    
     $scope.email = "";
     $scope.err_mes = "";
     $scope.search = function(){
@@ -365,12 +360,14 @@ mp4Controllers
 
 .controller('cancelReqCtrl', ['$scope', '$http', '$resource', 'request', function($scope, $http, $resource, request) {
     $scope.message = 'Your request number can be found in your confirmation email';
-    $scope.requestNumber;
+    $scope.requestNumber = '';
+    $scope.email = '';
     $scope.cancel = function() {
-        if($scope.requestNumber || $scope.requestNumber.length > 0){
-            request.delete($scope.requestNumber, function() {
+        if($scope.requestNumber.length > 0 && $scope.email.length > 0){
+            request.update($scope.requestNumber, {status: 4, contactInfo: $scope.email}, function() {
                 $scope.requestNumber = '';
-                $scope.message = 'Request canceled';
+                $scope.email = '';
+                $scope.message = 'Request canceled!';
             });
         }
     }       
