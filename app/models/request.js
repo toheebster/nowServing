@@ -7,7 +7,7 @@ var requestSchema = mongoose.Schema({
     service: {type: String, default: ""},
     customerName: {type: String, default: ""},
     contactInfo: {type: String, default: ""},
-    status: {type: Number, default:0}, //0 new, 1 accepted, 2 rejected, 3 completed
+    status: {type: Number, default:0}, //0 new, 1 accepted, 2 rejected, 3 completed, 4 cancelled
     proposedTime: {type: [String], default: []},
     acceptedTime: {type: [Boolean], default: []},
     createdTime: {type:Date, default:Date.now()}

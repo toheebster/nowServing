@@ -15,6 +15,7 @@ var userSchema = mongoose.Schema({
 	completed: {type:[String], default:[]}, //store request ids
 	accepted: {type:[String], default:[]},  //store request ids
 	new: {type:[String], default:[]},       //store request ids
+	cancelled: {type:[String], default:[]}, //store request ids
 	myrequests: {type:[String], default:[]},  //store request ids
 
 });

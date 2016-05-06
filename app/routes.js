@@ -1,6 +1,20 @@
 var User = require('./models/user');
 var Service = require('./models/service');
-var Request = require('./models/request')
+var Request = require('./models/request');
+var multer  = require('multer');
+
+var storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+		cb(null, 'frontend/public/userImage/');
+	},
+	filename: function (req, file, cb) {
+		var extension = file.originalname.split(/[. ]+/).pop();
+		cb(null, req['user']._id+ '.' + extension);
+	}
+});
+
+var upload = multer({ storage: storage });
+
 
 module.exports = function(app, passport) {
 
@@ -259,8 +273,11 @@ module.exports = function(app, passport) {
 
 	});
 
+
+	//app.put
+
 	//edit request, will also update user's request list
-	app.put('/editRequest/:req_id', isLoggedIn, function(req, res){
+	app.put('/editRequest/:req_id', function(req, res){
 		//if(req['user']._id != req.params.user_id) return;
 		Request.findById(req.params.req_id, function (err, ret) {
 			if (err) {
@@ -270,7 +287,7 @@ module.exports = function(app, passport) {
 				res.status(404).json({message: 'Invalid request'});
 			}
 			else {
-				if (ret.userID == req['user']._id || ret.creatorID == req['user']._id) {
+				//if (ret.userID == req['user']._id || ret.creatorID == req['user']._id) {
 					var previousStatus = ret.status;
 					for (var key in req.body) {
 						if (req.body.hasOwnProperty(key)) {
@@ -295,7 +312,7 @@ module.exports = function(app, passport) {
 										res.status(404).json({message: 'No matched user found'});
 									}
 									else {
-										var status = ["new", 'accepted', 'rejected', 'completed'];
+										var status = ["new", 'accepted', 'rejected', 'completed', 'cancelled'];
 										var index = user[status[previousStatus]].indexOf(ret._id);
 										if (index > -1) {
 											user[status[previousStatus]].splice(index, 1);
@@ -333,10 +350,10 @@ module.exports = function(app, passport) {
 							}
 						}
 					})
-				}
-				else {
-					res.status(404).json({message: 'not your request'});
-				}
+				//}
+				//else {
+				//	res.status(404).json({message: 'not your request'});
+				//}
 			}
 		});
 	});
@@ -375,7 +392,7 @@ module.exports = function(app, passport) {
 								}
 								else {
 									//console.log("2");
-									var status = ["new", 'accepted', 'rejected', 'completed'];
+									var status = ["new", 'accepted', 'rejected', 'completed', 'cancelled'];
 									var index = user[status[req_status]].indexOf(rid);
 									if (index > -1) {
 										user[status[req_status]].splice(index, 1);
@@ -844,4 +861,22 @@ module.exports = function(app, passport) {
 		})
 	})
 
+	app.post('/fs/upload',isLoggedIn,function (req, res) {
+		console.log("into upload")
+		var image_receiver = upload.single('avatar');
+		image_receiver(req, res, function (err) {
+			if (err) {
+				// An error occurred when uploading
+				console.log("error in /fs/upload : " + err );
+				return;
+			}
+			// Everything went fine
+			//res.redirect('/#/user/portfolio/' + req['user']._id);
+			//res.status(200).json({message:"Image uploaded successfully"});
+		})
+	});
+
+	app.get('/loggedin', isLoggedIn,function(req,res) {
+		res.status(200).json({message: "loggedin"});
+	});
 };
