@@ -1,16 +1,21 @@
-<section class="banner small-12">
+<section class="banner small-12" >
 <!--     <div class="small-12">
         <div class="bt round small-5 medium-2 float-right topright" ng-click="showAddService()">Add Service</div>
     </div>
     <div class="circle no-overflow small-centered"><a href=""></a></div> -->
-    <div class="small-12" style="position: absolute;">
-        <div class="bt round small-5 medium-2 float-right topright" ng-click="showAddService()">Add Service</div>
+    <div class="row">
+        <div class="columns small-12" style="text-align: center">
+            <a ng-href="#/user/portfolio/{{SP._id}}">
+                <img class="circle no-overflow small-centered" ng-src="{{img}}" err-src="../userImage/user-default.png" check-image>
+            </a>
+            <a href="#" class="bt round small-5 medium-2 float-right topright" ng-click="showAddService()">Add Service</a>
+        </div>
     </div>
-    <div class="small-12" style="text-align: center">
-        <a ng-href="#/user/portfolio/{{SP._id}}">
-            <img class="circle no-overflow small-centered" ng-src="{{img}}" err-src="../userImage/user-default.png" check-image>
-        </a>
-    </div>
+<!--     <div class='row'>
+        <div class="columns small-12" style="margin: 0 auto">
+            
+        </div>
+    </div> -->
 </section>
 <section>
     <div class="tabs tabs-style-flip queue">

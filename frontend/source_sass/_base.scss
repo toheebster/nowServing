@@ -165,11 +165,14 @@ strong{
 	@extend .button;
 	background-color: #2CC185;
 	font-size: 14px;
+	
 }
 .bigbt{
 	@extend .bt;
-	font-size: 18px;
+	font-size: 16px;
 	margin: 0 auto;
+	height: 50px;
+	width: 100%;
 }
 .namebt{
 	@extend .bt;
@@ -185,7 +188,7 @@ strong{
 	padding-top: 56px;
 }
 
-.navbar{
+/*.navbar{
 	z-index: 234567;
 	background-color: white;
 	height: 55px;
@@ -205,7 +208,7 @@ strong{
 		  line-height: normal; 
 		}
 	}
-}
+}*/
 .fixtop{
 	position: fixed !important;
 }
@@ -266,7 +269,7 @@ strong{
 
 
 #home {
-	top: -75px;
+	top: 0px;
 	position: relative;
     background-image: url("../images/icecream2.jpg");
     background-color: black;
@@ -304,7 +307,8 @@ h1 {
 }
 
 #quote {
-	font-size: 20px;
+	font-size: 23px;
+	font-weight: normal;
 }
 
 .row {
