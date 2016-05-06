@@ -305,7 +305,7 @@ module.exports = function(app, passport) {
 						}
 					}
 					var message = 'You are no longer in line\n  Cancelation of request # '+req.params.req_id;
-					var confirmation = {from: 'lineupnowserving@gmail.com', to: req.body.contactInfo, subject: 'Line Up Notification! #'+ret._id, text: message };
+					var confirmation = {from: 'lineupnowserving@gmail.com', to: req.body.contactInfo, subject: 'Line Up Notification! #'+req.params.req_id, text: message };
 					var currentStatus = ret.status;
 					ret.save(function (err) {
 						if (err) {
@@ -368,6 +368,9 @@ module.exports = function(app, passport) {
 										}
 									}
 								});
+							}
+							else {
+								res.status(200).json({message: 'Request updated3!', data: ret});
 							}
 						}
 					})
@@ -455,6 +458,9 @@ module.exports = function(app, passport) {
 										}
 									}
 								});
+							}
+							else {
+								res.status(200).json({message: 'Request updated3!', data: ret});
 							}
 						}
 					})

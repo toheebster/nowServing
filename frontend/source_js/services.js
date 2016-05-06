@@ -35,6 +35,11 @@ mp4Services.factory('SP', function(){
                callback();
            });
        },
+       cancel: function(req_id, obj, callback){
+           $http.put(baseUrl+'/cancelRequest/'+req_id, obj).success(function(){
+               callback();
+           });
+       },
        delete: function(req_id, callback){
            
            $http.delete(baseUrl+'/deleteRequest/'+req_id).success(function(){

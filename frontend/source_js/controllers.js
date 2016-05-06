@@ -383,7 +383,7 @@ mp4Controllers
     $scope.email = '';
     $scope.cancel = function() {
         if($scope.requestNumber.length > 0 && $scope.email.length > 0){
-            request.update($scope.requestNumber, {status: 4, contactInfo: $scope.email}, function() {
+            request.cancel($scope.requestNumber, {status: 4, contactInfo: $scope.email}, function() {
                 $scope.requestNumber = '';
                 $scope.email = '';
                 $scope.message = 'Request cancelled!';
