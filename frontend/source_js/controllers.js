@@ -9,7 +9,7 @@ var homeurl = "http://localhost:8080"
 var curSPID = ""
 mp4Controllers
 // Not require login
-.controller('HomeCtrl', ['$scope', '$http', '$resource', 'ngDialog', 'user', function($scope, $http, $resource, ngDialog, user) {
+.controller('HomeCtrl', ['$scope','$http','$location', 'user', function($scope, $http, $location, user) {
     $scope.cancelRequest = function () {
         ngDialog.open({ template: './partials/cancelRequest.html', className: 'ngdialog-theme-default', controller: 'cancelReqCtrl' })
     };
@@ -17,6 +17,20 @@ mp4Controllers
     $scope.showUsers = function () {
         ngDialog.open({ template: './partials/searchUsers.html', className: 'ngdialog-theme-default', controller: 'searchUsersCtrl' })
     };
+    
+    
+    $scope.email = "";
+    $scope.err_mes = "";
+    $scope.search = function(){
+        user.findUser($scope.email).success(function(data, status){
+            console.log(data);
+             $location.path('/user/portfolio/'+data.data._id); 
+        }).error(function(err){
+            console.log("error in search : " + err);
+            $scope.err_mes = err.message;
+        });
+    };
+    
 
 }])
 

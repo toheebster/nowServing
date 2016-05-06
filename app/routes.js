@@ -18,6 +18,26 @@ var upload = multer({ storage: storage });
 
 
 module.exports = function(app, passport) {
+    
+	app.get('/findUser/:email', function(req, res) {
+        console.log("reached in findUser " + req.params.email);
+
+		User.findOne({'local.email':req.params.email}, function(err, user) {
+			if (err) {
+				res.status(500).json({message: 'Error happened!', data: err});
+			}
+			else if (user == "" || user == null || user == undefined) {
+				res.status(404).json({message: 'No such user found!'});
+			}
+			else {
+                res.status(200).json({message:"user found",data:user});
+			}
+		});
+	});
+    
+    
+    
+    
 
 	app.post('/signup', function(req, res, next) {
 		passport.authenticate('local-signup', function(err, user, info) {
@@ -515,6 +535,9 @@ app.delete('/deleteRequest/:req_id', function(req, res) {
 			}
 		});
 	});
+    
+    
+    
 
 	//get logged in user
 	app.get('/user', isLoggedIn, function(req, res) {

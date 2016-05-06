@@ -9,5 +9,17 @@
 		<div class="small-6 medium-6 large-6 small-centered">
 		    <a href="#/" class="bigbt round send-request text-center small-12 hollow" style="font-weight: normal; border-color: white; color: white;" ng-click='cancelRequest()' > Cancel Request</a>
 		</div>
+        <br>
+        <br>
+        <div class="small-10 medium-8 small-centered">
+            <form>
+                <div class="form-group">
+                    <input type="text" ng-model="email" placeholder="Search by Service-provider email">
+                </div>
+                <button style="font-weight: normal;" ng-click ="search()">Search</button>
+                <h5 >{{err_mes}}</h5>
+            </form>
+		</div>        
+        
  	</div>
 </div>
