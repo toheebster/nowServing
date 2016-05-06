@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" style="height:100%">
 <head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -51,7 +51,7 @@
 
 </head>
 
-<body ng-app="mp4">
+<body ng-app="mp4" style="height:100%">
     <nav ng-controller = "TopbarCtrl">
         <div class="title-bar fixtop small-12" data-responsive-toggle="nav-menu" data-hide-for="medium">
             <a href="#/" class="button hollow float-left" style="color: #2CC185; border-color: #2CC185; font-weight: bold;">LU</a>
@@ -109,14 +109,7 @@
     </nav>    
     <div class="content" ng-view></div>
 
-    <footer>
-        <div class="row" style="text-align:center">
-            <a href="https://github.com/toheebster/nowServing"><i class="fa fa-3x fa-github" style="color: #2CC185"></i></a>
-        </div>
-        <div class="row" style="text-align: center">
-            © 2016 LineUp. All Rights Reserved.
-        </div>
-    </footer>
+    
 
 
     <!-- Scripts -->
@@ -128,6 +121,13 @@
     </script>
     <script src="http://localhost:35729/livereload.js"></script>
 
-
 </body>
+<footer class="footer columns large-12 large-centered">
+        <div class="row" style="text-align:center; margin: 0 auto;">
+            <a href="https://github.com/toheebster/nowServing"><i class="fa fa-3x fa-github" style="color: #2CC185"></i></a>
+        </div>
+        <div class="row" style="text-align: center; margin: 0 auto;">
+            © 2016 LineUp. All Rights Reserved.
+        </div>
+    </footer>
 </html>
