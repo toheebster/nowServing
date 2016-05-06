@@ -2,20 +2,33 @@
  	<div id="intro" class="small-12 large-12 small-centered">
 	 	<h1 id="now-serving" class="text-center small-12">Now  Serving</h1>
 	    <p id="quote" class="text-center large-12 small-12">Good order is the foundation of all great things.</p>
-	    <div class="small-6 medium-6 large-6 small-centered">
-		    <a href="#/" class="bigbt round send-request text-center small-12 large-12" style="font-weight: normal; display: inline-block" ng-click='showUsers()' >Line Up!</a>
-		</div>
+
+        <div class="small-10 small-centered">
+            <form> 
+                <div class="row">
+                    <div class="small-12  large-11 columns" style="padding:0;">
+                        <input type="text" ng-model= "email" class=" expand nopadding" placeholder="Search by the email of service provider" style="font-family: verdana;font-size:20px; height:60px; color: #000000; padding-left: 15px;border: 1px solid black; background-color:#ffffff;">      
+                    </div>
+                    <div class="large-1 columns" style="padding:0;">
+                        <input type="submit" class="searchBar expand nopadding" value="&#xf002;" style="font-size: 2.5em;height:60px;" ng-click ="search()"/>   
+                    </div>
+                </div>
+                <h5 >{{err_mes}}</h5>
+            </form>
+        </div>         
+        
 		<br>
 		<div class="small-6 medium-6 large-6 small-centered">
 		    <a href="#/" class="bigbt round send-request text-center small-12 hollow" style="font-weight: normal; border-color: white; color: white;" ng-click='cancelRequest()' > Cancel Request</a>
 		</div>
         <br>
         <br>
-        <div class="small-10 medium-8 small-centered">
-
-                <button style="font-weight: normal;" ng-click ="search()">Search a user</button>
-                <h5 >{{err_mes}}</h5>
-		</div>        
+       
         
  	</div>
 </div>
+<!--
+	    <div class="small-6 medium-6 large-6 small-centered">
+		    <a href="#/" class="bigbt round send-request text-center small-12 large-12" style="font-weight: normal; display: inline-block" ng-click='showUsers()' >Line Up!</a>
+		</div>
+-->
