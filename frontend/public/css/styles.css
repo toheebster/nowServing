@@ -4603,6 +4603,14 @@ h1 {
 .editable-intro {
   width: 800px; }
 
+/* line 424, ../../source_sass/_base.scss */
+.footer {
+  background-color: white; }
+
+/* line 429, ../../source_sass/_base.scss */
+btn:hover, bt:hover, bigbt:hover, button:hover {
+  background-color: #2CC185; }
+
 /*
   NOTE: Do not touch this file. Write the bulk of your custom styles
   in _base.scss
