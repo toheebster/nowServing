@@ -2,20 +2,27 @@
 <!--     <div class="circle no-overflow small-centered"><a href=""></a></div> -->
 
     <div class="small-12" style="position: absolute;">
-        <div class="bt round small-3 medium-2 float-right topright" ng-show="showEdit()" ng-click="showEditPortfolio()" id="editprofile">Edit profile</div>
+        <div class="button hollow round small-3 medium-2 float-right topright" style="border: 1px solid white; color:#2cc185; margin-right: 10px;" ng-show="showEdit()" ng-click="showEditPortfolio()" id="editprofile">Edit profile</div>
     </div>
     <div class="row" style="text-align: center">
-        <img class="circle no-overflow small-centered" ng-src="{{img}}" err-src="../userImage/user-default.png" check-image>
+           <img ng-click="uploadImage()" style="cursor:pointer;" class="circle no-overflow small-centered" ng-src="{{img}}" err-src="../userImage/user-default.png" check-image>
     </div>
 
     <div class="portfolioname">
-        <div class="small-centered small-12 text-center">{{user.businessName}}</div>
-        <div class="small-centered small-12 text-center">by</div>
-        <div class="small-centered small-12 text-center">{{user.username}}</div>
+        <div class="small-centered small-12 text-center">{{user.businessName}}  by  {{user.username}}</div>
+<!--         <div class="small-centered small-12 text-center">by</div>
+        <div class="small-centered small-12 text-center">{{user.username}}</div> -->
+    </div>
+    <div class="row" style="text-align: center">
+        <i class="fa fa-3x fa-male" ng-show="male" style="color: #2CC185 "></i>
+        <i class="fa fa-3x fa-female" ng-show="female" style="color: #2CC185 "></i>
+    </div>
+    <div class="row" style="text-align: center">
+        {{user.intro}}
     </div>
 </section>
 
-<section class="small-12 text-center paddingTopM"><h3>Service Provided</h3></section>
+<section class="small-12 text-center paddingTopM"><h3>Service(s) Provided</h3></section>
 
 <section>
     

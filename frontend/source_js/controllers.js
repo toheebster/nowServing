@@ -42,6 +42,8 @@ mp4Controllers
 // Not require login
 .controller('PortfolioCtrl', ['$scope', '$http', 'service', 'user', '$routeParams', 'ngDialog', function($scope, $http, service, user, $routeParams, ngDialog ) {    
     var SPID = $routeParams.id
+    $scope.male = false;
+    $scope.female = false;
     $scope.reload = function(){
         user.get($routeParams.id)
         .success(function (data, status, headers, config) {
@@ -59,6 +61,9 @@ mp4Controllers
                     console.log($scope.services);            
                 });
             }, $scope.services); 
+
+            $scope.male = $scope.user.gender == 1;
+            $scope.female = $scope.user.gender == 2;
 
             $scope.img = '../userImage/' + $scope.user._id + '.jpg';
             console.log($scope.img);
@@ -101,7 +106,21 @@ mp4Controllers
         $scope.dialog = ngDialog.open({ template: './partials/editPortfolio.html', className: 'ngdialog-theme-default', controller: 'editPortfolioCtrl', scope:$scope });
 
     }
+
+    $scope.uploadImage = function() {
+        //console.log($scope.img);
+        $scope.dialog = ngDialog.open({ template: './partials/uploadImage.html', className: 'ngdialog-theme-default', controller: 'uploadImageCtrl', scope: $scope });
+
+    }
+
     $scope.reload()
+}])
+.controller('uploadImageCtrl', ['$scope', '$http', 'user', '$routeParams', '$route', 'ngDialog', function($scope, $http, user, $routeParams, $route, ngDialog) {
+    // console.log($routeParams);
+    $scope.uploadimg = function() {
+        $scope.dialog.close();
+    }
+
 }])
 .controller('editPortfolioCtrl', ['$scope', '$http', 'user', '$routeParams', '$route', function($scope, $http, user, $routeParams, $route) {
 

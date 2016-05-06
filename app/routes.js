@@ -106,61 +106,33 @@ module.exports = function(app, passport) {
 	}
 
 
-	//test authentication
-	app.get('/testA/:user_id',isLoggedIn, function(req,res) {
-		console.log(req.params.user_id);
-		if (req.params.user_id == req['user']._id) {
-			res.json({data: req['user']});
-		}
-		else {
-			res.json({data: "invalid"})
-		}
-	})
-	app.get('/testB/:user_id', function(req,res) {
-		console.log(req.params.user_id);
-		if (req.isAuthenticated()) {
-			if (req.params.user_id == req['user']._id) {
-				res.json({
-					data: req['user']
-				});
-			}
-			else {
-				res.json({
-					data: "invalid"
-				})
-			}
-		}
-		res.json({
-			msg: "User not logged in"
-		});
-	})
 
-	//get all request
-	app.get('/getAllReq', function(req,res){
-		console.log(req['user']);
-		Request.find(function(err,ret){
-			if (err) {
-				res.status(500).json({message: 'Error happened!', data: err});
-			}
-			else if (ret == "" || ret == null || ret == undefined) {
-				res.status(404).json({message: 'No data found!!'});
-			}
-			else {
-				res.status(200).json({message: 'Data fetched!!', data: ret});
-			}
-		})
-	})
-	//delete all request, should be commented out in production code
-	app.delete('/deleteAllReq', function(req,res){
-		Request.remove({}, function(err){
-			if (err) {
-				res.status(500).json({message: 'Error happened!', data: err});
-			}
-			else {
-				res.status(200).json({message: 'All request removed!!'});
-			}
-		})
-	})
+	// //get all request
+	// app.get('/getAllReq', function(req,res){
+	// 	console.log(req['user']);
+	// 	Request.find(function(err,ret){
+	// 		if (err) {
+	// 			res.status(500).json({message: 'Error happened!', data: err});
+	// 		}
+	// 		else if (ret == "" || ret == null || ret == undefined) {
+	// 			res.status(404).json({message: 'No data found!!'});
+	// 		}
+	// 		else {
+	// 			res.status(200).json({message: 'Data fetched!!', data: ret});
+	// 		}
+	// 	})
+	// })
+	// //delete all request, should be commented out in production code
+	// app.delete('/deleteAllReq', function(req,res){
+	// 	Request.remove({}, function(err){
+	// 		if (err) {
+	// 			res.status(500).json({message: 'Error happened!', data: err});
+	// 		}
+	// 		else {
+	// 			res.status(200).json({message: 'All request removed!!'});
+	// 		}
+	// 	})
+	// })
 
 
 	//get request with query, not used
@@ -878,54 +850,35 @@ app.delete('/deleteRequest/:req_id', function(req, res) {
 		});
 	});
 
-	//for test
-	app.put('/test', function(req,res){
-		var s = "", s2 = "";
-		for (var key in req.body) {
-			if (req.body.hasOwnProperty(key)) {
-				s += key + ",";
-				s2 += req.body[key] + ",";
-			}
-		}
-		var msg = "message";
-		Request.findById("571d82637d6845660e6b9e18", function(err, ret){
-			if (ret[msg] != undefined) {
-				console.log(ret[msg]);
-			}
-			console.log("2." + ret[msg]);
 
-		})
-		res.status(200).json({keys: s2});
-	})
-
-	//delete all data
-	app.delete('/deleteAll', function(req, res){
-		Service.remove({}, function(err){
-			if (err) {
-				res.status(500).json({message: 'Error happened!', data: err});
-			}
-			else {
-				User.remove({}, function(err){
-					if (err) {
-						res.status(500).json({message: 'Error happened!', data: err});
-					}
-					else {
-						Request.remove({}, function(err){
-							if (err) {
-								res.status(500).json({message: 'Error happened!', data: err});
-							}
-							else {
-								res.status(200).json({message: 'All removed!!'});
-							}
-						})
-					}
-				})
-			}
-		})
-	})
+	// //delete all data
+	// app.delete('/deleteAll', function(req, res){
+	// 	Service.remove({}, function(err){
+	// 		if (err) {
+	// 			res.status(500).json({message: 'Error happened!', data: err});
+	// 		}
+	// 		else {
+	// 			User.remove({}, function(err){
+	// 				if (err) {
+	// 					res.status(500).json({message: 'Error happened!', data: err});
+	// 				}
+	// 				else {
+	// 					Request.remove({}, function(err){
+	// 						if (err) {
+	// 							res.status(500).json({message: 'Error happened!', data: err});
+	// 						}
+	// 						else {
+	// 							res.status(200).json({message: 'All removed!!'});
+	// 						}
+	// 					})
+	// 				}
+	// 			})
+	// 		}
+	// 	})
+	// })
 
 	app.post('/fs/upload',isLoggedIn,function (req, res) {
-		console.log("into upload")
+
 		var image_receiver = upload.single('avatar');
 		image_receiver(req, res, function (err) {
 			if (err) {
