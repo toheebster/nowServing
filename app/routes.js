@@ -21,7 +21,6 @@ module.exports = function(app, passport) {
     
 	app.get('/findUser/:email', function(req, res) {
         console.log("reached in findUser " + req.params.email);
-
 		User.findOne({'local.email':req.params.email}, function(err, user) {
 			if (err) {
 				res.status(500).json({message: 'Error happened!', data: err});
@@ -309,8 +308,11 @@ module.exports = function(app, passport) {
 
 	});
 
+
+	//app.put
+
 	//edit request, will also update user's request list
-	app.put('/editRequest/:req_id', isLoggedIn, function(req, res){
+	app.put('/editRequest/:req_id', function(req, res){
 		//if(req['user']._id != req.params.user_id) return;
 		Request.findById(req.params.req_id, function (err, ret) {
 			if (err) {
@@ -320,7 +322,7 @@ module.exports = function(app, passport) {
 				res.status(404).json({message: 'Invalid request'});
 			}
 			else {
-				if (ret.userID == req['user']._id || ret.creatorID == req['user']._id) {
+				//if (ret.userID == req['user']._id || ret.creatorID == req['user']._id) {
 					var previousStatus = ret.status;
 					for (var key in req.body) {
 						if (req.body.hasOwnProperty(key)) {
@@ -330,6 +332,8 @@ module.exports = function(app, passport) {
 							}
 						}
 					}
+					var message = 'You are no longer in line\n  Cancelation of request # '+req_id;
+					var confirmation = {from: 'lineupnowserving@gmail.com', to: req.body.contactInfo, subject: 'Line Up Notification! #'+request._id, text: message };
 					var currentStatus = ret.status;
 					ret.save(function (err) {
 						if (err) {
@@ -345,7 +349,7 @@ module.exports = function(app, passport) {
 										res.status(404).json({message: 'No matched user found'});
 									}
 									else {
-										var status = ["new", 'accepted', 'rejected', 'completed'];
+										var status = ["new", 'accepted', 'rejected', 'completed', 'cancelled'];
 										var index = user[status[previousStatus]].indexOf(ret._id);
 										if (index > -1) {
 											user[status[previousStatus]].splice(index, 1);
@@ -354,12 +358,18 @@ module.exports = function(app, passport) {
 											}
 											user.save(function (err) {
 												if (err) {
+													if(req.body.contactInfo === ret.contactInfo){
+														mail.sendMail(confirmation);
+													}
 													res.status(200).json({
 														message: 'Requested updated but user update has error!',
 														data: err
 													});
 												}
 												else {
+													if(req.body.contactInfo === ret.contactInfo){
+														mail.sendMail(confirmation);
+													}
 													res.status(200).json({message: 'Request updated!', data: ret});
 												}
 											})
@@ -368,12 +378,18 @@ module.exports = function(app, passport) {
 											user[status[currentStatus]].push(ret._id);
 											user.save(function (err) {
 												if (err) {
+													if(req.body.contactInfo === ret.contactInfo){
+														mail.sendMail(confirmation);
+													}
 													res.status(200).json({
 														message: 'Requested updated but user update has error!',
 														data: err
 													});
 												}
 												else {
+													if(req.body.contactInfo === ret.contactInfo){
+														mail.sendMail(confirmation);
+													}
 													res.status(200).json({message: 'Request updated2!', data: ret});
 												}
 											})
@@ -383,10 +399,10 @@ module.exports = function(app, passport) {
 							}
 						}
 					})
-				}
-				else {
-					res.status(404).json({message: 'not your request'});
-				}
+				//}
+				//else {
+				//	res.status(404).json({message: 'not your request'});
+				//}
 			}
 		});
 	});
@@ -426,7 +442,7 @@ app.delete('/deleteRequest/:req_id', function(req, res) {
 								}
 								else {
 									//console.log("2");
-									var status = ["new", 'accepted', 'rejected', 'completed'];
+									var status = ["new", 'accepted', 'rejected', 'completed', 'cancelled'];
 									var index = user[status[req_status]].indexOf(rid);
 									if (index > -1) {
 										user[status[req_status]].splice(index, 1);

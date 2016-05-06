@@ -2,12 +2,14 @@
     <div class="row">
         <span class="columns small-12 text-center">Cancel Request</span>
     </div>
+    <form name="myForm" method="put">
+        <div class="columns">
+            <input class="form-control" type="email" name="contactInfo" ng-model="email" type='number' placeholder="Email address">
+            <label ng-model="message">{{message}}
+            <input class="form-control" type="text" ng-model="requestNumber" type='number' name="requestNumber"placeholder="Request number you want to cancel">
+          </label>
+        </div>
+    </form>
+        <div style="display:flex; align-items: center"class="small-9 small-centered"><button ng-disabled="myForm.contactInfo.$error.email || myForm.contactInfo.$error.required || myform.requestNumber.$error.number || myForm.requestNumber.$error.required" class="btn btn-lg send-request" style="margin: 0 auto" ng-click='cancel()'>Cancel Request</button></div>
 
-    <div class="columns">
-        <label ng-model="message">{{message}}
-        <input type="text" ng-model="requestNumber" type='number' placeholder="Cancel a request">
-      </label>
-    </div>
-    
-    <div style="display:flex; align-items: center"class="small-9 small-centered"><a class="btn btn-lg send-request" style="margin: 0 auto" ng-click='cancel()'>Cancel Request</a></div>
 </div>
