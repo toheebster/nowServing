@@ -17,7 +17,7 @@
         </div>
         <div class="marginLRS greyroundborder paddingLRM marginS row">
             <div ng-repeat="slot in req.proposedTime" class="small-12 medium-4 end bt round columns" id="slot_{{$index}}" ng-click="acceptTime($index)"
-                ng-class="{'selected': req.acceptedTime[$index]}">{{slot | date:'MMM d, h:mm:ss a, y'}}</div>
+                ng-class="{'selected': req.acceptedTime[$index]}">{{slot | date:'EEE MMM d, y'}}</div>
         </div>
     </div>    
 
