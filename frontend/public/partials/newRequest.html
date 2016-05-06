@@ -7,7 +7,9 @@
         <div class="row"><span>Email Address:</span></div>
         <div class="row textbox"><input type="text" placeholder="Your Email" ng-model="newRequest.contactInfo"></div>
         <div class="row" id="inputdiv_1">
-            <input id="input_1" ng-click="newInputField(1)" readonly="true">
+            <datepicker date-format="yyyy-MM-dd">
+                <input id="input_1" ng-click="newInputField(1)" readonly="true" ng-model="time[0]">
+            </datepicker>
         </div>
 
 

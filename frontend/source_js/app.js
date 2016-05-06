@@ -1,4 +1,4 @@
-var app = angular.module('mp4', ['ngRoute', 'mp4Controllers', 'mp4Services', '720kb.datepicker', 'ngDialog', 'xeditable']);
+var app = angular.module('mp4', ['ngRoute', 'mp4Controllers', 'mp4Services', '720kb.datepicker', 'ngDialog']);
 app.config(['$routeProvider','$locationProvider', function($routeProvider, $locationProvider) {
   $routeProvider.
   when('/', {
@@ -42,7 +42,3 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider, $loca
 */
 }]);
 
-app.run(function($rootScope, editableOptions){
-    $rootScope.$apply($(document).foundation());
-    // editableOptions.theme = 'bs3';
-});

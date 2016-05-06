@@ -1,4 +1,4 @@
-var mp4Controllers = angular.module('mp4Controllers', ['720kb.datepicker', 'ngResource', 'ngDialog']);
+var mp4Controllers = angular.module('mp4Controllers', ['ngResource', 'ngDialog', '720kb.datepicker']);
 
 var NEW_REQUEST = 0;
 var IN_PROGRESS = 1;
@@ -87,9 +87,9 @@ mp4Controllers
     }
 
     $scope.showEdit = function(){
-        console.log("showEdit: cur / SP")
-        console.log(curSPID)
-        console.log(SPID)
+        //console.log("showEdit: cur / SP")
+        //console.log(curSPID)
+        //console.log(SPID)
         return (curSPID == SPID) ? true : false; 
     }
 
@@ -236,6 +236,7 @@ mp4Controllers
                 var t = request.get(i).then(function(res){
                     var req = res.data.data 
                     $scope.tasks.push(req)
+                    console.log(req)
                 });
             }, $scope.tasks);
 
@@ -378,6 +379,8 @@ mp4Controllers
 
 .controller('NewRequestCtrl', ['$scope', '$http', '$routeParams', 'SP', 'request','user', '$compile', function($scope, $http, $routeParams, SP, request, user, $compile) {
     
+    $scope.time = [""]
+
     var SPID = $routeParams.id;  
     $scope.SP;
     $scope.newRequest = {
@@ -410,6 +413,7 @@ mp4Controllers
     $scope.sendRequest = function(){
         console.log("sending request")
         console.log($scope.newRequest)
+        $scope.newRequest.proposedTime = $scope.time
 
         request.post(SPID, $scope.newRequest, function(data){
             console.log("sent request")
@@ -423,6 +427,7 @@ mp4Controllers
         // gets input field index
         // if it is readonly, set it to be editable
         // if is not, just return
+
         var myEl = angular.element(document.querySelector('#input_'+i));
         myEl.attr('readonly');
         console.log("input: "+i)
@@ -431,9 +436,13 @@ mp4Controllers
             var j = i+1
             myEl.attr('readonly', false);
 
-            var newInput = '<div class="row" id="inputdiv_'+j+'"><input id="input_'+j+'" ng-click="newInputField('+j+')" readonly="true"></div>';
+            var newInput = '<div class="row" id="inputdiv_'+j+'"><datepicker date-format="yyyy-MM-dd"><input id="input_'+j+'" ng-click="newInputField('+j+')" readonly="true" ng-model="time['+i+']"></datepicker></div>';
             var content = $compile(newInput)($scope);
             angular.element(document.querySelector('#inputdiv_'+i)).after(content)
+            console.log("time["+i+"]")
+            //$scope.time[j] = new Date($scope.time[j])
+            console.log($scope.time)
+            
         }   
     }
 
