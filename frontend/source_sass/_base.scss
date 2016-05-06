@@ -1,4 +1,17 @@
 // Add any custom Sass & CSS here
+
+.searchBar {
+    border: none;
+    cursor: pointer;
+    color:#2CC185; 
+    background-color:white;
+    position:relative;
+}
+input[type="submit"] {
+    font-family: FontAwesome;
+}
+
+
 body{
 	background: none !important;
 }
