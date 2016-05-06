@@ -5,24 +5,22 @@ var IN_PROGRESS = 1;
 var COMPLETED = 3;
 var DECLINED = 2;
 
-var homeurl = "http://localhost:8080"
+var homeurl = "http://localhost:8080" 
 var curSPID = ""
 mp4Controllers
 // Not require login
 .controller('HomeCtrl', ['$scope','$http','$location', 'user', 'ngDialog', function($scope, $http, $location, user, ngDialog) {
     $scope.cancelRequest = function () {
         ngDialog.open({ template: './partials/cancelRequest.html', className: 'ngdialog-theme-default', controller: 'cancelReqCtrl' })
-    };
-
+    };    
+    
     $scope.email = "";
     $scope.err_mes = "";
     $scope.search = function(){
         user.findUser($scope.email).success(function(data, status){
-            console.log(data);
              $location.path('/user/portfolio/'+data.data._id); 
         }).error(function(err){
-            console.log("error in search : " + err);
-            $scope.err_mes = err.message;
+            $scope.err_mes = err;
         });
     };
     
