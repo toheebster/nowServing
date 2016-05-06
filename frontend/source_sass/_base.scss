@@ -19,31 +19,52 @@ input, textarea{
 	border-radius: $roundcorner !important;
 	resize:none !important;
 }
-nav{
-	div{
-		z-index: 999;
-	}
+span{
+	word-wrap: break-word;
+}
+.content{
+	padding-top:56px;
+} 
+nav{ 
 	.top-bar{
 		z-index: 99;
+		height: 56px;
+		-webkit-box-shadow: 0 4px 8px 0 #aaa;
+		box-shadow: 0 4px 8px 0 #aaa;
 		background-color: white;
 		.top-bar-right{
+			background-color: white;
 			li{
 				background-color: white;
 			}
+			padding-bottom:10px;
 		}
 	}
 	.title-bar{
+		z-index: 999;
+		-webkit-box-shadow: 0 4px 8px 0 #aaa;
+		box-shadow: 0 4px 8px 0 #aaa;
 		height: 56px;
 		background-color: white;
 		.title-bar-title{
 			color:$green;
 		}
 		button{
+			font-size: 32px;
 			i{
 				color:$green;
+				font-size: 28px;
+				line-height: 13px !important;
 			}
 		}
 	}
+	.verticalmiddle{
+		font-size: 17px !important;
+		line-height: 13px !important;
+	}
+}
+.paddingTop56px{
+	padding-top: 56px !important;
 }
 .send-request {
     position: relative;
@@ -80,6 +101,10 @@ nav{
 }
 .paddingTopBottomM{
 	padding:$paddingTopBottomM;
+}
+.paddingTopM{
+	padding:$paddingTopBottomM;
+	padding-bottom: 0px;
 }
 .paddingTopBottomS{
 	padding:$paddingTopBottomS;
@@ -158,9 +183,15 @@ strong{
 	@extend .banner;
 	height: 400px;
 	color:white;
+	#addservice{
+		margin-top:70px;
+	}
+	#editprofile{
+		margin-top:10px;
+	}
 }
 .portfolioname{
-	margin-top:6%;
+	margin-top:70px;
 }
 
 .queue-tabs{
@@ -378,6 +409,7 @@ h1 {
     justify-content: center;
     */
 }
+
 
 .send-request {
     position: relative;
