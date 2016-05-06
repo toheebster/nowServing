@@ -4,6 +4,7 @@ var NEW_REQUEST = 0;
 var IN_PROGRESS = 1;
 var COMPLETED = 3;
 var DECLINED = 2;
+var CANCELLED = 4;
 
 var homeurl = "http://localhost:8080" 
 var curSPID = ""
@@ -120,10 +121,8 @@ mp4Controllers
     $scope.uploadimg = function() {
         $scope.dialog.close();
     }
-
 }])
 .controller('editPortfolioCtrl', ['$scope', '$http', 'user', '$routeParams', '$route', function($scope, $http, user, $routeParams, $route) {
-
     var SPID = $routeParams.id;
     $scope.editUser = function() {
         console.log("edit profile");
@@ -239,6 +238,8 @@ mp4Controllers
                 reqids = $scope.SP.rejected;
             }else if($scope.curType == COMPLETED){
                 reqids = $scope.SP.completed;
+            }else if($scope.curType == CANCELLED){
+                reqids = $scope.SP.cancelled;
             }
             console.log(reqids)
             $scope.tasks = []
@@ -385,7 +386,7 @@ mp4Controllers
             request.update($scope.requestNumber, {status: 4, contactInfo: $scope.email}, function() {
                 $scope.requestNumber = '';
                 $scope.email = '';
-                $scope.message = 'Request canceled!';
+                $scope.message = 'Request cancelled!';
             });
         }
     }       
@@ -567,6 +568,7 @@ mp4Controllers
             // SP.set(null);
             $scope.curUser=null;
             curSPID = null
+            $location.path('#/');
          }).error(function (data, status, headers, config) {
             console.log("data: "+data);
             console.log("status: "+status);

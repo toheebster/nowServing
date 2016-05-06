@@ -27,6 +27,7 @@
                 <li><a class="fa fa-tasks fa-1x" ng-click="setType(1)"><span>In Progress</span></a></li>
                 <li><a class="fa fa-check-square-o fa-1x" ng-click="setType(3)"><span>Completed</span></a></li>
                 <li><a class="fa fa-ban fa-1x" ng-click="setType(2)"><span>Declined</span></a></li>
+                <li><a class="fa fa-times fa-1x" ng-click="setType(4)"><span>Canceled</span></a></li>
             </ul>
         </nav>
         <div class="content-wrap" hidden>
@@ -34,6 +35,7 @@
             <section id="section-flip-2" hidden><p hidden>2</p></section>
             <section id="section-flip-3" hidden><p hidden>3</p></section>
             <section id="section-flip-4" hidden><p hidden>4</p></section>
+            <section id="section-flip-5" hidden><p hidden>5</p></section>
         </div><!-- /content -->
     </div><!-- /tabs -->
 </section>
@@ -42,9 +44,9 @@
     
     <div class="row">
         <div class="medium-offset-1 small-12 medium-8 columns taskList">
-            <div ng-repeat="each in tasks | filter: searchTxt | orderBy: sortBy" class="small-12 task" ng-click="seeDetail($index)">
+            <div ng-repeat="each in tasks | filter: searchTxt | orderBy: createdTime" class="small-12 task" ng-click="seeDetail($index)">
             <!--<a ng-href="#/request/{{each._id}}"> -->
-                <div class="small-6 columns"><strong>Name:{{each.customerName}}</strong></div>
+                <div class="small-6 columns"><strong>Name: {{each.customerName}}</strong></div>
                 <div class="small-6 float-right text-right columns"><span>{{each.createdTime | date:'MMM, d yyyy'}}</span></div>
                 <div class="small-12 columns"><strong>Message:</strong><span>{{each.message}}</span></div>
             </a>

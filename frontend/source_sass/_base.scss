@@ -302,7 +302,10 @@ strong{
 
 }
 
-
+.datepicker {
+	color: $green;
+	background-color: $green;
+}
 
 
 @media (max-width:768px) {
@@ -313,7 +316,7 @@ strong{
 
 
 #home {
-	top: 0px;
+	top: -75px;
 	position: relative;
     background-image: url("../images/icecream2.jpg");
     background-color: black;

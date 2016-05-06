@@ -108,31 +108,31 @@ module.exports = function(app, passport) {
 
 
 	// //get all request
-	// app.get('/getAllReq', function(req,res){
-	// 	console.log(req['user']);
-	// 	Request.find(function(err,ret){
-	// 		if (err) {
-	// 			res.status(500).json({message: 'Error happened!', data: err});
-	// 		}
-	// 		else if (ret == "" || ret == null || ret == undefined) {
-	// 			res.status(404).json({message: 'No data found!!'});
-	// 		}
-	// 		else {
-	// 			res.status(200).json({message: 'Data fetched!!', data: ret});
-	// 		}
-	// 	})
-	// })
-	// //delete all request, should be commented out in production code
-	// app.delete('/deleteAllReq', function(req,res){
-	// 	Request.remove({}, function(err){
-	// 		if (err) {
-	// 			res.status(500).json({message: 'Error happened!', data: err});
-	// 		}
-	// 		else {
-	// 			res.status(200).json({message: 'All request removed!!'});
-	// 		}
-	// 	})
-	// })
+	app.get('/getAllReq', function(req,res){
+		console.log(req['user']);
+		Request.find(function(err,ret){
+			if (err) {
+				res.status(500).json({message: 'Error happened!', data: err});
+			}
+			else if (ret == "" || ret == null || ret == undefined) {
+				res.status(404).json({message: 'No data found!!'});
+			}
+			else {
+				res.status(200).json({message: 'Data fetched!!', data: ret});
+			}
+		})
+	})
+	//delete all request, should be commented out in production code
+	app.delete('/deleteAllReq', function(req,res){
+		Request.remove({}, function(err){
+			if (err) {
+				res.status(500).json({message: 'Error happened!', data: err});
+			}
+			else {
+				res.status(200).json({message: 'All request removed!!'});
+			}
+		})
+	})
 
 
 	//get request with query, not used
@@ -304,8 +304,8 @@ module.exports = function(app, passport) {
 							}
 						}
 					}
-					var message = 'You are no longer in line\n  Cancelation of request # '+req_id;
-					var confirmation = {from: 'lineupnowserving@gmail.com', to: req.body.contactInfo, subject: 'Line Up Notification! #'+request._id, text: message };
+					var message = 'You are no longer in line\n  Cancelation of request # '+req.params.req_id;
+					var confirmation = {from: 'lineupnowserving@gmail.com', to: req.body.contactInfo, subject: 'Line Up Notification! #'+req.params.req_id, text: message };
 					var currentStatus = ret.status;
 					ret.save(function (err) {
 						if (err) {
@@ -851,31 +851,31 @@ app.delete('/deleteRequest/:req_id', function(req, res) {
 	});
 
 
-	// //delete all data
-	// app.delete('/deleteAll', function(req, res){
-	// 	Service.remove({}, function(err){
-	// 		if (err) {
-	// 			res.status(500).json({message: 'Error happened!', data: err});
-	// 		}
-	// 		else {
-	// 			User.remove({}, function(err){
-	// 				if (err) {
-	// 					res.status(500).json({message: 'Error happened!', data: err});
-	// 				}
-	// 				else {
-	// 					Request.remove({}, function(err){
-	// 						if (err) {
-	// 							res.status(500).json({message: 'Error happened!', data: err});
-	// 						}
-	// 						else {
-	// 							res.status(200).json({message: 'All removed!!'});
-	// 						}
-	// 					})
-	// 				}
-	// 			})
-	// 		}
-	// 	})
-	// })
+	//delete all data
+	app.delete('/deleteAll', function(req, res){
+		Service.remove({}, function(err){
+			if (err) {
+				res.status(500).json({message: 'Error happened!', data: err});
+			}
+			else {
+				User.remove({}, function(err){
+					if (err) {
+						res.status(500).json({message: 'Error happened!', data: err});
+					}
+					else {
+						Request.remove({}, function(err){
+							if (err) {
+								res.status(500).json({message: 'Error happened!', data: err});
+							}
+							else {
+								res.status(200).json({message: 'All removed!!'});
+							}
+						})
+					}
+				})
+			}
+		})
+	})
 
 	app.post('/fs/upload',isLoggedIn,function (req, res) {
 

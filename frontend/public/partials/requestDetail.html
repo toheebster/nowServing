@@ -1,18 +1,13 @@
 <div class="request small-11 medium-9 small-centered paddingTopBottomM">
-    <div class="row">
-        <span class="columns small-12 text-left">Name:</span>
-    </div>
-    <div class="row textbox"><span class="columns small-12">{{req.customerName}}</span></div>
-    <div class="row"><span class="columns small-12">Contact Info:</span></div>
-    <div class="row textbox"><span class="columns small-12">{{req.contactInfo}}</span></div>
-    <div class="row"><span class="columns small-12">Message:</span></div>
-    <div class="row textbox"><span class="columns small-12">{{req.message}}</span></div>
-    <div class="row"><span class="columns small-12">Status:</span></div>
-    <div class="row textbox"><span class="columns small-12">{{req.status}}</span></div>
-    
+    <div class="row textbox"><span class="columns small-12">Name: {{req.customerName}}</span> </div>
+    <div class="row"><span class="columns small-12">Contact Info: {{req.contactInfo}}</span></div>
+    <div class="row"><span class="columns small-12">Message: {{req.message}}</span></div>
+    <br>
+<!--     <div class="row"><span class="columns small-12">Status: {{req.status}}</span></div>
+ -->    
     <div ng-show="req.proposedTime[0]">
-        <div class="row">
-            <span class="columns small-12" ng-if="curType == 0">Choose a time to accept:</span>
+        <div class="row" style="text-align: center ">
+            <h5 style="text-align: center "class="columns small-12" ng-if="curType == 0">Choose a time to accept:</h5>
             <span class="columns small-12" ng-if="curType != 0">Chosen Time:</span>
         </div>
         <div class="marginLRS greyroundborder paddingLRM marginS row">
@@ -25,8 +20,6 @@
         <button class="small-12 bt round" ng-click="accept()" ng-if="curType == 0">Accept</button>
         <button class="small-12 bt round" ng-click="complete()" ng-if="curType == 1">Complete</button>
     </div>
-
-    <div class="row"><span class="columns small-12">Or Decline:</span></div>
     
     <div class="small-9 small-centered"><button class="small-12 bt round" ng-click="decline()">Decline</button></div>
 </div>
