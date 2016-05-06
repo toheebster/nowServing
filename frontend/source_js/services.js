@@ -1,5 +1,5 @@
 var mp4Services = angular.module('mp4Services', ['ngRoute', 'ngResource']);
-var baseUrl = "http://localhost:8080";
+var baseUrl = "http://104.131.81.173:8080";
 
 mp4Services.factory('SP', function(){
     var SP =  {

@@ -6,7 +6,7 @@ var COMPLETED = 3;
 var DECLINED = 2;
 var CANCELLED = 4;
 
-var homeurl = "http://localhost:8080" 
+var homeurl = "http://104.131.81.173:8080" 
 var curSPID = ""
 mp4Controllers
 // Not require login
