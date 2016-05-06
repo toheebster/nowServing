@@ -525,7 +525,7 @@ mp4Controllers
             // console.log($scope.setUser($scope.curUser))
             $scope.getCurUser();
             $scope.dialog.close()
-            $location.path('/user/'+data.data._id);
+            $location.path('/');
          }).error(function (data, status, headers, config) {
             console.log("data: "+data);
             console.log("status: "+status);
